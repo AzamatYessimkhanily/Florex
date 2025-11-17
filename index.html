@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Florex — Оптовая продажа цветов</title>
+    <title>Florex — Премиальная оптовая продажа цветов</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,8 @@
             --dusty-sage: #687e79;
             --light-sage: #A7B3AD;
             --light-concrete: #C5CEC9;
-            --deep-slate: #3E4A49; /* Added for filter-chip */
+            --deep-slate: #3E4A49;
+            --soft-white: #FFFFFF;
         }
 
         body {
@@ -46,15 +47,15 @@
             padding: 0 60px;
         }
 
-        /* Добавил премиальные стили для header */
+        /* Премиальный хедер */
         header {
-            background: var(--white);
-            border-bottom: 1px solid var(--light-concrete);
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--light-sage);
             padding: 28px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 30px rgba(18, 18, 18, 0.08);
         }
 
         .header-content {
@@ -63,29 +64,30 @@
             align-items: center;
         }
 
-        /* Улучшен логотип с иконкой */
+        /* Логотип */
         .logo {
             font-family: 'Montserrat', sans-serif;
-            font-size: 28px;
-            font-weight: 600;
+            font-size: 23px;
+            font-weight: 700;
             color: var(--black);
             text-decoration: none;
             letter-spacing: 1px;
             display: flex;
             align-items: center;
             gap: 12px;
+            padding: 8px 0;
         }
 
         .logo-icon {
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .logo-accent {
-            color: var(--accent-orange);
+            background: var(--accent-orange);
+            border-radius: 50%;
+            padding: 8px;
+            box-shadow: 0 4px 12px rgba(211, 84, 44, 0.3);
         }
 
         nav ul {
@@ -97,26 +99,29 @@
         nav a {
             font-family: 'Montserrat', sans-serif;
             font-size: 15px;
-            font-weight: 500;
-            color: var(--black);
+            font-weight: 600;
+            color: var(--dusty-olive);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
+            padding: 8px 0;
         }
 
         nav a:hover {
             color: var(--accent-orange);
+            transform: translateY(-2px);
         }
 
         nav a::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: 0;
             left: 0;
             width: 0;
-            height: 2px;
+            height: 3px;
             background: var(--accent-orange);
             transition: width 0.3s;
+            border-radius: 2px;
         }
 
         nav a:hover::after {
@@ -129,17 +134,29 @@
             align-items: center;
         }
 
-        /* Заменил эмодзи на SVG иконки */
+        /* Иконки */
         .cart-icon {
             position: relative;
             cursor: pointer;
-            width: 24px;
-            height: 24px;
-            transition: transform 0.3s;
+            width: 28px;
+            height: 28px;
+            transition: all 0.3s;
+            background: var(--dusty-olive);
+            border-radius: 50%;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-icon svg {
+            stroke: var(--white);
         }
 
         .cart-icon:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
+            background: var(--accent-orange);
+            box-shadow: 0 6px 20px rgba(211, 84, 44, 0.4);
         }
 
         .cart-count {
@@ -149,87 +166,112 @@
             background: var(--accent-orange);
             color: var(--white);
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(211, 84, 44, 0.4);
         }
 
         .user-icon {
             cursor: pointer;
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             background: var(--dusty-sage);
             color: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 16px;
             transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(104, 126, 121, 0.3);
         }
 
         .user-icon:hover {
             background: var(--accent-orange);
             transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(211, 84, 44, 0.4);
         }
 
-        /* Улучшил стили кнопок */
+        /* Кнопки */
         .btn {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            padding: 16px 40px;
+            font-weight: 700;
+            padding: 18px 42px;
             border: none;
             cursor: pointer;
             font-size: 15px;
             transition: all 0.3s;
-            border-radius: 2px;
+            border-radius: 4px;
             text-decoration: none;
             display: inline-block;
             text-align: center;
             letter-spacing: 0.5px;
             text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
             background: var(--accent-orange);
             color: var(--white);
-            box-shadow: 0 4px 12px rgba(211, 84, 44, 0.2);
+            box-shadow: 0 6px 20px rgba(211, 84, 44, 0.3);
         }
 
         .btn-primary:hover {
             background: var(--burnt-terracotta);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(211, 84, 44, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(211, 84, 44, 0.4);
         }
 
         .btn-secondary {
             background: var(--white);
             color: var(--black);
             border: 2px solid var(--light-sage);
+            box-shadow: 0 4px 12px rgba(104, 126, 121, 0.1);
         }
 
         .btn-secondary:hover {
             background: var(--light-concrete);
             border-color: var(--dusty-sage);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(104, 126, 121, 0.2);
         }
 
         .btn-outline {
             background: transparent;
             color: var(--black);
             border: 2px solid var(--black);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-outline::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--black);
+            transition: width 0.3s;
+            z-index: -1;
         }
 
         .btn-outline:hover {
-            background: var(--black);
             color: var(--white);
         }
 
-        /* Screens */
+        .btn-outline:hover::after {
+            width: 100%;
+        }
+
+        /* Экраны */
         .screen {
             display: none;
             min-height: calc(100vh - 100px);
@@ -239,14 +281,16 @@
             display: block;
         }
 
-        /* Новый экран регистрации вместо выбора города */
+        /* Экран регистрации */
         .auth-screen {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 60px 0;
-            background: linear-gradient(135deg, var(--light-concrete) 0%, var(--white) 100%);
+            background: var(--light-concrete);
+            position: relative;
+            overflow: hidden;
         }
 
         .auth-container {
@@ -254,8 +298,11 @@
             width: 100%;
             background: var(--white);
             padding: 60px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
             border: 1px solid var(--light-sage);
+            border-radius: 12px;
+            position: relative;
+            z-index: 1;
         }
 
         .auth-logo {
@@ -264,30 +311,34 @@
         }
 
         .auth-logo svg {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 16px;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 12px rgba(211, 84, 44, 0.3));
         }
 
         .auth-logo h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
+            font-size: 36px;
+            margin-bottom: 12px;
+            color: var(--black);
         }
 
         .auth-logo p {
             color: var(--dusty-olive);
-            font-size: 15px;
+            font-size: 16px;
+            font-weight: 500;
         }
 
         .form-group {
-            margin-bottom: 28px;
+            margin-bottom: 32px;
+            position: relative;
         }
 
         label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--dusty-olive);
@@ -295,19 +346,22 @@
 
         select, input {
             width: 100%;
-            padding: 16px 18px;
+            padding: 18px 20px;
             border: 2px solid var(--light-sage);
             background: var(--white);
             font-family: 'Inter', sans-serif;
-            font-size: 15px;
+            font-size: 16px;
             color: var(--black);
             transition: all 0.3s;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         select:focus, input:focus {
             outline: none;
             border-color: var(--accent-orange);
-            box-shadow: 0 0 0 4px rgba(211, 84, 44, 0.1);
+            box-shadow: 0 0 0 4px rgba(211, 84, 44, 0.15);
+            transform: translateY(-2px);
         }
 
         .checkbox-group {
@@ -339,20 +393,21 @@
             text-decoration: underline;
         }
 
-        /* SMS подтверждение экран */
+        /* SMS подтверждение */
         .sms-verification {
             text-align: center;
         }
 
         .sms-verification h2 {
-            font-size: 28px;
+            font-size: 32px;
             margin-bottom: 16px;
+            color: var(--black);
         }
 
         .sms-verification p {
             color: var(--dusty-olive);
             margin-bottom: 40px;
-            font-size: 15px;
+            font-size: 16px;
         }
 
         .sms-code-inputs {
@@ -370,10 +425,15 @@
             font-weight: 700;
             border: 2px solid var(--light-sage);
             padding: 0;
+            border-radius: 8px;
+            background: var(--white);
+            transition: all 0.3s;
         }
 
         .sms-code-input:focus {
             border-color: var(--accent-orange);
+            box-shadow: 0 0 0 4px rgba(211, 84, 44, 0.15);
+            transform: translateY(-2px);
         }
 
         .resend-code {
@@ -386,19 +446,25 @@
             color: var(--accent-orange);
             text-decoration: underline;
             cursor: pointer;
+            font-weight: 600;
         }
 
         /* Home Screen */
         .hero {
             padding: 100px 0 120px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero h1 {
             font-size: 64px;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 24px;
             letter-spacing: -1px;
+            color: var(--black);
+            position: relative;
+            z-index: 1;
         }
 
         .hero p {
@@ -408,6 +474,8 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
+            z-index: 1;
         }
 
         .selection-card {
@@ -416,15 +484,20 @@
             padding: 48px;
             max-width: 600px;
             margin: 0 auto;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
         }
 
         .selection-card h2 {
             font-size: 24px;
             margin-bottom: 32px;
             text-align: center;
+            color: var(--dusty-olive);
         }
 
-        /* Улучшил карточки каталога */
+        /* Каталог */
         .catalog-header {
             padding: 48px 0 32px;
             display: flex;
@@ -436,6 +509,7 @@
         .catalog-header h1 {
             font-size: 48px;
             letter-spacing: -1px;
+            color: var(--black);
         }
 
         .catalog-info {
@@ -449,6 +523,10 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            background: var(--white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--light-sage);
         }
 
         .catalog-controls {
@@ -473,17 +551,20 @@
             font-size: 14px;
             transition: all 0.3s;
             letter-spacing: 0.5px;
+            border-radius: 6px;
         }
 
         .filter-btn:hover, .filter-btn.active {
             background: var(--dusty-sage);
             color: var(--white);
             border-color: var(--dusty-sage);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(104, 126, 121, 0.3);
         }
 
         .sort-select {
             width: 220px;
+            border-radius: 6px;
         }
 
         .products-grid {
@@ -493,92 +574,105 @@
             padding: 40px 0 100px;
         }
 
-        /* Премиальные карточки товаров */
+        /* ОБНОВЛЕННЫЕ КАРТОЧКИ ТОВАРОВ - НОВЫЙ ДИЗАЙН */
         .product-card {
             background: var(--white);
-            border: 1px solid var(--light-concrete);
+            border: 1px solid var(--light-sage);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s;
             position: relative;
             overflow: hidden;
-        }
-
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--accent-orange);
-            transform: scaleX(0);
-            transition: transform 0.3s;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .product-card:hover {
             border-color: var(--accent-orange);
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
-        }
-
-        .product-card:hover::before {
-            transform: scaleX(1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         .product-image {
             width: 100%;
-            height: 340px;
-            background: linear-gradient(135deg, var(--light-concrete) 0%, #dae0dd 100%);
+            height: 240px;
+            background: var(--light-concrete);
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Removed font-size: 80px for emoji, now using SVG icons */
             position: relative;
-            overflow: hidden; /* Added to contain the SVG icon */
+            overflow: hidden;
         }
 
-        /* Added styles for flower SVG icons */
-        .flower-icon {
-            width: 120px;
-            height: 120px;
-            opacity: 0.15;
-            filter: blur(1px);
-            color: var(--accent-orange); /* Default color for icons */
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
         }
 
         .product-status {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 16px;
+            right: 16px;
             background: var(--white);
-            padding: 8px 16px;
-            font-size: 11px;
+            padding: 6px 12px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            z-index: 2;
         }
 
         .product-status.in-stock {
             color: var(--dusty-sage);
+            border: 1px solid var(--dusty-sage);
         }
 
         .product-status.pre-order {
             color: var(--accent-orange);
+            border: 1px solid var(--accent-orange);
         }
 
         .product-info {
-            padding: 28px;
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-name {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             margin-bottom: 12px;
             letter-spacing: 0.3px;
+            color: var(--black);
+            line-height: 1.4;
         }
 
-        .product-meta {
+        /* Терракотовая плашка с количеством */
+        .product-quantity-badge {
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: inline-block;
+            align-self: flex-start;
+            box-shadow: 0 4px 12px rgba(211, 84, 44, 0.3);
+        }
+
+        .product-specs {
             display: flex;
             gap: 16px;
             margin-bottom: 20px;
@@ -586,10 +680,35 @@
             color: var(--dusty-olive);
         }
 
-        .product-meta span {
+        .spec-item {
             display: flex;
             align-items: center;
             gap: 6px;
+        }
+
+        .spec-icon {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-brand {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-concrete);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--black);
+            letter-spacing: 1px;
         }
 
         .product-price {
@@ -602,7 +721,7 @@
         }
 
         .price {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--black);
             letter-spacing: -0.5px;
@@ -625,14 +744,16 @@
             transition: all 0.3s;
             letter-spacing: 0.5px;
             text-transform: uppercase;
+            border-radius: 4px;
         }
 
         .add-to-cart-btn:hover {
             background: var(--accent-orange);
             transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(211, 84, 44, 0.3);
         }
 
-        /* Product Detail */
+        /* Детали товара - ОБНОВЛЕННЫЙ ДИЗАЙН */
         .product-detail {
             padding: 60px 0 100px;
         }
@@ -644,19 +765,32 @@
         }
 
         .product-detail-image {
-            background: linear-gradient(135deg, var(--light-concrete) 0%, #dae0dd 100%);
+            background: var(--light-concrete);
             height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 140px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-detail-info {
+            padding: 20px 0;
         }
 
         .product-detail-info h1 {
             font-size: 48px;
             margin-bottom: 16px;
             letter-spacing: -1px;
+            color: var(--black);
         }
 
         .product-article {
@@ -665,9 +799,23 @@
             margin-bottom: 32px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 600;
         }
 
-        .product-specs {
+        /* Терракотовая плашка в деталях */
+        .detail-quantity-badge {
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 24px;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(211, 84, 44, 0.3);
+        }
+
+        .product-detail-specs {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 24px;
@@ -675,6 +823,8 @@
             padding: 40px;
             background: var(--light-concrete);
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            border: 1px solid var(--light-sage);
         }
 
         .spec-item {
@@ -694,6 +844,29 @@
         .spec-value {
             font-size: 20px;
             font-weight: 600;
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .product-detail-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 32px 0;
+            padding: 24px;
+            background: var(--white);
+            border-radius: 8px;
+            border: 1px solid var(--light-sage);
+        }
+
+        .brand-logo-large {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--black);
+            letter-spacing: 1px;
         }
 
         .quantity-selector {
@@ -708,6 +881,7 @@
             text-transform: uppercase;
             font-size: 14px;
             letter-spacing: 0.5px;
+            color: var(--dusty-olive);
         }
 
         .quantity-controls {
@@ -715,6 +889,8 @@
             align-items: center;
             border: 2px solid var(--light-sage);
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 6px;
+            overflow: hidden;
         }
 
         .quantity-btn {
@@ -742,6 +918,7 @@
             border-right: 2px solid var(--light-sage);
             font-weight: 600;
             font-size: 18px;
+            background: var(--white);
         }
 
         .product-actions {
@@ -750,7 +927,7 @@
             margin-top: 48px;
         }
 
-        /* Cart Screen */
+        /* Корзина */
         .cart-screen {
             padding: 60px 0 100px;
         }
@@ -759,6 +936,7 @@
             font-size: 48px;
             margin-bottom: 48px;
             letter-spacing: -1px;
+            color: var(--black);
         }
 
         .cart-grid {
@@ -773,7 +951,6 @@
             gap: 24px;
         }
 
-        /* Улучшил карточки корзины */
         .cart-item {
             display: grid;
             grid-template-columns: 140px 1fr auto;
@@ -783,26 +960,30 @@
             background: var(--white);
             transition: all 0.3s;
             box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border-radius: 12px;
         }
 
         .cart-item:hover {
             border-color: var(--light-sage);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
         }
 
         .cart-item-image {
             width: 140px;
             height: 140px;
-            background: linear-gradient(135deg, var(--light-concrete) 0%, #dae0dd 100%);
+            background: var(--light-concrete);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 60px;
+            border-radius: 8px;
         }
 
         .cart-item-info h3 {
             font-size: 22px;
             margin-bottom: 10px;
+            color: var(--black);
         }
 
         .cart-item-meta {
@@ -831,6 +1012,7 @@
             font-size: 28px;
             font-weight: 700;
             letter-spacing: -0.5px;
+            color: var(--black);
         }
 
         .remove-btn {
@@ -848,7 +1030,7 @@
             color: var(--accent-orange);
         }
 
-        /* Улучшил сводку корзины */
+        /* Сводка корзины */
         .cart-summary {
             background: var(--dusty-sage);
             color: var(--white);
@@ -856,7 +1038,8 @@
             height: fit-content;
             position: sticky;
             top: 120px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-radius: 12px;
         }
 
         .cart-summary h2 {
@@ -894,6 +1077,7 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             background: rgba(255, 255, 255, 0.1);
             color: var(--white);
+            border-radius: 6px;
         }
 
         .promo-input::placeholder {
@@ -908,6 +1092,13 @@
             cursor: pointer;
             font-weight: 700;
             letter-spacing: 0.5px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .promo-btn:hover {
+            background: var(--accent-orange);
+            color: var(--white);
         }
 
         .checkout-btn {
@@ -915,13 +1106,16 @@
             margin-top: 28px;
             background: var(--accent-orange);
             padding: 18px;
+            border-radius: 6px;
         }
 
         .checkout-btn:hover {
             background: var(--burnt-terracotta);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(211, 84, 44, 0.4);
         }
 
-        /* Checkout Screen */
+        /* Оформление заказа */
         .checkout-screen {
             padding: 60px 0 100px;
         }
@@ -930,6 +1124,7 @@
             font-size: 48px;
             margin-bottom: 48px;
             letter-spacing: -1px;
+            color: var(--black);
         }
 
         .checkout-grid {
@@ -949,6 +1144,7 @@
             align-items: center;
             gap: 16px;
             letter-spacing: 0.3px;
+            color: var(--black);
         }
 
         .step-number {
@@ -962,7 +1158,7 @@
             justify-content: center;
             font-size: 18px;
             font-weight: 700;
-            box-shadow: 0 2px 8px rgba(211, 84, 44, 0.3);
+            box-shadow: 0 4px 12px rgba(211, 84, 44, 0.3);
         }
 
         .delivery-options {
@@ -980,18 +1176,20 @@
             align-items: center;
             gap: 20px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border-radius: 8px;
+            background: var(--white);
         }
 
         .delivery-option:hover {
             border-color: var(--dusty-sage);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
         .delivery-option.selected {
             border-color: var(--accent-orange);
             background: rgba(211, 84, 44, 0.05);
-            box-shadow: 0 4px 20px rgba(211, 84, 44, 0.15);
+            box-shadow: 0 8px 25px rgba(211, 84, 44, 0.15);
         }
 
         .radio {
@@ -1028,6 +1226,7 @@
             font-size: 18px;
             margin-bottom: 6px;
             font-weight: 600;
+            color: var(--black);
         }
 
         .delivery-info p {
@@ -1049,18 +1248,20 @@
             transition: all 0.3s;
             text-align: center;
             box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border-radius: 8px;
+            background: var(--white);
         }
 
         .payment-method:hover {
             border-color: var(--dusty-sage);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
         .payment-method.selected {
             border-color: var(--accent-orange);
             background: rgba(211, 84, 44, 0.05);
-            box-shadow: 0 4px 20px rgba(211, 84, 44, 0.15);
+            box-shadow: 0 8px 25px rgba(211, 84, 44, 0.15);
         }
 
         .payment-icon {
@@ -1071,22 +1272,26 @@
         .payment-method h3 {
             font-size: 16px;
             font-weight: 600;
+            color: var(--black);
         }
 
-        /* Улучшил сводку заказа */
+        /* Сводка заказа */
         .order-summary {
             background: var(--light-concrete);
             padding: 40px;
             height: fit-content;
             position: sticky;
             top: 120px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            border: 1px solid var(--light-sage);
         }
 
         .order-summary h2 {
             font-size: 26px;
             margin-bottom: 32px;
             letter-spacing: 0.5px;
+            color: var(--black);
         }
 
         .order-items {
@@ -1119,6 +1324,7 @@
             justify-content: center;
             font-size: 32px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-radius: 6px;
         }
 
         .order-item-info {
@@ -1129,6 +1335,7 @@
             font-size: 15px;
             margin-bottom: 6px;
             font-weight: 600;
+            color: var(--black);
         }
 
         .order-item-info p {
@@ -1139,6 +1346,7 @@
         .order-item-price {
             font-weight: 700;
             font-size: 17px;
+            color: var(--black);
         }
 
         .place-order-btn {
@@ -1154,16 +1362,17 @@
             transition: all 0.3s;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            box-shadow: 0 4px 16px rgba(211, 84, 44, 0.3);
+            box-shadow: 0 6px 20px rgba(211, 84, 44, 0.3);
+            border-radius: 6px;
         }
 
         .place-order-btn:hover {
             background: var(--burnt-terracotta);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(211, 84, 44, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(211, 84, 44, 0.4);
         }
 
-        /* Payment Screen */
+        /* Оплата */
         .payment-screen {
             padding: 60px 0 100px;
         }
@@ -1178,6 +1387,7 @@
             margin-bottom: 16px;
             text-align: center;
             letter-spacing: -1px;
+            color: var(--black);
         }
 
         .order-number {
@@ -1191,7 +1401,8 @@
             background: var(--white);
             border: 2px solid var(--light-sage);
             padding: 48px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-radius: 12px;
         }
 
         .payment-amount {
@@ -1224,6 +1435,7 @@
             font-weight: 600;
             letter-spacing: 0.5px;
             font-size: 15px;
+            border-radius: 8px;
         }
 
         .card-input-group {
@@ -1246,7 +1458,7 @@
             flex: 1;
         }
 
-        /* Success Screen */
+        /* Успешная оплата */
         .success-screen {
             padding: 120px 0;
             text-align: center;
@@ -1256,20 +1468,21 @@
             width: 140px;
             height: 140px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--dusty-sage) 0%, var(--dusty-olive) 100%);
+            background: var(--dusty-sage);
             color: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 70px;
             margin: 0 auto 40px;
-            box-shadow: 0 12px 40px rgba(104, 126, 121, 0.3);
+            box-shadow: 0 15px 40px rgba(104, 126, 121, 0.3);
         }
 
         .success-screen h1 {
             font-size: 52px;
             margin-bottom: 20px;
             letter-spacing: -1px;
+            color: var(--black);
         }
 
         .success-screen p {
@@ -1285,7 +1498,7 @@
             justify-content: center;
         }
 
-        /* Account Screen */
+        /* Личный кабинет */
         .account-screen {
             padding: 60px 0 100px;
         }
@@ -1302,6 +1515,7 @@
         .account-header h1 {
             font-size: 52px;
             letter-spacing: -1px;
+            color: var(--black);
         }
 
         .account-grid {
@@ -1325,6 +1539,7 @@
             background: var(--white);
             font-size: 15px;
             letter-spacing: 0.3px;
+            border-radius: 8px;
         }
 
         .account-menu-item:hover {
@@ -1338,7 +1553,7 @@
             color: var(--white);
             border-color: var(--dusty-sage);
             transform: translateX(8px);
-            box-shadow: 0 4px 16px rgba(104, 126, 121, 0.3);
+            box-shadow: 0 6px 20px rgba(104, 126, 121, 0.3);
         }
 
         .account-content-section {
@@ -1360,12 +1575,14 @@
             background: var(--white);
             border: 2px solid var(--light-sage);
             transition: all 0.3s;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border-radius: 8px;
         }
 
         .info-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: var(--dusty-sage);
         }
 
         .info-card h3 {
@@ -1380,6 +1597,7 @@
         .info-card p {
             font-size: 19px;
             font-weight: 600;
+            color: var(--black);
         }
 
         .orders-list {
@@ -1392,13 +1610,15 @@
             background: var(--white);
             border: 2px solid var(--light-sage);
             padding: 36px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
             transition: all 0.3s;
+            border-radius: 12px;
         }
 
         .order-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+            border-color: var(--dusty-sage);
         }
 
         .order-header {
@@ -1414,6 +1634,7 @@
             font-size: 22px;
             font-weight: 700;
             letter-spacing: 0.3px;
+            color: var(--black);
         }
 
         .order-status {
@@ -1424,26 +1645,26 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            border-radius: 20px;
         }
 
-        /* Order status classes were updated in the <updates> section, using those */
-        .order-status.awaiting { /* New: Ожидает оплаты */
+        .order-status.awaiting {
             background: var(--accent-orange);
         }
 
-        .order-status.paid { /* Existing */
+        .order-status.paid {
             background: var(--dusty-sage);
         }
         
-        .order-status.ready { /* New */
+        .order-status.ready {
             background: var(--dusty-olive);
         }
 
-        .order-status.completed { /* New */
-            background: #4a7c59; /* Dark green for completed */
+        .order-status.completed {
+            background: #4a7c59;
         }
         
-        .order-status.new { /* New */
+        .order-status.new {
             background: var(--light-sage);
         }
 
@@ -1466,9 +1687,10 @@
         .order-detail-item p {
             font-size: 17px;
             font-weight: 600;
+            color: var(--black);
         }
 
-        /* Footer */
+        /* Футер */
         footer {
             background: var(--dusty-sage);
             color: var(--white);
@@ -1484,13 +1706,13 @@
         }
 
         .footer-section h3 {
-            font-size: 19px;
-            margin-bottom: 24px;
+            font-size: 20px;
+            margin-bottom: 28px;
             letter-spacing: 0.5px;
         }
 
         .footer-section p {
-            font-size: 14px;
+            font-size: 15px;
             line-height: 1.9;
             opacity: 0.9;
         }
@@ -1498,31 +1720,33 @@
         .footer-links {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
         }
 
         .footer-links a {
             color: var(--white);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 15px;
             opacity: 0.9;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            padding-left: 0;
         }
 
         .footer-links a:hover {
             opacity: 1;
-            transform: translateX(4px);
+            transform: translateX(8px);
         }
 
         .footer-bottom {
             padding-top: 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.2);
             text-align: center;
-            font-size: 13px;
+            font-size: 14px;
             opacity: 0.7;
         }
 
-        /* Utilities */
+        /* Утилиты */
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -1533,21 +1757,27 @@
             margin-bottom: 40px;
             transition: all 0.3s;
             font-size: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: var(--white);
+            border: 1px solid var(--light-sage);
         }
 
         .back-link:hover {
             color: var(--accent-orange);
             transform: translateX(-4px);
+            border-color: var(--accent-orange);
         }
 
-        /* Добавлены улучшенные фильтры */
+        /* Фильтры */
         .filters-container {
-            background: linear-gradient(135deg, #f8f9f9 0%, #e8eceb 100%);
+            background: var(--white);
             border-radius: 16px;
             padding: 0;
             margin-bottom: 48px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             overflow: hidden;
+            border: 1px solid var(--light-sage);
         }
 
         .filters-header {
@@ -1586,6 +1816,7 @@
             transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            border-radius: 6px;
         }
 
         .filters-reset:hover {
@@ -1645,7 +1876,7 @@
 
         .filter-group select:hover {
             border-color: var(--dusty-sage);
-            box-shadow: 0 2px 8px rgba(104, 126, 121, 0.1);
+            box-shadow: 0 4px 12px rgba(104, 126, 121, 0.1);
         }
 
         .filter-group select:focus {
@@ -1656,7 +1887,7 @@
 
         .sort-section {
             padding: 24px 32px;
-            background: linear-gradient(135deg, #fafbfb 0%, #f4f6f5 100%);
+            background: var(--light-concrete);
             border-top: 2px solid var(--light-concrete);
         }
 
@@ -1702,14 +1933,14 @@
             background: var(--light-concrete);
             border-color: var(--dusty-sage);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(104, 126, 121, 0.15);
+            box-shadow: 0 6px 18px rgba(104, 126, 121, 0.15);
         }
 
         .sort-btn.active {
             background: var(--accent-orange);
             color: var(--white);
             border-color: var(--accent-orange);
-            box-shadow: 0 4px 16px rgba(211, 84, 44, 0.3);
+            box-shadow: 0 6px 18px rgba(211, 84, 44, 0.3);
         }
 
         .active-filters {
@@ -1718,11 +1949,9 @@
             gap: 12px;
             flex-wrap: wrap;
             background: var(--white);
-            /* добавляем выравнивание элементов */
             align-items: center;
         }
 
-        /* добавляем стили для лейбла "Активные фильтры:" */
         .active-filters-label {
             font-family: 'Montserrat', sans-serif;
             font-size: 14px;
@@ -1736,10 +1965,9 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            background: linear-gradient(135deg, var(--dusty-sage) 0%, var(--deep-slate) 100%);
+            background: var(--dusty-sage);
             color: var(--white);
             border-radius: 20px;
-            /* используем правильный шрифт Montserrat */
             font-family: 'Montserrat', sans-serif;
             font-size: 13px;
             font-weight: 600;
@@ -1749,7 +1977,7 @@
         }
 
         .filter-chip:hover {
-            background: linear-gradient(135deg, var(--deep-slate) 0%, var(--dusty-olive) 100%);
+            background: var(--deep-slate);
             transform: scale(1.05);
         }
 
@@ -1759,7 +1987,7 @@
             stroke: currentColor;
         }
 
-        /* Улучшенные карточки товаров с ценой за коробку и упаковку */
+        /* Ценовые карточки */
         .product-pricing {
             display: flex;
             flex-direction: column;
@@ -1777,12 +2005,13 @@
             color: var(--dusty-olive);
         }
 
-        /* Калькулятор коробок в корзине */
+        /* Калькулятор коробок */
         .cart-calculator {
             background: var(--light-concrete);
             padding: 28px;
             margin-top: 24px;
             border-left: 4px solid var(--accent-orange);
+            border-radius: 8px;
         }
 
         .calc-row {
@@ -1818,6 +2047,7 @@
             padding: 16px;
             background: var(--white);
             border: 2px solid var(--light-sage);
+            border-radius: 8px;
         }
 
         .recipient-item:hover {
@@ -1832,7 +2062,7 @@
             width: 70px;
             height: 70px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--burnt-terracotta) 100%);
+            background: var(--accent-orange);
             color: var(--white);
             border: none;
             cursor: pointer;
@@ -1840,14 +2070,14 @@
             align-items: center;
             justify-content: center;
             font-size: 32px;
-            box-shadow: 0 8px 24px rgba(211, 84, 44, 0.4);
+            box-shadow: 0 10px 30px rgba(211, 84, 44, 0.4);
             transition: all 0.3s;
             z-index: 1000;
         }
 
         .chatbot-trigger:hover {
             transform: scale(1.1);
-            box-shadow: 0 12px 32px rgba(211, 84, 44, 0.5);
+            box-shadow: 0 15px 40px rgba(211, 84, 44, 0.5);
         }
 
         .chatbot-window {
@@ -1858,11 +2088,11 @@
             height: 600px;
             background: var(--white);
             border: 2px solid var(--light-sage);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.2);
             z-index: 1000;
             display: none;
             flex-direction: column;
-            border-radius: 4px;
+            border-radius: 12px;
             overflow: hidden;
         }
 
@@ -1957,6 +2187,7 @@
             border: 2px solid var(--light-sage);
             font-family: 'Inter', sans-serif;
             font-size: 14px;
+            border-radius: 20px;
         }
 
         .chatbot-send {
@@ -1967,23 +2198,26 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
+            border-radius: 20px;
         }
 
         .chatbot-send:hover {
             background: var(--burnt-terracotta);
+            transform: scale(1.05);
         }
 
         /* Премиальные акценты */
         .premium-badge {
             display: inline-block;
             padding: 6px 14px;
-            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--burnt-terracotta) 100%);
+            background: var(--accent-orange);
             color: var(--white);
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 2px 8px rgba(211, 84, 44, 0.3);
+            box-shadow: 0 4px 12px rgba(211, 84, 44, 0.3);
+            border-radius: 20px;
         }
 
         .section-title {
@@ -1998,6 +2232,7 @@
             display: inline-block;
         }
 
+        /* Медиа-запросы */
         @media (max-width: 1024px) {
             .container {
                 padding: 0 32px;
@@ -2052,7 +2287,7 @@
             }
 
             nav ul {
-                display: none; /* Hide nav on smaller screens, implement mobile menu later */
+                display: none;
             }
 
             .hero h1 {
@@ -2141,14 +2376,10 @@
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo" onclick="showScreen('home')">
-                    <!-- Добавил SVG логотип вместо текста -->
                     <div class="logo-icon">
-                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                            <circle cx="18" cy="18" r="16" stroke="#D3542C" stroke-width="2.5"/>
-                            <circle cx="18" cy="18" r="6" fill="#D3542C"/>
-                        </svg>
+                        <img src="image copy.png" alt="">
                     </div>
-                    FL<span class="logo-accent">Ø</span>REX
+                    
                 </a>
                 <nav>
                     <ul>
@@ -2159,7 +2390,6 @@
                 </nav>
                 <div class="header-actions">
                     <div class="cart-icon" onclick="showScreen('cart')">
-                        <!-- SVG иконка корзины -->
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                             <line x1="3" y1="6" x2="21" y2="6"/>
@@ -2173,12 +2403,13 @@
         </div>
     </header>
 
-    <!-- Новый экран регистрации вместо выбора города -->
+    <!-- Экраны остаются без изменений -->
+    <!-- Home Screen -->
     <div id="homeScreen" class="screen active">
         <div class="auth-screen">
             <div class="auth-container">
                 <div class="auth-logo">
-                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                    <svg width="80" height="80" viewBox="0 0 60 60" fill="none">
                         <circle cx="30" cy="30" r="28" stroke="#D3542C" stroke-width="3"/>
                         <circle cx="30" cy="30" r="10" fill="#D3542C"/>
                     </svg>
@@ -2208,7 +2439,7 @@
         </div>
     </div>
 
-    <!-- Новый экран SMS подтверждения -->
+    <!-- SMS Screen -->
     <div id="smsScreen" class="screen">
         <div class="auth-screen">
             <div class="auth-container">
@@ -2239,7 +2470,6 @@
                 <h1>Каталог</h1>
                 <div class="catalog-info">
                     <span>
-                        <!-- SVG иконка вместо эмодзи -->
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                             <circle cx="12" cy="10" r="3"/>
@@ -2258,7 +2488,7 @@
                 </div>
             </div>
             
-            <!-- Переделанный премиальный блок фильтров -->
+            <!-- Filters Container -->
             <div class="filters-container">
                 <div class="filters-header">
                     <h2 class="filters-title">
@@ -2441,28 +2671,63 @@
             </a>
             <div class="product-detail">
                 <div class="product-detail-grid">
-                    <div class="product-detail-image" id="productDetailImage">🌹</div>
+                    <div class="product-detail-image">
+                        <!-- Здесь будет фото товара - замените на ваше изображение -->
+                        <img src="product-detail-image.jpg" alt="Роза Red Naomi" id="productDetailPhoto">
+                    </div>
                     <div class="product-detail-info">
                         <h1 id="productDetailName">Роза Red Naomi</h1>
                         <p class="product-article" id="productDetailArticle">Артикул: RN50-2024-NL</p>
-                        <div class="product-specs">
+                        
+                        <!-- Терракотовая плашка с количеством -->
+                        <div class="detail-quantity-badge" id="productDetailQuantity">50 шт</div>
+                        
+                        <div class="product-detail-specs">
                             <div class="spec-item">
                                 <span class="spec-label">Цвет</span>
-                                <span class="spec-value" id="productDetailColor">Красный</span>
+                                <span class="spec-value" id="productDetailColor">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                    </svg>
+                                    Красный
+                                </span>
                             </div>
                             <div class="spec-item">
                                 <span class="spec-label">Рост</span>
-                                <span class="spec-value" id="productDetailHeight">60 см</span>
+                                <span class="spec-value" id="productDetailHeight">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="12" y1="2" x2="12" y2="22"/>
+                                        <polyline points="5 9 12 2 19 9"/>
+                                    </svg>
+                                    60 см
+                                </span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Вес</span>
+                                <span class="spec-value" id="productDetailWeight">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 6h18M3 6v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6M3 6l3-3m15 3l-3-3M12 10v4"/>
+                                    </svg>
+                                    34 гр
+                                </span>
                             </div>
                             <div class="spec-item">
                                 <span class="spec-label">Страна</span>
-                                <span class="spec-value" id="productDetailCountry">Нидерланды</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">В упаковке</span>
-                                <span class="spec-value" id="productDetailBox">50 шт</span>
+                                <span class="spec-value" id="productDetailCountry">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                    </svg>
+                                    Нидерланды
+                                </span>
                             </div>
                         </div>
+                        
+                        <!-- Логотип Florex -->
+                        <div class="product-detail-brand">
+                        <img src="image copy.png" alt="Florex" style="height: 40px;"> 
+                        </div>
+                        
                         <div class="quantity-selector">
                             <span class="quantity-label">Количество упаковок:</span>
                             <div class="quantity-controls">
@@ -2955,7 +3220,7 @@
         </div>
     </footer>
 
-    <!-- Добавлен чат-бот -->
+    <!-- Чат-бот -->
     <button class="chatbot-trigger" onclick="toggleChatbot()">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -2988,53 +3253,97 @@
     <script>
         // Sample Products Data with more details
         const products = [
-            { id: 1, name: 'Роза Red Naomi', icon: 'rose', color: 'Красный', height: '60', country: 'NL', box: '50', price: 128000, pricePerStem: 2560, category: 'roses', status: 'stock', daysInStock: 3 },
-            { id: 2, name: 'Тюльпан Frilled Painted', icon: 'tulip', color: 'Персиковый', height: '38', country: 'NL', box: '50', price: 85000, pricePerStem: 1700, category: 'tulips', status: 'stock', daysInStock: 1 },
-            { id: 3, name: 'Роза Avalanche+', icon: 'rose', color: 'Белый', height: '70', country: 'EC', box: '50', price: 145000, pricePerStem: 2900, category: 'roses', status: 'preorder', daysInStock: 0 },
-            { id: 4, name: 'Эустома Green Poetry', icon: 'eustoma', color: 'Зеленый', height: '55', country: 'CO', box: '40', price: 92000, pricePerStem: 2300, category: 'eustoma', status: 'stock', daysInStock: 2 },
-            { id: 5, name: 'Роза Pink Floyd', icon: 'rose', color: 'Розовый', height: '60', country: 'KE', box: '50', price: 118000, pricePerStem: 2360, category: 'roses', status: 'stock', daysInStock: 4 },
-            { id: 6, name: 'Хризантема Baltica', icon: 'chrysanthemum', color: 'Белый', height: '70', country: 'NL', box: '60', price: 78000, pricePerStem: 1300, category: 'chrysanthemums', status: 'stock', daysInStock: 5 },
+            { 
+                id: 1, 
+                name: 'Роза Red Naomi', 
+                photo: 'image copy 2.png', // Замените на ваше фото
+                color: 'Красный', 
+                height: '60', 
+                weight: '34',
+                country: 'Нидерланды', 
+                box: '50', 
+                price: 128000, 
+                pricePerStem: 2560, 
+                category: 'roses', 
+                status: 'stock', 
+                daysInStock: 3 
+            },
+            { 
+                id: 2, 
+                name: 'Тюльпан Double Painted Bubble', 
+                photo: 'image copy 2.png', // Замените на ваше фото
+                color: 'Персиковый', 
+                height: '38', 
+                weight: '28',
+                country: 'Нидерланды', 
+                box: '50', 
+                price: 85000, 
+                pricePerStem: 1700, 
+                category: 'tulips', 
+                status: 'stock', 
+                daysInStock: 1 
+            },
+            { 
+                id: 3, 
+                name: 'Роза Avalanche+', 
+                photo: 'image copy 2.png', // Замените на ваше фото
+                color: 'Белый', 
+                height: '70', 
+                weight: '38',
+                country: 'Эквадор', 
+                box: '50', 
+                price: 145000, 
+                pricePerStem: 2900, 
+                category: 'roses', 
+                status: 'preorder', 
+                daysInStock: 0 
+            },
+            { 
+                id: 4, 
+                name: 'Эустома Green Poetry', 
+                photo: 'image copy 2.png', // Замените на ваше фото
+                color: 'Зеленый', 
+                height: '55', 
+                weight: '25',
+                country: 'Колумбия', 
+                box: '40', 
+                price: 92000, 
+                pricePerStem: 2300, 
+                category: 'eustoma', 
+                status: 'stock', 
+                daysInStock: 2 
+            },
+            { 
+                id: 5, 
+                name: 'Роза Pink Floyd', 
+                photo: 'image copy 2.png', // Замените на ваше фото
+                color: 'Розовый', 
+                height: '60', 
+                weight: '32',
+                country: 'Кения', 
+                box: '50', 
+                price: 118000, 
+                pricePerStem: 2360, 
+                category: 'roses', 
+                status: 'stock', 
+                daysInStock: 4 
+            },
+            { 
+                id: 6, 
+                name: 'Хризантема Baltica', 
+                photo: 'image copy 2.png', // Замените на ваше фото
+                color: 'Белый', 
+                height: '70', 
+                weight: '45',
+                country: 'Нидерланды', 
+                box: '60', 
+                price: 78000, 
+                pricePerStem: 1300, 
+                category: 'chrysanthemums', 
+                status: 'stock', 
+                daysInStock: 5 
+            },
         ];
-
-        function getFlowerIcon(type) {
-            const icons = {
-                rose: `<svg class="flower-icon" viewBox="0 0 200 200" fill="currentColor">
-                    <path d="M100 180 C80 180 60 170 50 150 C40 130 40 110 50 90 C60 70 80 60 100 60 C120 60 140 70 150 90 C160 110 160 130 150 150 C140 170 120 180 100 180Z"/>
-                    <ellipse cx="100" cy="100" rx="30" ry="40" opacity="0.8"/>
-                    <ellipse cx="80" cy="95" rx="25" ry="35" opacity="0.6"/>
-                    <ellipse cx="120" cy="95" rx="25" ry="35" opacity="0.6"/>
-                    <ellipse cx="100" cy="80" rx="20" ry="25" opacity="0.7"/>
-                    <circle cx="100" cy="100" r="15" opacity="0.9"/>
-                    <line x1="100" y1="180" x2="100" y2="200" stroke="currentColor" stroke-width="3"/>
-                </svg>`,
-                tulip: `<svg class="flower-icon" viewBox="0 0 200 200" fill="currentColor">
-                    <path d="M100 60 C80 60 70 80 70 100 C70 110 75 120 85 125 L85 190 C85 195 92 198 100 198 C108 198 115 195 115 190 L115 125 C125 120 130 110 130 100 C130 80 120 60 100 60Z"/>
-                    <ellipse cx="80" cy="90" rx="20" ry="40" transform="rotate(-20 80 90)" opacity="0.8"/>
-                    <ellipse cx="120" cy="90" rx="20" ry="40" transform="rotate(20 120 90)" opacity="0.8"/>
-                    <ellipse cx="100" cy="75" rx="18" ry="35" opacity="0.9"/>
-                </svg>`,
-                eustoma: `<svg class="flower-icon" viewBox="0 0 200 200" fill="currentColor">
-                    <circle cx="100" cy="100" r="35" opacity="0.3"/>
-                    <path d="M100 70 Q120 80 125 100 Q120 120 100 130 Q80 120 75 100 Q80 80 100 70Z" opacity="0.6"/>
-                    <path d="M70 100 Q80 80 100 75 Q120 80 130 100 Q120 120 100 125 Q80 120 70 100Z" opacity="0.5"/>
-                    <circle cx="100" cy="100" r="12" opacity="0.9"/>
-                    <line x1="100" y1="130" x2="100" y2="190" stroke="currentColor" stroke-width="2"/>
-                    <path d="M85 150 Q80 155 85 160" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <path d="M115 150 Q120 155 115 160" fill="none" stroke="currentColor" stroke-width="2"/>
-                </svg>`,
-                chrysanthemum: `<svg class="flower-icon" viewBox="0 0 200 200" fill="currentColor">
-                    <circle cx="100" cy="100" r="15" opacity="0.9"/>
-                    ${Array.from({length: 16}, (_, i) => {
-                        const angle = (i * 22.5) * Math.PI / 180;
-                        const x = 100 + Math.cos(angle) * 40;
-                        const y = 100 + Math.sin(angle) * 40;
-                        return `<ellipse cx="${x}" cy="${y}" rx="8" ry="25" transform="rotate(${i * 22.5} ${x} ${y})" opacity="0.6"/>`;
-                    }).join('')}
-                    <line x1="100" y1="140" x2="100" y2="195" stroke="currentColor" stroke-width="2"/>
-                </svg>`
-            };
-            return icons[type] || icons.rose;
-        }
 
         let cart = [];
         let currentProduct = null;
@@ -3125,34 +3434,52 @@
             grid.innerHTML = filtered.map(product => `
                 <div class="product-card" onclick="showProduct(${product.id})">
                     <div class="product-image">
-                        ${getFlowerIcon(product.icon)}
+                        <!-- Замените src на путь к вашему изображению -->
+                        <img src="${product.photo}" alt="${product.name}" onerror="this.src='placeholder-image.jpg'">
                         <div class="product-status ${product.status === 'stock' ? 'in-stock' : 'pre-order'}">
                             ${product.status === 'stock' ? `В наличии ${product.daysInStock}д` : 'В пути'}
                         </div>
                     </div>
                     <div class="product-info">
                         <h3 class="product-name">${product.name}</h3>
-                        <div class="product-meta">
-                            <span>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                    <circle cx="12" cy="12" r="10"/>
-                                </svg>
-                                ${product.color}
-                            </span>
-                            <span>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="12" y1="2" x2="12" y2="22"/>
-                                    <line x1="17" y1="7" x2="7" y2="17"/>
-                                </svg>
-                                ${product.height} см
-                            </span>
-                            <span>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                </svg>
-                                ${product.country}
-                            </span>
+                        
+                        <!-- Терракотовая плашка с количеством -->
+                        <div class="product-quantity-badge">${product.box} шт</div>
+                        
+                        <div class="product-specs">
+                            <div class="spec-item">
+                                <span class="spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="12" y1="2" x2="12" y2="22"/>
+                                        <polyline points="5 9 12 2 19 9"/>
+                                    </svg>
+                                </span>
+                                <span>${product.height} см</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 6h18M3 6v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6M3 6l3-3m15 3l-3-3M12 10v4"/>
+                                    </svg>
+                                </span>
+                                <span>${product.weight} гр</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                    </svg>
+                                </span>
+                                <span>${product.country}</span>
+                            </div>
                         </div>
+                        
+                        <!-- Логотип Florex -->
+                        <div class="product-brand">
+                            <img src="image copy.png" alt="Florex" style="height: 20px;">
+                        </div>
+                        
                         <div class="product-price">
                             <div class="product-pricing">
                                 <div class="price-per-box">${product.price.toLocaleString('ru-RU')} ₸</div>
@@ -3243,13 +3570,37 @@
         // Show Product Detail
         function showProduct(id) {
             currentProduct = products.find(p => p.id === id);
-            document.getElementById('productDetailImage').innerHTML = getFlowerIcon(currentProduct.icon); // Use innerHTML for SVG
+            document.getElementById('productDetailPhoto').src = currentProduct.photo;
+            document.getElementById('productDetailPhoto').alt = currentProduct.name;
             document.getElementById('productDetailName').textContent = currentProduct.name;
             document.getElementById('productDetailArticle').textContent = `Артикул: ${currentProduct.id}${Math.random().toString(36).substring(2, 9).toUpperCase()}`;
-            document.getElementById('productDetailColor').textContent = currentProduct.color;
-            document.getElementById('productDetailHeight').textContent = currentProduct.height;
-            document.getElementById('productDetailCountry').textContent = currentProduct.country === 'NL' ? 'Нидерланды' : currentProduct.country === 'EC' ? 'Эквадор' : currentProduct.country === 'KE' ? 'Кения' : currentProduct.country === 'CO' ? 'Колумбия' : currentProduct.country;
-            document.getElementById('productDetailBox').textContent = `${currentProduct.box} шт`;
+            document.getElementById('productDetailColor').innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                </svg>
+                ${currentProduct.color}
+            `;
+            document.getElementById('productDetailHeight').innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="2" x2="12" y2="22"/>
+                    <polyline points="5 9 12 2 19 9"/>
+                </svg>
+                ${currentProduct.height} см
+            `;
+            document.getElementById('productDetailWeight').innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 6h18M3 6v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6M3 6l3-3m15 3l-3-3M12 10v4"/>
+                </svg>
+                ${currentProduct.weight} гр
+            `;
+            document.getElementById('productDetailCountry').innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+                ${currentProduct.country}
+            `;
+            document.getElementById('productDetailQuantity').textContent = `${currentProduct.box} шт`;
             document.getElementById('productDetailPrice').textContent = currentProduct.price.toLocaleString('ru-RU');
             document.getElementById('productQuantity').value = 1;
             showScreen('product');
@@ -3313,7 +3664,9 @@
             
             cartItems.innerHTML = cart.map((item, index) => `
                 <div class="cart-item">
-                    <div class="cart-item-image">${getFlowerIcon(item.icon)}</div>
+                    <div class="cart-item-image">
+                        <img src="${item.photo}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='placeholder-image.jpg'">
+                    </div>
                     <div class="cart-item-info">
                         <h3>${item.name}</h3>
                         <div class="cart-item-meta">
@@ -3392,7 +3745,9 @@
             const checkoutItems = document.getElementById('checkoutItems');
             checkoutItems.innerHTML = cart.map(item => `
                 <div class="order-item">
-                    <div class="order-item-image">${getFlowerIcon(item.icon)}</div>
+                    <div class="order-item-image">
+                        <img src="${item.photo}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='placeholder-image.jpg'">
+                    </div>
                     <div class="order-item-info">
                         <h4>${item.name}</h4>
                         <p>${item.quantity} × ${item.price.toLocaleString('ru-RU')} ₸</p>
