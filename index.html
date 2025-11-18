@@ -902,6 +902,24 @@
             letter-spacing: 1px;
         }
 
+        /* Исправление кнопки "Оформить заказ" для мобильных */
+.checkout-btn {
+    background-color: var(--accent-orange) !important; /* Принудительно оранжевый */
+    color: var(--white) !important; /* Белый текст */
+    border: none !important;
+    outline: none !important;
+    -webkit-appearance: none; /* Отключает стили iPhone */
+    appearance: none;
+    box-shadow: 0 6px 20px rgba(211, 84, 44, 0.3) !important;
+}
+
+/* На всякий случай, чтобы при нажатии не синела */
+.checkout-btn:active, 
+.checkout-btn:focus {
+    background-color: var(--burnt-terracotta) !important;
+    color: var(--white) !important;
+}
+        
         .quantity-selector {
             display: flex;
             align-items: center;
