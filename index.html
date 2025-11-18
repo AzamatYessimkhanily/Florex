@@ -17,8 +17,8 @@
         :root {
             --black: #121212;
             --white: #EDEDED;
-            --accent-orange: #D3542C;
-            --burnt-terracotta: #BD3E2D;
+            --accent-orange: #cc6054;
+            --burnt-terracotta: #cc6054;
             --deep-coral: #F2A497;
             --dusty-olive: #4E5D59;
             --dusty-sage: #687e79;
@@ -27,7 +27,9 @@
             --deep-slate: #3E4A49;
             --soft-white: #FFFFFF;
         }
-
+        .hidden-for-guest {
+            display: none !important; /* Скрываем элемент */
+        }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--white);
@@ -49,7 +51,7 @@
 
         /* Премиальный хедер */
         header {
-            background: #FFFFFF;
+            background: #EDEDED;
             border-bottom: 1px solid var(--light-sage);
             padding: 28px 0;
             position: sticky;
@@ -98,7 +100,7 @@
 
         nav a {
             font-family: 'Montserrat', sans-serif;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 600;
             color: var(--dusty-olive);
             text-decoration: none;
@@ -197,7 +199,37 @@
             transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(211, 84, 44, 0.4);
         }
+.lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            border: 1px solid var(--light-sage);
+            border-radius: 20px;
+            padding: 4px;
+            margin-right: 8px; /* Небольшой отступ от корзины */
+        }
+        
+        .lang-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--dusty-olive);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
 
+        .lang-btn.active {
+            background: var(--accent-orange);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(211, 84, 44, 0.3);
+        }
+
+        .lang-btn:not(.active):hover {
+            background: var(--light-concrete);
+        }
         /* Кнопки */
         .btn {
             font-family: 'Montserrat', sans-serif;
@@ -617,6 +649,7 @@
             transform: scale(1.05);
         }
 
+        
         .product-status {
             position: absolute;
             top: 16px;
@@ -660,7 +693,7 @@
 
         /* Терракотовая плашка с количеством */
         .product-quantity-badge {
-            background: var(--accent-orange);
+            background: var(--deep-coral);
             color: var(--white);
             padding: 8px 16px;
             border-radius: 6px;
@@ -804,7 +837,7 @@
 
         /* Терракотовая плашка в деталях */
         .detail-quantity-badge {
-            background: var(--accent-orange);
+            background: var(--deep-coral);
             color: var(--white);
             padding: 12px 24px;
             border-radius: 8px;
@@ -1885,9 +1918,49 @@
             box-shadow: 0 0 0 4px rgba(211, 84, 44, 0.1);
         }
 
+        .filter-checkbox-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .filter-checkbox-group input[type="checkbox"] {
+            display: none; /* Прячем сам чекбокс */
+        }
+
+        .filter-checkbox-group label {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e5e3;
+            background: var(--white);
+            color: var(--dusty-olive);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 8px;
+            text-align: center;
+            margin: 0;
+            text-transform: none;
+            letter-spacing: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .filter-checkbox-group label:hover {
+            border-color: var(--dusty-sage);
+            box-shadow: 0 4px 12px rgba(104, 126, 121, 0.1);
+        }
+
+        /* Стиль для ВЫБРАННОГО чекбокса */
+        .filter-checkbox-group input[type="checkbox"]:checked + label {
+            background: var(--accent-orange);
+            color: var(--white);
+            border-color: var(--accent-orange);
+            box-shadow: 0 6px 18px rgba(211, 84, 44, 0.3);
+        }
         .sort-section {
             padding: 24px 32px;
-            background: var(--light-concrete);
+            background: var(--white);
             border-top: 2px solid var(--light-concrete);
         }
 
@@ -2018,7 +2091,7 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 12px;
-            font-size: 15px;
+            font-size: 18px;
         }
 
         .calc-row strong {
@@ -2210,7 +2283,7 @@
         .premium-badge {
             display: inline-block;
             padding: 6px 14px;
-            background: var(--accent-orange);
+            background: #F2A497;
             color: var(--white);
             font-size: 11px;
             font-weight: 700;
@@ -2368,6 +2441,80 @@
                 gap: 40px;
             }
         }
+
+
+        .country-flag {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%; /* Делает флаг круглым */
+    display: block;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Тень для объема */
+    object-fit: cover;
+}
+
+
+/* Стили переключателя упаковок */
+.unit-switch {
+    display: flex;
+    background: var(--light-concrete);
+    padding: 4px;
+    border-radius: 12px;
+    gap: 4px;
+    margin-bottom: 24px;
+    border: 1px solid var(--light-sage);
+}
+
+.unit-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.unit-btn:hover {
+    background: rgba(255,255,255, 0.5);
+}
+
+.unit-btn.active {
+    background: var(--white);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid #e0e5e3;
+}
+
+.unit-btn.active .unit-title {
+    color: var(--accent-orange);
+}
+
+.unit-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--dusty-olive);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.unit-subtitle {
+    font-size: 11px;
+    color: var(--light-sage);
+    font-weight: 500;
+}
+
+.unit-btn.active .unit-subtitle {
+    color: var(--dusty-olive);
+}
+
+
+
     </style>
 </head>
 <body>
@@ -2375,12 +2522,15 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo" onclick="showScreen('home')">
-                    <div class="logo-icon">
-                        <img src="image copy.png" alt="">
-                    </div>
-                    
-                </a>
+<a href="#" class="logo" onclick="showScreen('home')" style="gap: 0; padding: 0;">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="320 90 160 40"
+         height="40"
+         style="width: auto; display: block;"
+         fill="none">
+        <path fill="var(--black)" d="M257.22,120.81c.06-.09.09-.21.09-.35,0-.2-.07-.35-.2-.46-.13-.11-.32-.16-.56-.16h-.76v2.04h.42v-.75h.33l.38.75h.45v-.02l-.44-.83c.12-.05.21-.13.27-.22ZM256.8,120.72c-.06.05-.14.08-.24.08h-.34v-.61h.34c.11,0,.2.03.25.08.06.06.08.13.08.23s-.03.17-.09.22ZM256.5,118.52c-1.28,0-2.32,1.04-2.32,2.32s1.04,2.32,2.32,2.32,2.32-1.04,2.32-2.32-1.04-2.32-2.32-2.32ZM256.5,122.7c-1.02,0-1.86-.83-1.86-1.86s.83-1.86,1.86-1.86,1.86.83,1.86,1.86-.83,1.86-1.86,1.86ZM185.87,101.72h-5.06c-.07,0-.12-.05-.13-.12-.53-5.08-4.56-9.05-9.63-9.52v-.05h-11.01c-.38,0-.69.31-.69.69v1.54c0,.95.77,1.72,1.72,1.72h8.98c3.29,0,6.08,2.35,6.64,5.58,0,.05-.01.09-.03.11-.01.02-.05.05-.1.05h-1.43s-.28.03-.28.03v.02c-3.81.36-7.14,2.73-8.74,6.24-.02.04-.06.06-.08.06-.02,0-.07.01-.12-.02-1.66-1.29-2.61-3.23-2.61-5.32v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,4.04,2.22,7.66,5.81,9.51,0,.06,0,.12,0,.18v10.01c0,.38.31.69.69.69h10.74s.28-.03.28-.03v-.02c5.45-.51,9.68-5.14,9.68-10.65v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,3.72-3.02,6.74-6.74,6.74h-6.62s0,0,0,0c-.05,0-.08-.02-.09-.04-.01-.01-.04-.04-.04-.09v-5.61h10.93c.36,0,.66-.29.68-.65l.02-6.97c0-.07.06-.13.13-.13h3.97c.95,0,1.72-.77,1.72-1.72v-1.54c0-.38-.31-.69-.69-.69ZM176.79,109.34c0,.07-.06.13-.13.13h-6.67c-.06,0-.1-.05-.11-.07-.01-.02-.03-.07,0-.12,1.17-2.22,3.45-3.61,5.95-3.62h.83c.07,0,.13.06.13.13v3.54ZM142.29,102.53v3.24c0,.21-.09.4-.24.52-.15.15-.34.21-.55.21h-10.99c.92,0,1.68.73,1.68,1.65v2.6h7.33c.52,0,.79.27.79.79v3.21c0,.24-.06.43-.21.55-.15.15-.34.21-.58.21h-9.01c.89,0,1.68.73,1.68,1.62v5.13c0,.21-.06.4-.21.55-.12.15-.31.21-.55.21h-4.06c-.46,0-.76-.31-.76-.76v-17.86c0-.7.34-1.44.82-1.92.24-.21.52-.4.86-.55.34-.12.64-.18.98-.18h12.24c.4,0,.79.4.79.79ZM161.03,118.44c.15.15.21.34.21.58v3.24c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.14c-.37,0-.76-.4-.76-.76v-17.89c0-1.4,1.25-2.63,2.66-2.63h2.38c.21,0,.4.06.52.21.15.15.21.34.21.55v14.81c0,.15.09.37.24.58.15.24.4.37.7.37h8.18c.21,0,.43.06.58.18ZM204.52,115.14c-.06-.09-.09-.18-.06-.34,0-.15.09-.27.24-.37,2.14-1.22,3.27-3.21,3.27-5.68,0-5.04-3.85-6.96-8.55-6.96h-6.47c-1.5,0-2.66,1.13-2.66,2.63v17.89c0,.37.43.73.76.73h4.18c.21,0,.4-.06.55-.21.15-.12.21-.31.21-.52v-5.04c0-.37-.15-.73-.43-1.1-.31-.34-.7-.52-1.22-.52h4c.37,0,.64.15.82.49l3.11,6.11c.24.52.64.79,1.22.79h4.31c.15,0,.31-.06.46-.18.12-.12.18-.27.18-.43,0-.09-.03-.21-.09-.34l-3.85-6.96ZM199.39,111.17h-2.66c-.27,0-.49-.09-.64-.27-.18-.18-.27-.4-.27-.64v-2.47c0-.92-.79-1.62-1.68-1.62h5.25c.79,0,1.44.21,1.95.64.49.46.73,1.1.73,1.92,0,1.65-1.1,2.44-2.69,2.44ZM227.67,119.29v2.99c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.6c-.37,0-.76-.4-.76-.76v-17.86c0-1.5,1.16-2.66,2.66-2.66h12.46c.49,0,.79.31.79.79v3.02c0,.21-.06.4-.21.52-.15.15-.34.21-.58.21h-11.27c.92,0,1.68.73,1.68,1.65v1.28c0,.52.4.95.92.95h6.66c.49,0,.79.31.79.79v2.75c0,.46-.34.79-.79.79h-9.25c.86,0,1.68.7,1.68,1.59v1.44c0,.52.4.95.92.95h8.92c.52,0,.79.27.79.79ZM249.78,122.1c.06.12.09.24.09.37,0,.15-.06.31-.18.46-.15.12-.31.18-.46.18h-4.79c-.43,0-.79-.21-1.07-.61l-3.73-5.4c-.12-.03-.18-.06-.24-.06l-3.73,5.47c-.27.4-.64.61-1.07.61h-4.64c-.15,0-.31-.06-.46-.18-.12-.15-.18-.31-.18-.46s.03-.24.09-.34l6.53-9.77c.06-.06.06-.12.03-.21l-6.05-9.31c-.06-.12-.09-.24-.09-.37,0-.34.31-.64.64-.64h4.64c.46,0,.82.21,1.1.67l3.27,5.01c.03.09.09.12.18.12l3.54-5.13c.27-.46.61-.67,1.07-.67h4.43c.15,0,.31.06.46.18.12.15.18.31.18.46,0,.12-.03.24-.09.37l-6.08,9.25c-.06.06-.06.12,0,.21l6.6,9.8ZZM473.55,120.81c.06-.09.09-.21.09-.35,0-.2-.07-.35-.2-.46-.13-.11-.32-.16-.56-.16h-.76v2.04h.42v-.75h.33l.38.75h.45v-.02l-.44-.83c.12-.05.21-.13.27-.22ZM473.13,120.72c-.06.05-.14.08-.24.08h-.34v-.61h.34c.11,0,.2.03.25.08.06.06.08.13.08.23s-.03.17-.09.22ZM472.83,118.52c-1.28,0-2.32,1.04-2.32,2.32s1.04,2.32,2.32,2.32,2.32-1.04,2.32-2.32-1.04-2.32-2.32-2.32ZM472.83,122.7c-1.02,0-1.86-.83-1.86-1.86s.83-1.86,1.86-1.86,1.86.83,1.86,1.86-.83,1.86-1.86,1.86ZM402.2,101.72h-5.06c-.07,0-.12-.05-.13-.12-.53-5.08-4.56-9.05-9.63-9.52v-.05h-11.01c-.38,0-.69.31-.69.69v1.54c0,.95.77,1.72,1.72,1.72h8.98c3.29,0,6.08,2.35,6.64,5.58,0,.05-.01.09-.03.11-.01.02-.05.05-.1.05h-1.43s-.28.03-.28.03v.02c-3.81.36-7.14,2.73-8.74,6.24-.02.04-.06.06-.08.06-.02,0-.07.01-.12-.02-1.66-1.29-2.61-3.23-2.61-5.32v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,4.04,2.22,7.66,5.81,9.51,0,.06,0,.12,0,.18v10.01c0,.38.31.69.69.69h10.74s.28-.03.28-.03v-.02c5.45-.51,9.68-5.14,9.68-10.65v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,3.72-3.02,6.74-6.74,6.74h-6.62s0,0,0,0c-.05,0-.08-.02-.09-.04-.01-.01-.04-.04-.04-.09v-5.61h10.93c.36,0,.66-.29.68-.65l.02-6.97c0-.07.06-.13.13-.13h3.97c.95,0,1.72-.77,1.72-1.72v-1.54c0-.38-.31-.69-.69-.69ZM393.12,109.34c0,.07-.06.13-.13.13h-6.67c-.06,0-.1-.05-.11-.07-.01-.02-.03-.07,0-.12,1.17-2.22,3.45-3.61,5.95-3.62h.83c.07,0,.13.06.13.13v3.54ZM358.62,102.53v3.24c0,.21-.09.4-.24.52-.15.15-.34.21-.55.21h-10.99c.92,0,1.68.73,1.68,1.65v2.6h7.33c.52,0,.79.27.79.79v3.21c0,.24-.06.43-.21.55-.15.15-.34.21-.58.21h-9.01c.89,0,1.68.73,1.68,1.62v5.13c0,.21-.06.4-.21.55-.12.15-.31.21-.55.21h-4.06c-.46,0-.76-.31-.76-.76v-17.86c0-.7.34-1.44.82-1.92.24-.21.52-.4.86-.55.34-.12.64-.18.98-.18h12.24c.4,0,.79.4.79.79ZM377.36,118.44c.15.15.21.34.21.58v3.24c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.14c-.37,0-.76-.4-.76-.76v-17.89c0-1.4,1.25-2.63,2.66-2.63h2.38c.21,0,.4.06.52.21.15.15.21.34.21.55v14.81c0,.15.09.37.24.58.15.24.4.37.7.37h8.18c.21,0,.43.06.58.18ZM420.86,115.14c-.06-.09-.09-.18-.06-.34,0-.15.09-.27.24-.37,2.14-1.22,3.27-3.21,3.27-5.68,0-5.04-3.85-6.96-8.55-6.96h-6.47c-1.5,0-2.66,1.13-2.66,2.63v17.89c0,.37.43.73.76.73h4.18c.21,0,.4-.06.55-.21.15-.12.21-.31.21-.52v-5.04c0-.37-.15-.73-.43-1.1-.31-.34-.7-.52-1.22-.52h4c.37,0,.64.15.82.49l3.11,6.11c.24.52.64.79,1.22.79h4.31c.15,0,.31-.06.46-.18.12-.12.18-.27.18-.43,0-.09-.03-.21-.09-.34l-3.85-6.96ZM415.73,111.17h-2.66c-.27,0-.49-.09-.64-.27-.18-.18-.27-.4-.27-.64v-2.47c0-.92-.79-1.62-1.68-1.62h5.25c.79,0,1.44.21,1.95.64.49.46.73,1.1.73,1.92,0,1.65-1.1,2.44-2.69,2.44ZM444,119.29v2.99c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.6c-.37,0-.76-.4-.76-.76v-17.86c0-1.5,1.16-2.66,2.66-2.66h12.46c.49,0,.79.31.79.79v3.02c0,.21-.06.4-.21.52-.15.15-.34.21-.58.21h-11.27c.92,0,1.68.73,1.68,1.65v1.28c0,.52.4.95.92.95h6.66c.49,0,.79.31.79.79v2.75c0,.46-.34.79-.79.79h-9.25c.86,0,1.68.7,1.68,1.59v1.44c0,.52.4.95.92.95h8.92c.52,0,.79.27.79.79ZM466.11,122.1c.06.12.09.24.09.37,0,.15-.06.31-.18.46-.15.12-.31.18-.46.18h-4.79c-.43,0-.79-.21-1.07-.61l-3.73-5.4c-.12-.03-.18-.06-.24-.06l-3.73,5.47c-.27.4-.64.61-1.07.61h-4.64c-.15,0-.31-.06-.46-.18-.12-.15-.18-.31-.18-.46s.03-.24.09-.34l6.53-9.77c.06-.06.06-.12.03-.21l-6.05-9.31c-.06-.12-.09-.24-.09-.37,0-.34.31-.64.64-.64h4.64c.46,0,.82.21,1.1.67l3.27,5.01c.03.09.09.12.18.12l3.54-5.13c.27-.46.61-.67,1.07-.67h4.43c.15,0,.31.06.46.18.12.15.18.31.18.46,0,.12-.03.24-.09.37l-6.08,9.25c-.06.06-.06.12,0,.21l6.6,9.8Z"/>
+    </svg>
+</a>
                 <nav>
                     <ul>
                         <li><a href="#" onclick="showScreen('catalog')">Каталог</a></li>
@@ -2389,6 +2539,10 @@
                     </ul>
                 </nav>
                 <div class="header-actions">
+                    <div class="lang-switcher">
+                        <a href="#" class="lang-btn active">РУС</a>
+                        <a href="#" class="lang-btn">КАЗ</a>
+                    </div>
                     <div class="cart-icon" onclick="showScreen('cart')">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
@@ -2397,7 +2551,7 @@
                         </svg>
                         <span class="cart-count" id="cartCount">0</span>
                     </div>
-                    <div class="user-icon" onclick="showScreen('account')">ГА</div>
+                    <div class="user-icon hidden-for-guest" onclick="showScreen('account')">ГА</div>
                 </div>
             </div>
         </div>
@@ -2409,10 +2563,13 @@
         <div class="auth-screen">
             <div class="auth-container">
                 <div class="auth-logo">
-                    <svg width="80" height="80" viewBox="0 0 60 60" fill="none">
-                        <circle cx="30" cy="30" r="28" stroke="#D3542C" stroke-width="3"/>
-                        <circle cx="30" cy="30" r="10" fill="#D3542C"/>
-                    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="308 90 160 40"
+         height="40"
+         style="width: auto; display: block;"
+         fill="none">
+        <path fill="var(--black)" d="M257.22,120.81c.06-.09.09-.21.09-.35,0-.2-.07-.35-.2-.46-.13-.11-.32-.16-.56-.16h-.76v2.04h.42v-.75h.33l.38.75h.45v-.02l-.44-.83c.12-.05.21-.13.27-.22ZM256.8,120.72c-.06.05-.14.08-.24.08h-.34v-.61h.34c.11,0,.2.03.25.08.06.06.08.13.08.23s-.03.17-.09.22ZM256.5,118.52c-1.28,0-2.32,1.04-2.32,2.32s1.04,2.32,2.32,2.32,2.32-1.04,2.32-2.32-1.04-2.32-2.32-2.32ZM256.5,122.7c-1.02,0-1.86-.83-1.86-1.86s.83-1.86,1.86-1.86,1.86.83,1.86,1.86-.83,1.86-1.86,1.86ZM185.87,101.72h-5.06c-.07,0-.12-.05-.13-.12-.53-5.08-4.56-9.05-9.63-9.52v-.05h-11.01c-.38,0-.69.31-.69.69v1.54c0,.95.77,1.72,1.72,1.72h8.98c3.29,0,6.08,2.35,6.64,5.58,0,.05-.01.09-.03.11-.01.02-.05.05-.1.05h-1.43s-.28.03-.28.03v.02c-3.81.36-7.14,2.73-8.74,6.24-.02.04-.06.06-.08.06-.02,0-.07.01-.12-.02-1.66-1.29-2.61-3.23-2.61-5.32v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,4.04,2.22,7.66,5.81,9.51,0,.06,0,.12,0,.18v10.01c0,.38.31.69.69.69h10.74s.28-.03.28-.03v-.02c5.45-.51,9.68-5.14,9.68-10.65v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,3.72-3.02,6.74-6.74,6.74h-6.62s0,0,0,0c-.05,0-.08-.02-.09-.04-.01-.01-.04-.04-.04-.09v-5.61h10.93c.36,0,.66-.29.68-.65l.02-6.97c0-.07.06-.13.13-.13h3.97c.95,0,1.72-.77,1.72-1.72v-1.54c0-.38-.31-.69-.69-.69ZM176.79,109.34c0,.07-.06.13-.13.13h-6.67c-.06,0-.1-.05-.11-.07-.01-.02-.03-.07,0-.12,1.17-2.22,3.45-3.61,5.95-3.62h.83c.07,0,.13.06.13.13v3.54ZM142.29,102.53v3.24c0,.21-.09.4-.24.52-.15.15-.34.21-.55.21h-10.99c.92,0,1.68.73,1.68,1.65v2.6h7.33c.52,0,.79.27.79.79v3.21c0,.24-.06.43-.21.55-.15.15-.34.21-.58.21h-9.01c.89,0,1.68.73,1.68,1.62v5.13c0,.21-.06.4-.21.55-.12.15-.31.21-.55.21h-4.06c-.46,0-.76-.31-.76-.76v-17.86c0-.7.34-1.44.82-1.92.24-.21.52-.4.86-.55.34-.12.64-.18.98-.18h12.24c.4,0,.79.4.79.79ZM161.03,118.44c.15.15.21.34.21.58v3.24c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.14c-.37,0-.76-.4-.76-.76v-17.89c0-1.4,1.25-2.63,2.66-2.63h2.38c.21,0,.4.06.52.21.15.15.21.34.21.55v14.81c0,.15.09.37.24.58.15.24.4.37.7.37h8.18c.21,0,.43.06.58.18ZM204.52,115.14c-.06-.09-.09-.18-.06-.34,0-.15.09-.27.24-.37,2.14-1.22,3.27-3.21,3.27-5.68,0-5.04-3.85-6.96-8.55-6.96h-6.47c-1.5,0-2.66,1.13-2.66,2.63v17.89c0,.37.43.73.76.73h4.18c.21,0,.4-.06.55-.21.15-.12.21-.31.21-.52v-5.04c0-.37-.15-.73-.43-1.1-.31-.34-.7-.52-1.22-.52h4c.37,0,.64.15.82.49l3.11,6.11c.24.52.64.79,1.22.79h4.31c.15,0,.31-.06.46-.18.12-.12.18-.27.18-.43,0-.09-.03-.21-.09-.34l-3.85-6.96ZM199.39,111.17h-2.66c-.27,0-.49-.09-.64-.27-.18-.18-.27-.4-.27-.64v-2.47c0-.92-.79-1.62-1.68-1.62h5.25c.79,0,1.44.21,1.95.64.49.46.73,1.1.73,1.92,0,1.65-1.1,2.44-2.69,2.44ZM227.67,119.29v2.99c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.6c-.37,0-.76-.4-.76-.76v-17.86c0-1.5,1.16-2.66,2.66-2.66h12.46c.49,0,.79.31.79.79v3.02c0,.21-.06.4-.21.52-.15.15-.34.21-.58.21h-11.27c.92,0,1.68.73,1.68,1.65v1.28c0,.52.4.95.92.95h6.66c.49,0,.79.31.79.79v2.75c0,.46-.34.79-.79.79h-9.25c.86,0,1.68.7,1.68,1.59v1.44c0,.52.4.95.92.95h8.92c.52,0,.79.27.79.79ZM249.78,122.1c.06.12.09.24.09.37,0,.15-.06.31-.18.46-.15.12-.31.18-.46.18h-4.79c-.43,0-.79-.21-1.07-.61l-3.73-5.4c-.12-.03-.18-.06-.24-.06l-3.73,5.47c-.27.4-.64.61-1.07.61h-4.64c-.15,0-.31-.06-.46-.18-.12-.15-.18-.31-.18-.46s.03-.24.09-.34l6.53-9.77c.06-.06.06-.12.03-.21l-6.05-9.31c-.06-.12-.09-.24-.09-.37,0-.34.31-.64.64-.64h4.64c.46,0,.82.21,1.1.67l3.27,5.01c.03.09.09.12.18.12l3.54-5.13c.27-.46.61-.67,1.07-.67h4.43c.15,0,.31.06.46.18.12.15.18.31.18.46,0,.12-.03.24-.09.37l-6.08,9.25c-.06.06-.06.12,0,.21l6.6,9.8ZZM473.55,120.81c.06-.09.09-.21.09-.35,0-.2-.07-.35-.2-.46-.13-.11-.32-.16-.56-.16h-.76v2.04h.42v-.75h.33l.38.75h.45v-.02l-.44-.83c.12-.05.21-.13.27-.22ZM473.13,120.72c-.06.05-.14.08-.24.08h-.34v-.61h.34c.11,0,.2.03.25.08.06.06.08.13.08.23s-.03.17-.09.22ZM472.83,118.52c-1.28,0-2.32,1.04-2.32,2.32s1.04,2.32,2.32,2.32,2.32-1.04,2.32-2.32-1.04-2.32-2.32-2.32ZM472.83,122.7c-1.02,0-1.86-.83-1.86-1.86s.83-1.86,1.86-1.86,1.86.83,1.86,1.86-.83,1.86-1.86,1.86ZM402.2,101.72h-5.06c-.07,0-.12-.05-.13-.12-.53-5.08-4.56-9.05-9.63-9.52v-.05h-11.01c-.38,0-.69.31-.69.69v1.54c0,.95.77,1.72,1.72,1.72h8.98c3.29,0,6.08,2.35,6.64,5.58,0,.05-.01.09-.03.11-.01.02-.05.05-.1.05h-1.43s-.28.03-.28.03v.02c-3.81.36-7.14,2.73-8.74,6.24-.02.04-.06.06-.08.06-.02,0-.07.01-.12-.02-1.66-1.29-2.61-3.23-2.61-5.32v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,4.04,2.22,7.66,5.81,9.51,0,.06,0,.12,0,.18v10.01c0,.38.31.69.69.69h10.74s.28-.03.28-.03v-.02c5.45-.51,9.68-5.14,9.68-10.65v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,3.72-3.02,6.74-6.74,6.74h-6.62s0,0,0,0c-.05,0-.08-.02-.09-.04-.01-.01-.04-.04-.04-.09v-5.61h10.93c.36,0,.66-.29.68-.65l.02-6.97c0-.07.06-.13.13-.13h3.97c.95,0,1.72-.77,1.72-1.72v-1.54c0-.38-.31-.69-.69-.69ZM393.12,109.34c0,.07-.06.13-.13.13h-6.67c-.06,0-.1-.05-.11-.07-.01-.02-.03-.07,0-.12,1.17-2.22,3.45-3.61,5.95-3.62h.83c.07,0,.13.06.13.13v3.54ZM358.62,102.53v3.24c0,.21-.09.4-.24.52-.15.15-.34.21-.55.21h-10.99c.92,0,1.68.73,1.68,1.65v2.6h7.33c.52,0,.79.27.79.79v3.21c0,.24-.06.43-.21.55-.15.15-.34.21-.58.21h-9.01c.89,0,1.68.73,1.68,1.62v5.13c0,.21-.06.4-.21.55-.12.15-.31.21-.55.21h-4.06c-.46,0-.76-.31-.76-.76v-17.86c0-.7.34-1.44.82-1.92.24-.21.52-.4.86-.55.34-.12.64-.18.98-.18h12.24c.4,0,.79.4.79.79ZM377.36,118.44c.15.15.21.34.21.58v3.24c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.14c-.37,0-.76-.4-.76-.76v-17.89c0-1.4,1.25-2.63,2.66-2.63h2.38c.21,0,.4.06.52.21.15.15.21.34.21.55v14.81c0,.15.09.37.24.58.15.24.4.37.7.37h8.18c.21,0,.43.06.58.18ZM420.86,115.14c-.06-.09-.09-.18-.06-.34,0-.15.09-.27.24-.37,2.14-1.22,3.27-3.21,3.27-5.68,0-5.04-3.85-6.96-8.55-6.96h-6.47c-1.5,0-2.66,1.13-2.66,2.63v17.89c0,.37.43.73.76.73h4.18c.21,0,.4-.06.55-.21.15-.12.21-.31.21-.52v-5.04c0-.37-.15-.73-.43-1.1-.31-.34-.7-.52-1.22-.52h4c.37,0,.64.15.82.49l3.11,6.11c.24.52.64.79,1.22.79h4.31c.15,0,.31-.06.46-.18.12-.12.18-.27.18-.43,0-.09-.03-.21-.09-.34l-3.85-6.96ZM415.73,111.17h-2.66c-.27,0-.49-.09-.64-.27-.18-.18-.27-.4-.27-.64v-2.47c0-.92-.79-1.62-1.68-1.62h5.25c.79,0,1.44.21,1.95.64.49.46.73,1.1.73,1.92,0,1.65-1.1,2.44-2.69,2.44ZM444,119.29v2.99c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.6c-.37,0-.76-.4-.76-.76v-17.86c0-1.5,1.16-2.66,2.66-2.66h12.46c.49,0,.79.31.79.79v3.02c0,.21-.06.4-.21.52-.15.15-.34.21-.58.21h-11.27c.92,0,1.68.73,1.68,1.65v1.28c0,.52.4.95.92.95h6.66c.49,0,.79.31.79.79v2.75c0,.46-.34.79-.79.79h-9.25c.86,0,1.68.7,1.68,1.59v1.44c0,.52.4.95.92.95h8.92c.52,0,.79.27.79.79ZM466.11,122.1c.06.12.09.24.09.37,0,.15-.06.31-.18.46-.15.12-.31.18-.46.18h-4.79c-.43,0-.79-.21-1.07-.61l-3.73-5.4c-.12-.03-.18-.06-.24-.06l-3.73,5.47c-.27.4-.64.61-1.07.61h-4.64c-.15,0-.31-.06-.46-.18-.12-.15-.18-.31-.18-.46s.03-.24.09-.34l6.53-9.77c.06-.06.06-.12.03-.21l-6.05-9.31c-.06-.12-.09-.24-.09-.37,0-.34.31-.64.64-.64h4.64c.46,0,.82.21,1.1.67l3.27,5.01c.03.09.09.12.18.12l3.54-5.13c.27-.46.61-.67,1.07-.67h4.43c.15,0,.31.06.46.18.12.15.18.31.18.46,0,.12-.03.24-.09.37l-6.08,9.25c-.06.06-.06.12,0,.21l6.6,9.8Z"/>
+    </svg>
                     <h1>Регистрация</h1>
                     <p>Заполните данные для входа в систему</p>
                 </div>
@@ -2476,15 +2633,7 @@
                         </svg>
                         <span id="selectedCity">Алматы</span>
                     </span>
-                    <span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                            <line x1="16" y1="2" x2="16" y2="6"/>
-                            <line x1="8" y1="2" x2="8" y2="6"/>
-                            <line x1="3" y1="10" x2="21" y2="10"/>
-                        </svg>
-                        <span id="selectedDate">Сегодня</span>
-                    </span>
+
                 </div>
             </div>
             
@@ -2538,7 +2687,7 @@
                         </select>
                     </div>
 
-                    <div class="filter-group">
+                <div class="filter-group">
                         <label>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
@@ -2546,11 +2695,13 @@
                             </svg>
                             Наличие
                         </label>
-                        <select id="filterAvailability" onchange="applyFilters()">
-                            <option value="">Все товары</option>
-                            <option value="stock">В наличии</option>
-                            <option value="preorder">В пути</option>
-                        </select>
+                        <div class="filter-checkbox-group">
+                            <input type="checkbox" id="checkStock" onchange="applyFilters()">
+                            <label for="checkStock">В наличии</label>
+                            
+                            <input type="checkbox" id="checkPreorder" onchange="applyFilters()">
+                            <label for="checkPreorder">В пути</label>
+                        </div>
                     </div>
 
                     <div class="filter-group">
@@ -2640,13 +2791,7 @@
                             </svg>
                             А-Я
                         </button>
-                        <button class="sort-btn" onclick="setSorting('stock', this)" data-sort-key="stock">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                <polyline points="9 11 12 14 22 4"/>
-                            </svg>
-                            В наличии
-                        </button>
+
                     </div>
                 </div>
 
@@ -2724,10 +2869,19 @@
                         </div>
                         
                         <!-- Логотип Florex -->
-                        <div class="product-detail-brand">
-                        <img src="image copy.png" alt="Florex" style="height: 40px;"> 
-                        </div>
-                        
+                        <div class="unit-selector-container">
+    <span class="spec-label" style="margin-bottom: 12px; display: block;">Единица измерения:</span>
+    <div class="unit-switch">
+        <button class="unit-btn active" id="btnUnitBox" onclick="setUnit('box')">
+            <div class="unit-title">Коробка</div>
+            <div class="unit-subtitle" id="boxContentInfo">500 стеблей</div>
+        </button>
+        <button class="unit-btn" id="btnUnitPack" onclick="setUnit('pack')">
+            <div class="unit-title">Упаковка</div>
+            <div class="unit-subtitle" id="packContentInfo">10 стеблей</div>
+        </button>
+    </div>
+</div>
                         <div class="quantity-selector">
                             <span class="quantity-label">Количество упаковок:</span>
                             <div class="quantity-controls">
@@ -2736,8 +2890,11 @@
                                 <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
                             </div>
                         </div>
-                        <div class="price" style="font-size: 40px; margin: 32px 0;">
-                            <span id="productDetailPrice">128 000</span> ₸ <span class="price-unit">/ упаковка</span>
+<div class="product-pricing" style="margin: 32px 0;">
+                            <div class="price-per-box" style="font-size: 40px;" id="productDetailPriceBox">
+                                </div>
+                            <div class="price-per-unit" style="font-size: 16px; margin-top: 8px;" id="productDetailPriceStem">
+                                </div>
                         </div>
                         <div class="product-actions">
                             <button class="btn btn-primary" style="flex: 2;" onclick="addToCartFromDetail()">Добавить в корзину</button>
@@ -2760,7 +2917,7 @@
                 Продолжить покупки
             </a>
             <div class="cart-screen">
-                <h1>Корзина</h1>
+                <h1>Корзина (Заказ № 123456789)</h1>
                 <div class="cart-grid">
                     <div class="cart-items" id="cartItems">
                         <!-- Cart items will be generated by JS -->
@@ -2794,7 +2951,7 @@
                             <span id="summaryDiscount">0 ₸</span>
                         </div>
                         <div class="summary-row">
-                            <span>Всего</span>
+                            <span>Общая стоимость</span>
                             <span id="summaryTotal">0 ₸</span>
                         </div>
                         <div class="promo-code">
@@ -2819,7 +2976,7 @@
                 Вернуться в корзину
             </a>
             <div class="checkout-screen">
-                <h1>Оформление заказа</h1>
+                <h1>Оформление заказа (Заказ № 123456789) </h1>
                 <div class="checkout-grid">
                     <div>
                         <div class="checkout-section">
@@ -2831,15 +2988,6 @@
                                         <h3>Самовывоз</h3>
                                         <p>Алматы, Проспект Суюнбая, 37 • Пн–Пт: 08:00–19:00</p>
                                     </div>
-                                    <strong>Бесплатно</strong>
-                                </div>
-                                <div class="delivery-option" onclick="selectDelivery(this)">
-                                    <div class="radio"></div>
-                                    <div class="delivery-info">
-                                        <h3>Доставка курьером</h3>
-                                        <p>В пределах города • Доставка в день заказа</p>
-                                    </div>
-                                    <strong>5 000 ₸</strong>
                                 </div>
                             </div>
                         </div>
@@ -2904,7 +3052,7 @@
                             <span id="checkoutDelivery">0 ₸</span>
                         </div>
                         <div class="summary-row">
-                            <span>Всего</span>
+                            <span>Общая стоимость</span>
                             <span id="checkoutTotal">0 ₸</span>
                         </div>
                         <button class="place-order-btn" onclick="proceedToPayment()">Перейти к оплате</button>
@@ -2998,6 +3146,14 @@
                                     <p>123456789012</p>
                                 </div>
                                 <div class="info-card">
+                                    <h3>Расчетный счет (IBAN)</h3>
+                                    <p>KZ55 1234 5678 9000 0000</p>
+                                </div>
+                                <div class="info-card">
+                                    <h3>БИК</h3>
+                                    <p>KZKOKZKX</p>
+                                </div>
+                                <div class="info-card">
                                     <h3>Контактное лицо</h3>
                                     <p>Гульжан Абдуллаева</p>
                                 </div>
@@ -3021,6 +3177,7 @@
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
                                     <div>
                                         <h3 style="font-size: 16px; margin-bottom: 8px;">Ваша личная скидка</h3>
+                                        <p style="font-size: 13px; color: var(--dusty-olive); margin-top: 5px;">* Личная скидка распространяется только на определенные позиции в каталоге.</p>
                                         <p style="font-size: 32px; font-weight: 700; color: var(--accent-orange);">15%</p>
                                     </div>
                                     <div class="premium-badge">VIP Клиент</div>
@@ -3161,11 +3318,20 @@
                                     </div>
                                     <button class="btn btn-outline" style="padding: 8px 16px; font-size: 13px;">Удалить</button>
                                 </div>
-                                
+                                Корзина 
                                 <div class="recipient-item">
                                     <div>
                                         <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 4px;">Дина Касымова</h4>
                                         <p style="font-size: 14px; color: var(--dusty-olive);">+7 (705) 456-78-90 • Администратор</p>
+                                    </div>
+                                    <button class="btn btn-outline" style="padding: 8px 16px; font-size: 13px;">Удалить</button>
+                                </div>
+
+                                                                <div class="recipient-item">
+                                    <div>
+                                        <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 4px;">Азамат Есимханулы</h4>
+                                        <p style="font-size: 14px; color: var(--dusty-olive);">+7 (705) 456-78-90 • Яндекс Курьер</p>
+                                        <a href="">Ссылка на Курьера</a>
                                     </div>
                                     <button class="btn btn-outline" style="padding: 8px 16px; font-size: 13px;">Удалить</button>
                                 </div>
@@ -3262,6 +3428,9 @@
                 weight: '34',
                 country: 'Нидерланды', 
                 box: '50', 
+                bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
+        stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
+        price: 128000, // Цена за КОРОБКУ
                 price: 128000, 
                 pricePerStem: 2560, 
                 category: 'roses', 
@@ -3277,6 +3446,9 @@
                 weight: '28',
                 country: 'Нидерланды', 
                 box: '50', 
+                bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
+        stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
+        price: 128000, // Цена за КОРОБКУ
                 price: 85000, 
                 pricePerStem: 1700, 
                 category: 'tulips', 
@@ -3291,7 +3463,10 @@
                 height: '70', 
                 weight: '38',
                 country: 'Эквадор', 
-                box: '50', 
+                box: '50',
+                bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
+        stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
+        price: 128000, // Цена за КОРОБКУ 
                 price: 145000, 
                 pricePerStem: 2900, 
                 category: 'roses', 
@@ -3307,6 +3482,9 @@
                 weight: '25',
                 country: 'Колумбия', 
                 box: '40', 
+                bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
+        stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
+        price: 128000, // Цена за КОРОБКУ
                 price: 92000, 
                 pricePerStem: 2300, 
                 category: 'eustoma', 
@@ -3322,6 +3500,9 @@
                 weight: '32',
                 country: 'Кения', 
                 box: '50', 
+                bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
+        stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
+        price: 128000, // Цена за КОРОБКУ
                 price: 118000, 
                 pricePerStem: 2360, 
                 category: 'roses', 
@@ -3337,6 +3518,9 @@
                 weight: '45',
                 country: 'Нидерланды', 
                 box: '60', 
+                bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
+        stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
+        price: 128000, // Цена за КОРОБКУ
                 price: 78000, 
                 pricePerStem: 1300, 
                 category: 'chrysanthemums', 
@@ -3348,7 +3532,47 @@
         let cart = [];
         let currentProduct = null;
         let discount = 0; // Initialize discount to 0
+let selectedUnit = 'box'; // 'box' или 'pack'
 
+// 1. Функция переключения
+function setUnit(unit) {
+    selectedUnit = unit;
+    
+    // Обновляем UI кнопок
+    document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+    if(unit === 'box') document.getElementById('btnUnitBox').classList.add('active');
+    else document.getElementById('btnUnitPack').classList.add('active');
+
+    // Обновляем лейбл количества
+    const label = document.querySelector('.quantity-label');
+    label.textContent = unit === 'box' ? 'Количество коробок:' : 'Количество упаковок:';
+
+    // Пересчитываем цены
+    updatePriceDisplay();
+}
+
+// 2. Функция обновления отображения цены
+function updatePriceDisplay() {
+    if (!currentProduct) return;
+
+    const priceBox = document.getElementById('productDetailPriceBox');
+    const priceStem = document.getElementById('productDetailPriceStem');
+    const quantityBadge = document.querySelector('.detail-quantity-badge');
+
+    if (selectedUnit === 'box') {
+        // Режим КОРОБКА
+        priceBox.textContent = `${currentProduct.price.toLocaleString('ru-RU')} ₸`;
+        priceStem.textContent = `${currentProduct.pricePerStem.toLocaleString('ru-RU')} ₸ / Стебель`;
+        quantityBadge.textContent = `${currentProduct.box} шт (Коробка)`;
+    } else {
+        // Режим УПАКОВКА
+        // Вычисляем цену упаковки: Цена коробки / кол-во пачек
+        const packPrice = currentProduct.price / currentProduct.bunchesInBox;
+        priceBox.textContent = `${packPrice.toLocaleString('ru-RU')} ₸`;
+        priceStem.textContent = `за 1 упаковку (${currentProduct.stemsPerBunch} шт)`;
+        quantityBadge.textContent = `${currentProduct.stemsPerBunch} шт (Упаковка)`;
+    }
+}
         // Screen Navigation
         function showScreen(screenName) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -3365,6 +3589,14 @@
             window.scrollTo(0, 0);
         }
 
+            function showUserIcon() {
+                const userIcon = document.querySelector('.user-icon');
+                if (userIcon) {
+                    // Удаляем класс, который скрывает элемент
+                    userIcon.classList.remove('hidden-for-guest');
+                    console.log('Иконка пользователя теперь видна!');
+                }
+            }
         function startRegistration(e) {
             e.preventDefault();
             const phone = document.getElementById('phoneNumber').value;
@@ -3382,6 +3614,7 @@
             // Verify SMS code (in real app would check with server)
             showScreen('catalog');
             renderProducts();
+            showUserIcon();
         }
 
         function resendCode() {
@@ -3393,6 +3626,33 @@
             updateActiveFilters(); // Also update active filters display
         }
 
+// Функция для получения SVG флага по названию страны
+function getCountryFlag(countryName) {
+    const className = "country-flag";
+    
+    // Нидерланды
+    if (countryName === 'Нидерланды') {
+        return `<svg class="${className}" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="600" fill="#21468b"/><rect width="900" height="400" fill="#fff"/><rect width="900" height="200" fill="#ae1c28"/></svg>`;
+    }
+    // Эквадор
+    else if (countryName === 'Эквадор') {
+        return `<svg class="${className}" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="600" fill="#ce1126"/><rect width="900" height="450" fill="#00338d"/><rect width="900" height="300" fill="#fcd116"/></svg>`;
+    }
+    // Кения
+    else if (countryName === 'Кения') {
+        return `<svg class="${className}" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="600" fill="#000"/><rect y="150" width="900" height="300" fill="#fff"/><rect y="170" width="900" height="260" fill="#bb0000"/><rect y="400" width="900" height="200" fill="#006600"/></svg>`;
+    }
+    // Колумбия
+    else if (countryName === 'Колумбия') {
+        return `<svg class="${className}" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg"><rect width="900" height="600" fill="#ce1126"/><rect width="900" height="450" fill="#003893"/><rect width="900" height="300" fill="#fcd116"/></svg>`;
+    }
+    // Стандартная иконка глобуса (если страна неизвестна)
+    else {
+        return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`;
+    }
+}
+
+
         function renderProducts(filter = 'all') {
             const grid = document.getElementById('productsGrid');
             let filtered = [...products]; // Create a copy to avoid modifying original array
@@ -3400,15 +3660,23 @@
             // Apply filters
             const filterType = document.getElementById('filterType')?.value;
             const filterCountry = document.getElementById('filterCountry')?.value;
-            const filterAvailability = document.getElementById('filterAvailability')?.value;
             const filterColor = document.getElementById('filterColor')?.value;
             const filterHeight = document.getElementById('filterHeight')?.value;
             const filterDays = document.getElementById('filterDays')?.value;
             const sortSelect = document.querySelector('.sort-btn.active')?.getAttribute('data-sort-key') || 'popular'; // Get sort key from active button
-            
+            // Новая логика для чекбоксов
+            const stockChecked = document.getElementById('checkStock').checked;
+            const preorderChecked = document.getElementById('checkPreorder').checked;
+
+            // Если выбран только один, фильтруем по нему
+            if (stockChecked && !preorderChecked) {
+                filtered = filtered.filter(p => p.status === 'stock');
+            } else if (!stockChecked && preorderChecked) {
+                filtered = filtered.filter(p => p.status === 'preorder');
+            }
+            // Если выбраны оба или не выбран ни один - показываем все (фильтр не применяем)
             if (filterType) filtered = filtered.filter(p => p.category === filterType);
             if (filterCountry) filtered = filtered.filter(p => p.country === filterCountry);
-            if (filterAvailability) filtered = filtered.filter(p => p.status === filterAvailability);
             if (filterColor) filtered = filtered.filter(p => p.color === filterColor);
             if (filterHeight) filtered = filtered.filter(p => p.height === filterHeight);
             if (filterDays) filtered = filtered.filter(p => p.daysInStock <= parseInt(filterDays));
@@ -3464,21 +3732,15 @@
                                 </span>
                                 <span>${product.weight} гр</span>
                             </div>
-                            <div class="spec-item">
-                                <span class="spec-icon">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                                    </svg>
-                                </span>
-                                <span>${product.country}</span>
-                            </div>
+                        <div class="spec-item">
+                            <span class="spec-icon">
+                                ${getCountryFlag(product.country)}
+                            </span>
+                            <span>${product.country}</span>
+                        </div>
                         </div>
                         
                         <!-- Логотип Florex -->
-                        <div class="product-brand">
-                            <img src="image copy.png" alt="Florex" style="height: 20px;">
-                        </div>
                         
                         <div class="product-price">
                             <div class="product-pricing">
@@ -3501,8 +3763,9 @@
         function resetFilters() {
             document.getElementById('filterType').value = '';
             document.getElementById('filterCountry').value = '';
-            document.getElementById('filterAvailability').value = '';
             document.getElementById('filterColor').value = '';
+            document.getElementById('checkStock').checked = false;
+            document.getElementById('checkPreorder').checked = false;
             document.getElementById('filterHeight').value = '';
             document.getElementById('filterDays').value = '';
             document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
@@ -3529,9 +3792,13 @@
                 const text = document.getElementById('filterCountry').selectedOptions[0].text;
                 filters.push({ key: 'filterCountry', label: text });
             }
-            if (filterAvailability) {
-                const text = document.getElementById('filterAvailability').selectedOptions[0].text;
-                filters.push({ key: 'filterAvailability', label: text });
+            const stockChecked = document.getElementById('checkStock').checked;
+            const preorderChecked = document.getElementById('checkPreorder').checked;
+
+            if (stockChecked && !preorderChecked) {
+                filters.push({ key: 'checkStock', label: 'В наличии' });
+            } else if (!stockChecked && preorderChecked) {
+                filters.push({ key: 'checkPreorder', label: 'В пути' });
             }
             if (filterColor) {
                 filters.push({ key: 'filterColor', label: filterColor });
@@ -3562,8 +3829,15 @@
             }
         }
 
-        function removeFilter(key) {
-            document.getElementById(key).value = '';
+function removeFilter(key) {
+            const el = document.getElementById(key);
+            if (el) {
+                if (el.type === 'checkbox') {
+                    el.checked = false; // Снимаем галочку
+                } else if (el.tagName === 'SELECT') {
+                    el.value = ''; // Сбрасываем селект
+                }
+            }
             applyFilters();
         }
 
@@ -3593,18 +3867,28 @@
                 </svg>
                 ${currentProduct.weight} гр
             `;
-            document.getElementById('productDetailCountry').innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                </svg>
-                ${currentProduct.country}
-            `;
-            document.getElementById('productDetailQuantity').textContent = `${currentProduct.box} шт`;
-            document.getElementById('productDetailPrice').textContent = currentProduct.price.toLocaleString('ru-RU');
-            document.getElementById('productQuantity').value = 1;
-            showScreen('product');
-        }
+document.getElementById('productDetailCountry').innerHTML = `
+    ${getCountryFlag(currentProduct.country)}
+    ${currentProduct.country}
+`;
+        document.getElementById('productDetailPriceBox').textContent = `${currentProduct.price.toLocaleString('ru-RU')} ₸`;
+            
+            // 2. Цена за ШТУКУ
+            document.getElementById('productDetailPriceStem').textContent = `${currentProduct.pricePerStem.toLocaleString('ru-RU')} ₸ / Коробка`;
+            /* ------------------- */
+            
+if (!currentProduct.bunchesInBox) currentProduct.bunchesInBox = 5; 
+    if (!currentProduct.stemsPerBunch) currentProduct.stemsPerBunch = 10;
+
+    document.getElementById('boxContentInfo').textContent = `${currentProduct.box} стеблей`;
+    document.getElementById('packContentInfo').textContent = `${currentProduct.stemsPerBunch} стеблей`;
+
+    // Сброс на "Коробку" при открытии
+    document.getElementById('productQuantity').value = 1;
+    setUnit('box'); 
+    
+    showScreen('product');
+}
 
         // Quantity Controls
         function changeQuantity(delta) {
@@ -3621,11 +3905,26 @@
             addToCart(product, 1);
         }
 
-        function addToCartFromDetail() {
-            const quantity = parseInt(document.getElementById('productQuantity').value);
-            addToCart(currentProduct, quantity);
-            showScreen('cart');
-        }
+function addToCartFromDetail() {
+    const quantity = parseInt(document.getElementById('productQuantity').value);
+    
+    // Создаем копию товара для корзины
+    let cartItem = { ...currentProduct };
+
+    if (selectedUnit === 'pack') {
+        // Если выбрана упаковка, меняем цену и название для корзины
+        cartItem.price = currentProduct.price / currentProduct.bunchesInBox;
+        cartItem.box = currentProduct.stemsPerBunch; // Теперь "в коробке" (в единице) столько стеблей
+        cartItem.name = `${cartItem.name} (Упаковка)`;
+        cartItem.isPack = true; // Метка, что это пачка
+    } else {
+        cartItem.name = `${cartItem.name} (Коробка)`;
+        cartItem.isPack = false;
+    }
+
+    addToCart(cartItem, quantity); // Ваша существующая функция addToCart сработает нормально
+    showScreen('cart');
+}
 
         function addToCart(product, quantity) {
             const existing = cart.find(item => item.id === product.id);
