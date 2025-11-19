@@ -199,7 +199,31 @@
             transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(211, 84, 44, 0.4);
         }
-.lang-switcher {
+
+        .guest-login {
+            cursor: pointer;
+            padding: 10px 20px;
+            background: var(--accent-orange);
+            color: var(--white);
+            border: none;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guest-login:hover {
+            background: var(--burnt-terracotta);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(211, 84, 44, 0.4);
+        }
+
+        .lang-switcher {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -535,7 +559,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--light-concrete);
         }
 
         .catalog-header h1 {
@@ -746,11 +769,17 @@
 
         .product-price {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 8px;
             margin-top: 20px;
             padding-top: 20px;
             border-top: 1px solid var(--light-concrete);
+        }
+
+        .price-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .price {
@@ -766,6 +795,16 @@
             font-weight: 400;
         }
 
+        .price-pack {
+            font-size: 16px;
+            color: var(--dusty-olive);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 8px;
+            border-top: 1px dashed var(--light-concrete);
+        }
+
         .add-to-cart-btn {
             padding: 10px 20px;
             background: var(--black);
@@ -778,6 +817,7 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
             border-radius: 4px;
+            margin-top: 12px;
         }
 
         .add-to-cart-btn:hover {
@@ -902,24 +942,6 @@
             letter-spacing: 1px;
         }
 
-        /* Исправление кнопки "Оформить заказ" для мобильных */
-.checkout-btn {
-    background-color: var(--accent-orange) !important; /* Принудительно оранжевый */
-    color: var(--white) !important; /* Белый текст */
-    border: none !important;
-    outline: none !important;
-    -webkit-appearance: none; /* Отключает стили iPhone */
-    appearance: none;
-    box-shadow: 0 6px 20px rgba(211, 84, 44, 0.3) !important;
-}
-
-/* На всякий случай, чтобы при нажатии не синела */
-.checkout-btn:active, 
-.checkout-btn:focus {
-    background-color: var(--burnt-terracotta) !important;
-    color: var(--white) !important;
-}
-        
         .quantity-selector {
             display: flex;
             align-items: center;
@@ -1210,6 +1232,77 @@
             font-size: 18px;
             font-weight: 700;
             box-shadow: 0 4px 12px rgba(211, 84, 44, 0.3);
+        }
+
+        /* Таймлайн заказа */
+        .order-timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 40px 0;
+            padding: 20px 0;
+        }
+
+        .order-timeline::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--light-sage);
+            z-index: 1;
+        }
+
+        .timeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--light-sage);
+            margin-bottom: 12px;
+            border: 3px solid var(--white);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .timeline-step.completed .timeline-dot {
+            background: var(--dusty-sage);
+        }
+
+        .timeline-step.active .timeline-dot {
+            background: var(--accent-orange);
+            box-shadow: 0 0 0 3px rgba(211, 84, 44, 0.3);
+        }
+
+        .timeline-label {
+            font-size: 12px;
+            text-align: center;
+            color: var(--dusty-olive);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-step.completed .timeline-label {
+            color: var(--dusty-sage);
+        }
+
+        .timeline-step.active .timeline-label {
+            color: var(--accent-orange);
+        }
+
+        .timeline-date {
+            font-size: 11px;
+            color: var(--light-sage);
+            margin-top: 4px;
         }
 
         .delivery-options {
@@ -1840,6 +1933,8 @@
             border-bottom: 2px solid var(--light-concrete);
         }
 
+
+        
         .filters-title {
             font-size: 20px;
             font-weight: 700;
@@ -1876,13 +1971,27 @@
             border-color: var(--accent-orange);
         }
 
-        .filters-advanced {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-            padding: 32px;
-            background: var(--white);
-        }
+.filters-advanced {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Ровно 6 колонок */
+    gap: 16px; /* Отступ между ними */
+    padding: 24px 32px;
+    background: var(--white);
+    align-items: end; /* Выравнивание по низу, чтобы было ровно */
+}
+
+/* Адаптив: на планшете в 3 колонки, на телефоне в 1 */
+@media (max-width: 1200px) {
+    .filters-advanced {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .filters-advanced {
+        grid-template-columns: 1fr;
+    }
+}
 
         .filter-group {
             display: flex;
@@ -1946,36 +2055,48 @@
             display: none; /* Прячем сам чекбокс */
         }
 
-        .filter-checkbox-group label {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid #e0e5e3;
-            background: var(--white);
-            color: var(--dusty-olive);
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-radius: 8px;
-            text-align: center;
-            margin: 0;
-            text-transform: none;
-            letter-spacing: 0;
-            font-family: 'Montserrat', sans-serif;
-        }
+.filter-checkbox-group label {
+    flex: 1;
+    display: flex;
+    align-items: center;     /* Центровка по вертикали */
+    justify-content: center; /* Центровка по горизонтали */
+    
+    /* КОПИРУЕМ РАЗМЕРЫ ИЗ СЕЛЕКТА */
+    padding: 14px 10px;      /* 14px сверху/снизу как у select */
+    border: 2px solid #e0e5e3;
+    border-radius: 8px;
+    background: var(--white);
+    
+    /* КОПИРУЕМ ШРИФТЫ ИЗ СЕЛЕКТА */
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;         /* Было 11px, стало 14px как везде */
+    font-weight: 500;        /* Было 700, стало 500 (тоньше) */
+    color: var(--dusty-olive);
+    
+    /* СБРАСЫВАЕМ ЛИШНЕЕ */
+    text-transform: none;    /* Убираем КАПС (В НАЛИЧИИ -> В наличии) */
+    letter-spacing: 0;       /* Убираем разрядку букв */
+    margin: 0;
+    
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;     /* Текст в одну строку */
+}
 
-        .filter-checkbox-group label:hover {
-            border-color: var(--dusty-sage);
-            box-shadow: 0 4px 12px rgba(104, 126, 121, 0.1);
-        }
+/* Добавляем hover эффект как у селектов */
+.filter-checkbox-group label:hover {
+    border-color: var(--dusty-sage);
+    box-shadow: 0 4px 12px rgba(104, 126, 121, 0.1);
+}
 
-        /* Стиль для ВЫБРАННОГО чекбокса */
-        .filter-checkbox-group input[type="checkbox"]:checked + label {
-            background: var(--accent-orange);
-            color: var(--white);
-            border-color: var(--accent-orange);
-            box-shadow: 0 6px 18px rgba(211, 84, 44, 0.3);
-        }
+/* Стиль выбранной кнопки */
+.filter-checkbox-group input[type="checkbox"]:checked + label {
+    background: var(--accent-orange);
+    color: var(--white);
+    border-color: var(--accent-orange);
+    box-shadow: 0 6px 18px rgba(211, 84, 44, 0.3);
+    font-weight: 600; /* Чуть жирнее когда выбрано */
+}
         .sort-section {
             padding: 24px 32px;
             background: var(--white);
@@ -2531,7 +2652,60 @@
     color: var(--dusty-olive);
 }
 
+/* 1. Принудительно задаем одинаковую высоту для ВСЕХ элементов */
+.filter-group select,
+.filter-checkbox-group label {
+    height: 48px !important;       /* Фиксированная высота для всех */
+    max-height: 48px !important;   /* Не даем растягиваться */
+    min-height: 48px !important;   /* Не даем сжиматься */
+    box-sizing: border-box !important;
+    
+    /* Центровка текста */
+    display: flex !important;
+    align-items: center !important;
+    
+    /* Шрифт и цвет (чтобы были одинаковые) */
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--dusty-olive) !important;
+    border-radius: 8px !important;
+    margin: 0 !important;
+}
 
+/* 2. Специфика для селекта (выпадающего списка) */
+.filter-group select {
+    /* У селекта текст центрируется иначе, поэтому паддинги */
+    padding: 0 34px 0 18px !important; 
+    /* Возвращаем иконку стрелки */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234E5D59' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 14px center !important;
+    background-size: 12px !important;
+    width: 100%;
+}
+
+/* 3. Специфика для кнопок (label) */
+.filter-checkbox-group label {
+    justify-content: center !important; /* Текст по центру */
+    padding: 0 10px !important;
+}
+
+/* 4. Убираем отступ у контейнера кнопок, из-за которого они могли "прыгать" */
+.filter-checkbox-group {
+    margin-top: 0 !important;
+    height: 48px !important; /* Высота контейнера равна высоте кнопок */
+    display: flex !important;
+    gap: 12px !important;
+}
+
+/* Активное состояние кнопок */
+.filter-checkbox-group input[type="checkbox"]:checked + label {
+    background: var(--accent-orange) !important;
+    color: var(--white) !important;
+    border-color: var(--accent-orange) !important;
+    font-weight: 600 !important;
+}
 
     </style>
 </head>
@@ -2546,7 +2720,7 @@
          height="40"
          style="width: auto; display: block;"
          fill="none">
-        <path fill="var(--black)" d="M257.22,120.81c.06-.09.09-.21.09-.35,0-.2-.07-.35-.2-.46-.13-.11-.32-.16-.56-.16h-.76v2.04h.42v-.75h.33l.38.75h.45v-.02l-.44-.83c.12-.05.21-.13.27-.22ZM256.8,120.72c-.06.05-.14.08-.24.08h-.34v-.61h.34c.11,0,.2.03.25.08.06.06.08.13.08.23s-.03.17-.09.22ZM256.5,118.52c-1.28,0-2.32,1.04-2.32,2.32s1.04,2.32,2.32,2.32,2.32-1.04,2.32-2.32-1.04-2.32-2.32-2.32ZM256.5,122.7c-1.02,0-1.86-.83-1.86-1.86s.83-1.86,1.86-1.86,1.86.83,1.86,1.86-.83,1.86-1.86,1.86ZM185.87,101.72h-5.06c-.07,0-.12-.05-.13-.12-.53-5.08-4.56-9.05-9.63-9.52v-.05h-11.01c-.38,0-.69.31-.69.69v1.54c0,.95.77,1.72,1.72,1.72h8.98c3.29,0,6.08,2.35,6.64,5.58,0,.05-.01.09-.03.11-.01.02-.05.05-.1.05h-1.43s-.28.03-.28.03v.02c-3.81.36-7.14,2.73-8.74,6.24-.02.04-.06.06-.08.06-.02,0-.07.01-.12-.02-1.66-1.29-2.61-3.23-2.61-5.32v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,4.04,2.22,7.66,5.81,9.51,0,.06,0,.12,0,.18v10.01c0,.38.31.69.69.69h10.74s.28-.03.28-.03v-.02c5.45-.51,9.68-5.14,9.68-10.65v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,3.72-3.02,6.74-6.74,6.74h-6.62s0,0,0,0c-.05,0-.08-.02-.09-.04-.01-.01-.04-.04-.04-.09v-5.61h10.93c.36,0,.66-.29.68-.65l.02-6.97c0-.07.06-.13.13-.13h3.97c.95,0,1.72-.77,1.72-1.72v-1.54c0-.38-.31-.69-.69-.69ZM176.79,109.34c0,.07-.06.13-.13.13h-6.67c-.06,0-.1-.05-.11-.07-.01-.02-.03-.07,0-.12,1.17-2.22,3.45-3.61,5.95-3.62h.83c.07,0,.13.06.13.13v3.54ZM142.29,102.53v3.24c0,.21-.09.4-.24.52-.15.15-.34.21-.55.21h-10.99c.92,0,1.68.73,1.68,1.65v2.6h7.33c.52,0,.79.27.79.79v3.21c0,.24-.06.43-.21.55-.15.15-.34.21-.58.21h-9.01c.89,0,1.68.73,1.68,1.62v5.13c0,.21-.06.4-.21.55-.12.15-.31.21-.55.21h-4.06c-.46,0-.76-.31-.76-.76v-17.86c0-.7.34-1.44.82-1.92.24-.21.52-.4.86-.55.34-.12.64-.18.98-.18h12.24c.4,0,.79.4.79.79ZM161.03,118.44c.15.15.21.34.21.58v3.24c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.14c-.37,0-.76-.4-.76-.76v-17.89c0-1.4,1.25-2.63,2.66-2.63h2.38c.21,0,.4.06.52.21.15.15.21.34.21.55v14.81c0,.15.09.37.24.58.15.24.4.37.7.37h8.18c.21,0,.43.06.58.18ZM204.52,115.14c-.06-.09-.09-.18-.06-.34,0-.15.09-.27.24-.37,2.14-1.22,3.27-3.21,3.27-5.68,0-5.04-3.85-6.96-8.55-6.96h-6.47c-1.5,0-2.66,1.13-2.66,2.63v17.89c0,.37.43.73.76.73h4.18c.21,0,.4-.06.55-.21.15-.12.21-.31.21-.52v-5.04c0-.37-.15-.73-.43-1.1-.31-.34-.7-.52-1.22-.52h4c.37,0,.64.15.82.49l3.11,6.11c.24.52.64.79,1.22.79h4.31c.15,0,.31-.06.46-.18.12-.12.18-.27.18-.43,0-.09-.03-.21-.09-.34l-3.85-6.96ZM199.39,111.17h-2.66c-.27,0-.49-.09-.64-.27-.18-.18-.27-.4-.27-.64v-2.47c0-.92-.79-1.62-1.68-1.62h5.25c.79,0,1.44.21,1.95.64.49.46.73,1.1.73,1.92,0,1.65-1.1,2.44-2.69,2.44ZM227.67,119.29v2.99c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.6c-.37,0-.76-.4-.76-.76v-17.86c0-1.5,1.16-2.66,2.66-2.66h12.46c.49,0,.79.31.79.79v3.02c0,.21-.06.4-.21.52-.15.15-.34.21-.58.21h-11.27c.92,0,1.68.73,1.68,1.65v1.28c0,.52.4.95.92.95h6.66c.49,0,.79.31.79.79v2.75c0,.46-.34.79-.79.79h-9.25c.86,0,1.68.7,1.68,1.59v1.44c0,.52.4.95.92.95h8.92c.52,0,.79.27.79.79ZM249.78,122.1c.06.12.09.24.09.37,0,.15-.06.31-.18.46-.15.12-.31.18-.46.18h-4.79c-.43,0-.79-.21-1.07-.61l-3.73-5.4c-.12-.03-.18-.06-.24-.06l-3.73,5.47c-.27.4-.64.61-1.07.61h-4.64c-.15,0-.31-.06-.46-.18-.12-.15-.18-.31-.18-.46s.03-.24.09-.34l6.53-9.77c.06-.06.06-.12.03-.21l-6.05-9.31c-.06-.12-.09-.24-.09-.37,0-.34.31-.64.64-.64h4.64c.46,0,.82.21,1.1.67l3.27,5.01c.03.09.09.12.18.12l3.54-5.13c.27-.46.61-.67,1.07-.67h4.43c.15,0,.31.06.46.18.12.15.18.31.18.46,0,.12-.03.24-.09.37l-6.08,9.25c-.06.06-.06.12,0,.21l6.6,9.8ZZM473.55,120.81c.06-.09.09-.21.09-.35,0-.2-.07-.35-.2-.46-.13-.11-.32-.16-.56-.16h-.76v2.04h.42v-.75h.33l.38.75h.45v-.02l-.44-.83c.12-.05.21-.13.27-.22ZM473.13,120.72c-.06.05-.14.08-.24.08h-.34v-.61h.34c.11,0,.2.03.25.08.06.06.08.13.08.23s-.03.17-.09.22ZM472.83,118.52c-1.28,0-2.32,1.04-2.32,2.32s1.04,2.32,2.32,2.32,2.32-1.04,2.32-2.32-1.04-2.32-2.32-2.32ZM472.83,122.7c-1.02,0-1.86-.83-1.86-1.86s.83-1.86,1.86-1.86,1.86.83,1.86,1.86-.83,1.86-1.86,1.86ZM402.2,101.72h-5.06c-.07,0-.12-.05-.13-.12-.53-5.08-4.56-9.05-9.63-9.52v-.05h-11.01c-.38,0-.69.31-.69.69v1.54c0,.95.77,1.72,1.72,1.72h8.98c3.29,0,6.08,2.35,6.64,5.58,0,.05-.01.09-.03.11-.01.02-.05.05-.1.05h-1.43s-.28.03-.28.03v.02c-3.81.36-7.14,2.73-8.74,6.24-.02.04-.06.06-.08.06-.02,0-.07.01-.12-.02-1.66-1.29-2.61-3.23-2.61-5.32v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,4.04,2.22,7.66,5.81,9.51,0,.06,0,.12,0,.18v10.01c0,.38.31.69.69.69h10.74s.28-.03.28-.03v-.02c5.45-.51,9.68-5.14,9.68-10.65v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,3.72-3.02,6.74-6.74,6.74h-6.62s0,0,0,0c-.05,0-.08-.02-.09-.04-.01-.01-.04-.04-.04-.09v-5.61h10.93c.36,0,.66-.29.68-.65l.02-6.97c0-.07.06-.13.13-.13h3.97c.95,0,1.72-.77,1.72-1.72v-1.54c0-.38-.31-.69-.69-.69ZM393.12,109.34c0,.07-.06.13-.13.13h-6.67c-.06,0-.1-.05-.11-.07-.01-.02-.03-.07,0-.12,1.17-2.22,3.45-3.61,5.95-3.62h.83c.07,0,.13.06.13.13v3.54ZM358.62,102.53v3.24c0,.21-.09.4-.24.52-.15.15-.34.21-.55.21h-10.99c.92,0,1.68.73,1.68,1.65v2.6h7.33c.52,0,.79.27.79.79v3.21c0,.24-.06.43-.21.55-.15.15-.34.21-.58.21h-9.01c.89,0,1.68.73,1.68,1.62v5.13c0,.21-.06.4-.21.55-.12.15-.31.21-.55.21h-4.06c-.46,0-.76-.31-.76-.76v-17.86c0-.7.34-1.44.82-1.92.24-.21.52-.4.86-.55.34-.12.64-.18.98-.18h12.24c.4,0,.79.4.79.79ZM377.36,118.44c.15.15.21.34.21.58v3.24c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.14c-.37,0-.76-.4-.76-.76v-17.89c0-1.4,1.25-2.63,2.66-2.63h2.38c.21,0,.4.06.52.21.15.15.21.34.21.55v14.81c0,.15.09.37.24.58.15.24.4.37.7.37h8.18c.21,0,.43.06.58.18ZM420.86,115.14c-.06-.09-.09-.18-.06-.34,0-.15.09-.27.24-.37,2.14-1.22,3.27-3.21,3.27-5.68,0-5.04-3.85-6.96-8.55-6.96h-6.47c-1.5,0-2.66,1.13-2.66,2.63v17.89c0,.37.43.73.76.73h4.18c.21,0,.4-.06.55-.21.15-.12.21-.31.21-.52v-5.04c0-.37-.15-.73-.43-1.1-.31-.34-.7-.52-1.22-.52h4c.37,0,.64.15.82.49l3.11,6.11c.24.52.64.79,1.22.79h4.31c.15,0,.31-.06.46-.18.12-.12.18-.27.18-.43,0-.09-.03-.21-.09-.34l-3.85-6.96ZM415.73,111.17h-2.66c-.27,0-.49-.09-.64-.27-.18-.18-.27-.4-.27-.64v-2.47c0-.92-.79-1.62-1.68-1.62h5.25c.79,0,1.44.21,1.95.64.49.46.73,1.1.73,1.92,0,1.65-1.1,2.44-2.69,2.44ZM444,119.29v2.99c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.6c-.37,0-.76-.4-.76-.76v-17.86c0-1.5,1.16-2.66,2.66-2.66h12.46c.49,0,.79.31.79.79v3.02c0,.21-.06.4-.21.52-.15.15-.34.21-.58.21h-11.27c.92,0,1.68.73,1.68,1.65v1.28c0,.52.4.95.92.95h6.66c.49,0,.79.31.79.79v2.75c0,.46-.34.79-.79.79h-9.25c.86,0,1.68.7,1.68,1.59v1.44c0,.52.4.95.92.95h8.92c.52,0,.79.27.79.79ZM466.11,122.1c.06.12.09.24.09.37,0,.15-.06.31-.18.46-.15.12-.31.18-.46.18h-4.79c-.43,0-.79-.21-1.07-.61l-3.73-5.4c-.12-.03-.18-.06-.24-.06l-3.73,5.47c-.27.4-.64.61-1.07.61h-4.64c-.15,0-.31-.06-.46-.18-.12-.15-.18-.31-.18-.46s.03-.24.09-.34l6.53-9.77c.06-.06.06-.12.03-.21l-6.05-9.31c-.06-.12-.09-.24-.09-.37,0-.34.31-.64.64-.64h4.64c.46,0,.82.21,1.1.67l3.27,5.01c.03.09.09.12.18.12l3.54-5.13c.27-.46.61-.67,1.07-.67h4.43c.15,0,.31.06.46.18.12.15.18.31.18.46,0,.12-.03.24-.09.37l-6.08,9.25c-.06.06-.06.12,0,.21l6.6,9.8Z"/>
+        <path fill="var(--black)" d="M257.22,120.81c.06-.09.09-.21.09-.35,0-.2-.07-.35-.2-.46-.13-.11-.32-.16-.56-.16h-.76v2.04h.42v-.75h.33l.38.75h.45v-.02l-.44-.83c.12-.05.21-.13.27-.22ZM256.8,120.72c-.06.05-.14.08-.24.08h-.34v-.61h.34c.11,0,.2.03.25.08.06.06.08.13.08.23s-.03.17-.09.22ZM256.5,118.52c-1.28,0-2.32,1.04-2.32,2.32s1.04,2.32,2.32,2.32,2.32-1.04,2.32-2.32-1.04-2.32-2.32-2.32ZM256.5,122.7c-1.02,0-1.86-.83-1.86-1.86s.83-1.86,1.86-1.86,1.86.83,1.86,1.86-.83,1.86-1.86,1.86ZM185.87,101.72h-5.06c-.07,0-.12-.05-.13-.12-.53-5.08-4.56-9.05-9.63-9.52v-.05h-11.01c-.38,0-.69.31-.69.69v1.54c0,.95.77,1.72,1.72,1.72h8.98c3.29,0,6.08,2.35,6.64,5.58,0,.05-.01.09-.03.11-.01.02-.05.05-.1.05h-1.43s-.28.03-.28.03v.02c-3.81.36-7.14,2.73-8.74,6.24-.02.04-.06.06-.08.06-.02,0-.07.01-.12-.02-1.66-1.29-2.61-3.23-2.61-5.32v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,4.04,2.22,7.66,5.81,9.51,0,.06,0,.12,0,.18v10.01c0,.38.31.69.69.69h10.74s.28-.03.28-.03v-.02c5.45-.51,9.68-5.14,9.68-10.65v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,3.72-3.02,6.74-6.74,6.74h-6.62s0,0,0,0c-.05,0-.08-.02-.09-.04-.01-.01-.04-.04-.04-.09v-5.61h10.93c.36,0,.66-.29.68-.65l.02-6.97c0-.07.06-.13.13-.13h3.97c.95,0,1.72-.77,1.72-1.72v-1.54c0-.38-.31-.69-.69-.69ZM176.79,109.34c0,.07-.06.13-.13.13h-6.67c-.06,0-.1-.05-.11-.07-.01-.02-.03-.07,0-.12,1.17-2.22,3.45-3.61,5.95-3.62h.83c.07,0,.13.06.13.13v3.54ZM142.29,102.53v3.24c0,.21-.09.4-.24.52-.15.15-.34.21-.55.21h-10.99c.92,0,1.68.73,1.68,1.65v2.6h7.33c.52,0,.79.27.79.79v3.21c0,.24-.06.43-.21.55-.15.15-.34.21-.58.21h-9.01c.89,0,1.68.73,1.68,1.62v5.13c0,.21-.06.4-.21.55-.12.15-.31.21-.55.21h-4.06c-.46,0-.76-.31-.76-.76v-17.86c0-.7.34-1.44.82-1.92.24-.21.52-.4.86-.55.34-.12.64-.18.98-.18h12.24c.4,0,.79.4.79.79ZM161.03,118.44c.15.15.21.34.21.58v3.24c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.14c-.37,0-.76-.4-.76-.76v-17.89c0-1.4,1.25-2.63,2.66-2.63h2.38c.21,0,.4.06.52.21.15.15.21.34.21.55v14.81c0,.15.09.37.24.58.15.24.4.37.7.37h8.18c.21,0,.43.06.58.18ZM204.52,115.14c-.06-.09-.09-.18-.06-.34,0-.15.09-.27.24-.37,2.14-1.22,3.27-3.21,3.27-5.68,0-5.04-3.85-6.96-8.55-6.96h-6.47c-1.5,0-2.66,1.13-2.66,2.63v17.89c0,.37.43.73.76.73h4.18c.21,0,.4-.06.55-.21.15-.12.21-.31.21-.52v-5.04c0-.37-.15-.73-.43-1.1-.31-.34-.7-.52-1.22-.52h4c.37,0,.64.15.82.49l3.11,6.11c.24.52.64.79,1.22.79h4.31c.15,0,.31-.06.46-.18.12-.12.18-.27.18-.43,0-.09-.03-.21-.09-.34l-3.85-6.96ZM199.39,111.17h-2.66c-.27,0-.49-.09-.64-.27-.18-.18-.27-.4-.27-.64v-2.47c0-.92-.79-1.62-1.68-1.62h5.25c.79,0,1.44.21,1.95.64.49.46.73,1.1.73,1.92,0,1.65-1.1,2.44-2.69,2.44ZM227.67,119.29v2.99c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.6c-.37,0-.76-.4-.76-.76v-17.86c0-1.5,1.16-2.66,2.66-2.66h12.46c.49,0,.79.31.79.79v3.02c0,.21-.06.4-.21.52-.15.15-.34.21-.58.21h-11.27c.92,0,1.68.73,1.68,1.65v1.28c0,.52.4.95.92.95h6.66c.49,0,.79.31.79.79v2.75c0,.46-.34.79-.79.79h-9.25c.86,0,1.68.7,1.68,1.59v1.44c0,.52.4.95.92.95h8.92c.52,0,.79.27.79.79ZM249.78,122.1c.06.12.09.24.09.37,0,.15-.06.31-.18.46-.15.12-.31.18-.46.18h-4.79c-.43,0-.79-.21-1.07-.61l-3.73-5.4c-.12-.03-.18-.06-.24-.06l-3.73,5.47c-.27.4-.64.61-1.07.61h-4.64c-.15,0-.31-.06-.46-.18-.12-.15-.18-.31-.18-.46s.03-.24.09-.34l6.53-9.77c.06-.06.06-.12.03-.21l-6.05-9.31c-.06-.12-.09-.24-.09-.37,0-.34.31-.64.64-.64h4.64c.46,0,.82.21,1.1.67l3.27,5.01c.03.09.09.12.18.12l3.54-5.13c.27-.46.61-.67,1.07-.67h4.43c.15,0,.31.06.46.18.12.15.18.31.18.46,0,.12-.03.24-.09.37l-6.08,9.25c-.06.06-.06.12,0,.21l6.6,9.8ZZM473.55,120.81c.06-.09.09-.21.09-.35,0-.2-.07-.35-.2-.46-.13-.11-.32-.16-.56-.16h-.76v2.04h.42v-.75h.33l.38.75h.45v-.02l-.44-.83c.12-.05.21-.13.27-.22ZM473.13,120.72c-.06.05-.14.08-.24.08h-.34v-.61h.34c.11,0,.2.03.25.08.06.06.08.13.08.23s-.03.17-.09.22ZM472.83,118.52c-1.28,0-2.32,1.04-2.32,2.32s1.04,2.32,2.32,2.32,2.32-1.04,2.32-2.32-1.04-2.32-2.32-2.32ZM472.83,122.7c-1.02,0-1.86-.83-1.86-1.86s.83-1.86,1.86-1.86,1.86.83,1.86,1.86-.83,1.86-1.86,1.86ZM402.2,101.72h-5.06c-.07,0-.12-.05-.13-.12-.53-5.08-4.56-9.05-9.63-9.52v-.05h-11.01c-.38,0-.69.31-.69.69v1.54c0,.95.77,1.72,1.72,1.72h8.98c3.29,0,6.08,2.35,6.64,5.58,0,.05-.01.09-.03.11-.01.02-.05.05-.1.05h-1.43s-.28.03-.28.03v.02c-3.81.36-7.14,2.73-8.74,6.24-.02.04-.06.06-.08.06-.02,0-.07.01-.12-.02-1.66-1.29-2.61-3.23-2.61-5.32v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,4.04,2.22,7.66,5.81,9.51,0,.06,0,.12,0,.18v10.01c0,.38.31.69.69.69h10.74s.28-.03.28-.03v-.02c5.45-.51,9.68-5.14,9.68-10.65v-4.2c0-.38-.31-.69-.69-.69h-2.58c-.38,0-.69.31-.69.69v4.2c0,3.72-3.02,6.74-6.74,6.74h-6.62s0,0,0,0c-.05,0-.08-.02-.09-.04-.01-.01-.04-.04-.04-.09v-5.61h10.93c.36,0,.66-.29.68-.65l.02-6.97c0-.07.06-.13.13-.13h3.97c.95,0,1.72-.77,1.72-1.72v-1.54c0-.38-.31-.69-.69-.69ZM393.12,109.34c0,.07-.06.13-.13.13h-6.67c-.06,0-.1-.05-.11-.07-.01-.02-.03-.07,0-.12,1.17-2.22,3.45-3.61,5.95-3.62h.83c.07,0,.13.06.13.13v3.54ZM358.62,102.53v3.24c0,.21-.09.4-.24.52-.15.15-.34.21-.55.21h-10.99c.92,0,1.68.73,1.68,1.65v2.6h7.33c.52,0,.79.27.79.79v3.21c0,.24-.06.43-.21.55-.15.15-.34.21-.58.21h-9.01c.89,0,1.68.73,1.68,1.62v5.13c0,.21-.06.4-.21.55-.12.15-.31.21-.55.21h-4.06c-.46,0-.76-.31-.76-.76v-17.86c0-.7.34-1.44.82-1.92.24-.21.52-.4.86-.55.34-.12.64-.18.98-.18h12.24c.4,0,.79.4,.79.79ZM377.36,118.44c.15.15.21.34.21.58v3.24c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.14c-.37,0-.76-.4-.76-.76v-17.89c0-1.4,1.25-2.63,2.66-2.63h2.38c.21,0,.4.06.52.21.15.15.21.34.21.55v14.81c0,.15.09.37.24.58.15.24.4.37.7.37h8.18c.21,0,.43.06.58.18ZM420.86,115.14c-.06-.09-.09-.18-.06-.34,0-.15.09-.27.24-.37,2.14-1.22,3.27-3.21,3.27-5.68,0-5.04-3.85-6.96-8.55-6.96h-6.47c-1.5,0-2.66,1.13-2.66,2.63v17.89c0,.37.43.73.76.73h4.18c.21,0,.4-.06.55-.21.15-.12.21-.31.21-.52v-5.04c0-.37-.15-.73-.43-1.1-.31-.34-.7-.52-1.22-.52h4c.37,0,.64.15.82.49l3.11,6.11c.24.52.64.79,1.22.79h4.31c.15,0,.31-.06.46-.18.12-.12.18-.27.18-.43,0-.09-.03-.21-.09-.34l-3.85-6.96ZM415.73,111.17h-2.66c-.27,0-.49-.09-.64-.27-.18-.18-.27-.4-.27-.64v-2.47c0-.92-.79-1.62-1.68-1.62h5.25c.79,0,1.44.21,1.95.64.49.46.73,1.1.73,1.92,0,1.65-1.1,2.44-2.69,2.44ZM444,119.29v2.99c0,.24-.06.43-.21.55-.15.15-.37.21-.58.21h-14.6c-.37,0-.76-.4-.76-.76v-17.86c0-1.5,1.16-2.66,2.66-2.66h12.46c.49,0,.79.31.79.79v3.02c0,.21-.06.4-.21.52-.15.15-.34.21-.58.21h-11.27c.92,0,1.68.73,1.68,1.65v1.28c0,.52.4.95.92.95h6.66c.49,0,.79.31.79.79v2.75c0,.46-.34.79-.79.79h-9.25c.86,0,1.68.7,1.68,1.59v1.44c0,.52.4.95.92.95h8.92c.52,0,.79.27.79.79ZM466.11,122.1c.06.12.09.24.09.37,0,.15-.06.31-.18.46-.15.12-.31.18-.46.18h-4.79c-.43,0-.79-.21-1.07-.61l-3.73-5.4c-.12-.03-.18-.06-.24-.06l-3.73,5.47c-.27.4-.64.61-1.07.61h-4.64c-.15,0-.31-.06-.46-.18-.12-.15-.18-.31-.18-.46s.03-.24.09-.34l6.53-9.77c.06-.06.06-.12.03-.21l-6.05-9.31c-.06-.12-.09-.24-.09-.37,0-.34.31-.64.64-.64h4.64c.46,0,.82.21,1.1.67l3.27,5.01c.03.09.09.12.18.12l3.54-5.13c.27-.46.61-.67,1.07-.67h4.43c.15,0,.31.06.46.18.12.15.18.31.18.46,0,.12-.03.24-.09.37l-6.08,9.25c-.06.06-.06.12,0,.21l6.6,9.8Z"/>
     </svg>
 </a>
                 <nav>
@@ -2570,6 +2744,13 @@
                         <span class="cart-count" id="cartCount">0</span>
                     </div>
                     <div class="user-icon hidden-for-guest" onclick="showScreen('account')">ГА</div>
+                    <div class="guest-login" onclick="showScreen('home')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        Вход
+                    </div>
                 </div>
             </div>
         </div>
@@ -2581,13 +2762,13 @@
         <div class="auth-screen">
             <div class="auth-container">
                 <div class="auth-logo">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="228.000000pt" height="206.000000pt" viewBox="0 0 228.000000 206.000000" preserveAspectRatio="xMidYMid meet">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="228.000000pt" height="206.000000pt" viewBox="0 0 228.000000 206.000000" preserveAspectRatio="xMidYMid meet">
 
-<g transform="translate(0.000000,206.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-<path d="M957 1944 c-168 -37 -310 -111 -429 -223 -126 -118 -198 -232 -254 -401 -26 -79 -28 -97 -28 -250 -1 -189 14 -261 85 -405 217 -443 764 -629 1204 -408 95 48 148 86 224 157 252 240 341 617 225 950 -51 147 -160 300 -285 399 -80 64 -241 147 -334 172 -87 24 -321 29 -408 9z m224 -415 c96 -45 176 -145 194 -242 l7 -37 94 0 94 0 0 -60 0 -59 -92 -3 -93 -3 -5 -120 -5 -120 -177 -3 -178 -2 0 -85 0 -85 128 0 c144 0 188 13 236 71 41 48 48 73 55 184 l6 100 54 3 c37 2 57 -1 62 -10 23 -35 1 -225 -32 -290 -32 -62 -96 -125 -158 -155 -56 -28 -57 -28 -266 -28 l-210 0 -3 166 -2 167 -53 40 c-37 27 -64 59 -87 103 -35 63 -35 65 -35 189 l0 125 55 0 55 0 7 -103 c7 -105 29 -174 65 -204 14 -11 19 -9 37 17 72 102 175 165 272 165 45 0 46 1 39 28 -13 53 -54 103 -108 128 -49 22 -63 24 -221 24 -196 0 -206 4 -206 75 0 23 3 45 8 49 4 4 97 6 207 4 192 -3 202 -4 256 -29z"/>
-<path d="M1185 1121 c-56 -14 -115 -54 -136 -93 -9 -17 -2 -18 96 -18 l105 0 0 60 c0 65 -1 66 -65 51z"/>
-</g>
-</svg>
+                <g transform="translate(0.000000,206.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                <path d="M957 1944 c-168 -37 -310 -111 -429 -223 -126 -118 -198 -232 -254 -401 -26 -79 -28 -97 -28 -250 -1 -189 14 -261 85 -405 217 -443 764 -629 1204 -408 95 48 148 86 224 157 252 240 341 617 225 950 -51 147 -160 300 -285 399 -80 64 -241 147 -334 172 -87 24 -321 29 -408 9z m224 -415 c96 -45 176 -145 194 -242 l7 -37 94 0 94 0 0 -60 0 -59 -92 -3 -93 -3 -5 -120 -5 -120 -177 -3 -178 -2 0 -85 0 -85 128 0 c144 0 188 13 236 71 41 48 48 73 55 184 l6 100 54 3 c37 2 57 -1 62 -10 23 -35 1 -225 -32 -290 -32 -62 -96 -125 -158 -155 -56 -28 -57 -28 -266 -28 l-210 0 -3 166 -2 167 -53 40 c-37 27 -64 59 -87 103 -35 63 -35 65 -35 189 l0 125 55 0 55 0 7 -103 c7 -105 29 -174 65 -204 14 -11 19 -9 37 17 72 102 175 165 272 165 45 0 46 1 39 28 -13 53 -54 103 -108 128 -49 22 -63 24 -221 24 -196 0 -206 4 -206 75 0 23 3 45 8 49 4 4 97 6 207 4 192 -3 202 -4 256 -29z"/>
+                <path d="M1185 1121 c-56 -14 -115 -54 -136 -93 -9 -17 -2 -18 96 -18 l105 0 0 60 c0 65 -1 66 -65 51z"/>
+                </g>
+                </svg>
                     <h1>Регистрация</h1>
                     <p>Заполните данные для входа в систему</p>
                 </div>
@@ -2657,163 +2838,94 @@
             
             <!-- Filters Container -->
             <div class="filters-container">
-                <div class="filters-header">
-                    <h2 class="filters-title">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-                        </svg>
-                        Фильтры
-                    </h2>
-                    <button class="filters-reset" onclick="resetFilters()">
-                        Сбросить все
-                    </button>
-                </div>
+<div class="filters-header">
+    <h2 class="filters-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+        </svg>
+        Фильтры
+    </h2>
 
-                <div class="filters-advanced">
-                    <div class="filter-group">
-                        <label>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
-                                <path d="M12 6v6l4 2"/>
-                            </svg>
-                            Вид цветка
-                        </label>
-                        <select id="filterType" onchange="applyFilters()">
-                            <option value="">Все виды</option>
-                            <option value="roses">Розы</option>
-                            <option value="tulips">Тюльпаны</option>
-                            <option value="chrysanthemums">Хризантемы</option>
-                            <option value="eustoma">Эустома</option>
-                        </select>
-                    </div>
+    <div class="sort-buttons">
+        <button class="sort-btn active" onclick="setSorting('popular', this)" data-sort-key="popular">Популярные</button>
+        <button class="sort-btn" onclick="setSorting('price-asc', this)" data-sort-key="price-asc">Цена ↑</button>
+        <button class="sort-btn" onclick="setSorting('price-desc', this)" data-sort-key="price-desc">Цена ↓</button>
+        <button class="sort-btn" onclick="setSorting('name', this)" data-sort-key="name">А-Я</button>
+</div>
+    <button class="filters-reset" onclick="resetFilters()">Сбросить все</button>
+</div>
 
-                    <div class="filter-group">
-                        <label>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="2" y1="12" x2="22" y2="12"/>
-                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                            Страна поставщик
-                        </label>
-                        <select id="filterCountry" onchange="applyFilters()">
-                            <option value="">Все страны</option>
-                            <option value="NL">Нидерланды</option>
-                            <option value="EC">Эквадор</option>
-                            <option value="KE">Кения</option>
-                            <option value="CO">Колумбия</option>
-                        </select>
-                    </div>
+<div class="filters-advanced">
+    <div class="filter-group">
+        <label>Вид цветка</label>
+        <select id="filterType" onchange="applyFilters()">
+            <option value="">Все виды</option>
+            <option value="roses">Розы</option>
+            <option value="tulips">Тюльпаны</option>
+            <option value="chrysanthemums">Хризантемы</option>
+            <option value="eustoma">Эустома</option>
+        </select>
+    </div>
 
-                <div class="filter-group">
-                        <label>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                <polyline points="9 11 12 14 22 4"/>
-                            </svg>
-                            Наличие
-                        </label>
-                        <div class="filter-checkbox-group">
-                            <input type="checkbox" id="checkStock" onchange="applyFilters()">
-                            <label for="checkStock">В наличии</label>
-                            
-                            <input type="checkbox" id="checkPreorder" onchange="applyFilters()">
-                            <label for="checkPreorder">В пути</label>
-                        </div>
-                    </div>
+    <div class="filter-group">
+        <label>Страна</label>
+        <select id="filterCountry" onchange="applyFilters()">
+            <option value="">Все страны</option>
+            <option value="Нидерланды">Нидерланды</option>
+            <option value="Эквадор">Эквадор</option>
+            <option value="Кения">Кения</option>
+            <option value="Колумбия">Колумбия</option>
+        </select>
+    </div>
 
-                    <div class="filter-group">
-                        <label>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                            </svg>
-                            Цвет
-                        </label>
-                        <select id="filterColor" onchange="applyFilters()">
-                            <option value="">Все цвета</option>
-                            <option value="Красный">Красный</option>
-                            <option value="Белый">Белый</option>
-                            <option value="Розовый">Розовый</option>
-                            <option value="Персиковый">Персиковый</option>
-                            <option value="Зеленый">Зеленый</option>
-                        </select>
-                    </div>
+    <div class="filter-group">
+        <label>Наличие</label>
+        <div class="filter-checkbox-group">
+            <input type="checkbox" id="checkStock" onchange="applyFilters()">
+            <label for="checkStock">В наличии</label>
+            
+            <input type="checkbox" id="checkPreorder" onchange="applyFilters()">
+            <label for="checkPreorder">В пути</label>
+        </div>
+    </div>
 
-                    <div class="filter-group">
-                        <label>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="2" x2="12" y2="22"/>
-                                <polyline points="5 9 12 2 19 9"/>
-                            </svg>
-                            Рост
-                        </label>
-                        <select id="filterHeight" onchange="applyFilters()">
-                            <option value="">Любой рост</option>
-                            <option value="38">38 см</option>
-                            <option value="55">55 см</option>
-                            <option value="60">60 см</option>
-                            <option value="70">70 см</option>
-                        </select>
-                    </div>
+    <div class="filter-group">
+        <label>Цвет</label>
+        <select id="filterColor" onchange="applyFilters()">
+            <option value="">Все цвета</option>
+            <option value="Красный">Красный</option>
+            <option value="Белый">Белый</option>
+            <option value="Розовый">Розовый</option>
+            <option value="Персиковый">Персиковый</option>
+            <option value="Зеленый">Зеленый</option>
+        </select>
+    </div>
 
-                    <div class="filter-group">
-                        <label>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                <line x1="16" y1="2" x2="16" y2="6"/>
-                                <line x1="8" y1="2" x2="8" y2="6"/>
-                                <line x1="3" y1="10" x2="21" y2="10"/>
-                            </svg>
-                            Дни на складе
-                        </label>
-                        <select id="filterDays" onchange="applyFilters()">
-                            <option value="">Любой срок</option>
-                            <option value="1">Сегодня</option>
-                            <option value="3">До 3 дней</option>
-                            <option value="5">До 5 дней</option>
-                            <option value="7">До недели</option>
-                        </select>
-                    </div>
-                </div>
+    <div class="filter-group">
+        <label>Рост</label>
+        <select id="filterHeight" onchange="applyFilters()">
+            <option value="">Любой</option>
+            <option value="38">38 см</option>
+            <option value="55">55 см</option>
+            <option value="60">60 см</option>
+            <option value="70">70 см</option>
+        </select>
+    </div>
 
-                <div class="sort-section">
-                    <label>Сортировка:</label>
-                    <div class="sort-buttons">
-                        <button class="sort-btn active" onclick="setSorting('popular', this)" data-sort-key="popular">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                                <polyline points="17 6 23 6 23 12"/>
-                            </svg>
-                            Популярные
-                        </button>
-                        <button class="sort-btn" onclick="setSorting('price-asc', this)" data-sort-key="price-asc">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="19" x2="12" y2="5"/>
-                                <polyline points="5 12 12 5 19 12"/>
-                            </svg>
-                            Цена ↑
-                        </button>
-                        <button class="sort-btn" onclick="setSorting('price-desc', this)" data-sort-key="price-desc">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="5" x2="12" y2="19"/>
-                                <polyline points="19 12 12 19 5 12"/>
-                            </svg>
-                            Цена ↓
-                        </button>
-                        <button class="sort-btn" onclick="setSorting('name', this)" data-sort-key="name">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="4" y1="9" x2="20" y2="9"/>
-                                <line x1="4" y1="15" x2="20" y2="15"/>
-                                <line x1="10" y1="3" x2="8" y2="21"/>
-                                <line x1="16" y1="3" x2="14" y2="21"/>
-                            </svg>
-                            А-Я
-                        </button>
+    <div class="filter-group">
+        <label>Свежесть</label>
+        <select id="filterDays" onchange="applyFilters()">
+            <option value="">Любой срок</option>
+            <option value="1">1 день</option>
+            <option value="3">до 3 дней</option>
+            <option value="5">до 5 дней</option>
+        </select>
+    </div>
+</div>
 
-                    </div>
-                </div>
 
-                <div class="active-filters" id="activeFilters"></div>
+
+
             </div>
 
             <div class="products-grid" id="productsGrid">
@@ -2901,7 +3013,7 @@
     </div>
 </div>
                         <div class="quantity-selector">
-                            <span class="quantity-label">Количество упаковок:</span>
+                            <span class="quantity-label" id="quantityLabel">Количество коробок:</span>
                             <div class="quantity-controls">
                                 <button class="quantity-btn" onclick="changeQuantity(-1)">−</button>
                                 <input type="number" class="quantity-input" id="productQuantity" value="1" min="1">
@@ -2995,6 +3107,36 @@
             </a>
             <div class="checkout-screen">
                 <h1>Оформление заказа (Заказ № 123456789) </h1>
+                
+                <!-- Таймлайн заказа -->
+                <div class="order-timeline">
+                    <div class="timeline-step completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Корзина</div>
+                        <div class="timeline-date">Сегодня</div>
+                    </div>
+                    <div class="timeline-step active">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Оформление</div>
+                        <div class="timeline-date">Сейчас</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Оплата</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Подтверждение</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Завершен</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                </div>
+                
                 <div class="checkout-grid">
                     <div>
                         <div class="checkout-section">
@@ -3087,6 +3229,36 @@
                 <div class="payment-container">
                     <h1>Оплата заказа</h1>
                     <p class="order-number">Заказ № <span id="paymentOrderNumber">123456789</span></p>
+                    
+                    <!-- Таймлайн заказа -->
+                    <div class="order-timeline">
+                        <div class="timeline-step completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-label">Корзина</div>
+                            <div class="timeline-date">Сегодня</div>
+                        </div>
+                        <div class="timeline-step completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-label">Оформление</div>
+                            <div class="timeline-date">Сегодня</div>
+                        </div>
+                        <div class="timeline-step active">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-label">Оплата</div>
+                            <div class="timeline-date">Сейчас</div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-label">Подтверждение</div>
+                            <div class="timeline-date"></div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-label">Завершен</div>
+                            <div class="timeline-date"></div>
+                        </div>
+                    </div>
+                    
                     <div class="payment-card">
                         <div class="payment-amount">
                             <div class="payment-amount-label">К оплате</div>
@@ -3449,7 +3621,6 @@
                 bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
         stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
         price: 128000, // Цена за КОРОБКУ
-                price: 128000, 
                 pricePerStem: 2560, 
                 category: 'roses', 
                 status: 'stock', 
@@ -3466,8 +3637,7 @@
                 box: '50', 
                 bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
         stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
-        price: 128000, // Цена за КОРОБКУ
-                price: 85000, 
+        price: 85000, // Цена за КОРОБКУ
                 pricePerStem: 1700, 
                 category: 'tulips', 
                 status: 'stock', 
@@ -3484,8 +3654,7 @@
                 box: '50',
                 bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
         stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
-        price: 128000, // Цена за КОРОБКУ 
-                price: 145000, 
+        price: 145000, // Цена за КОРОБКУ 
                 pricePerStem: 2900, 
                 category: 'roses', 
                 status: 'preorder', 
@@ -3502,8 +3671,7 @@
                 box: '40', 
                 bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
         stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
-        price: 128000, // Цена за КОРОБКУ
-                price: 92000, 
+        price: 92000, // Цена за КОРОБКУ
                 pricePerStem: 2300, 
                 category: 'eustoma', 
                 status: 'stock', 
@@ -3520,8 +3688,7 @@
                 box: '50', 
                 bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
         stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
-        price: 128000, // Цена за КОРОБКУ
-                price: 118000, 
+        price: 118000, // Цена за КОРОБКУ
                 pricePerStem: 2360, 
                 category: 'roses', 
                 status: 'stock', 
@@ -3538,8 +3705,7 @@
                 box: '60', 
                 bunchesInBox: 5, // НОВОЕ: Упаковок в коробке (например 5 пачек по 10 роз)
         stemsPerBunch: 10, // НОВОЕ: Стеблей в одной упаковке
-        price: 128000, // Цена за КОРОБКУ
-                price: 78000, 
+        price: 78000, // Цена за КОРОБКУ
                 pricePerStem: 1300, 
                 category: 'chrysanthemums', 
                 status: 'stock', 
@@ -3562,7 +3728,7 @@ function setUnit(unit) {
     else document.getElementById('btnUnitPack').classList.add('active');
 
     // Обновляем лейбл количества
-    const label = document.querySelector('.quantity-label');
+    const label = document.getElementById('quantityLabel');
     label.textContent = unit === 'box' ? 'Количество коробок:' : 'Количество упаковок:';
 
     // Пересчитываем цены
@@ -3609,9 +3775,11 @@ function updatePriceDisplay() {
 
             function showUserIcon() {
                 const userIcon = document.querySelector('.user-icon');
-                if (userIcon) {
+                const guestLogin = document.querySelector('.guest-login');
+                if (userIcon && guestLogin) {
                     // Удаляем класс, который скрывает элемент
                     userIcon.classList.remove('hidden-for-guest');
+                    guestLogin.style.display = 'none';
                     console.log('Иконка пользователя теперь видна!');
                 }
             }
@@ -3717,7 +3885,11 @@ function getCountryFlag(countryName) {
                 filtered.sort((a, b) => a.id - b.id); // Simple sort by ID as placeholder
             }
             
-            grid.innerHTML = filtered.map(product => `
+            grid.innerHTML = filtered.map(product => {
+                // Вычисляем цену за упаковку
+                const packPrice = product.price / product.bunchesInBox;
+                
+                return `
                 <div class="product-card" onclick="showProduct(${product.id})">
                     <div class="product-image">
                         <!-- Замените src на путь к вашему изображению -->
@@ -3761,15 +3933,19 @@ function getCountryFlag(countryName) {
                         <!-- Логотип Florex -->
                         
                         <div class="product-price">
-                            <div class="product-pricing">
+                            <div class="price-box">
                                 <div class="price-per-box">${product.price.toLocaleString('ru-RU')} ₸</div>
-                                <div class="price-per-unit">За упаковку (${product.box} шт) • ${product.pricePerStem.toLocaleString('ru-RU')} ₸/шт</div>
+                                <div class="price-unit">Коробка (${product.box} шт)</div>
+                            </div>
+                            <div class="price-pack">
+                                <div class="price-per-box">${packPrice.toLocaleString('ru-RU')} ₸</div>
+                                <div class="price-unit">Упаковка (${product.stemsPerBunch} шт)</div>
                             </div>
                             <button class="add-to-cart-btn" onclick="event.stopPropagation(); quickAddToCart(${product.id})">В корзину</button>
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         function setSorting(sort, btn) {
@@ -3920,7 +4096,7 @@ if (!currentProduct.bunchesInBox) currentProduct.bunchesInBox = 5;
         // Add to Cart
         function quickAddToCart(id) {
             const product = products.find(p => p.id === id);
-            addToCart(product, 1);
+            addToCart(product, 1, 'box'); // По умолчанию добавляем коробку
         }
 
 function addToCartFromDetail() {
@@ -3940,16 +4116,24 @@ function addToCartFromDetail() {
         cartItem.isPack = false;
     }
 
-    addToCart(cartItem, quantity); // Ваша существующая функция addToCart сработает нормально
+    addToCart(cartItem, quantity, selectedUnit); // Ваша существующая функция addToCart сработает нормально
     showScreen('cart');
 }
 
-        function addToCart(product, quantity) {
-            const existing = cart.find(item => item.id === product.id);
-            if (existing) {
-                existing.quantity += quantity;
+        function addToCart(product, quantity, unit) {
+            const existingIndex = cart.findIndex(item => 
+                item.id === product.id && item.isPack === (unit === 'pack')
+            );
+            
+            if (existingIndex !== -1) {
+                cart[existingIndex].quantity += quantity;
             } else {
-                cart.push({ ...product, quantity });
+                cart.push({ 
+                    ...product, 
+                    quantity,
+                    unit: unit,
+                    isPack: unit === 'pack'
+                });
             }
             updateCartCount();
             renderCart(); // Re-render cart to reflect changes
@@ -3987,7 +4171,8 @@ function addToCartFromDetail() {
                     <div class="cart-item-info">
                         <h3>${item.name}</h3>
                         <div class="cart-item-meta">
-                            <span>${item.color} • ${item.height} см • ${item.box} шт</span>
+                            <span>${item.color} • ${item.height} см • ${item.isPack ? item.stemsPerBunch + ' шт/уп' : item.box + ' шт/кор'}</span>
+                            <span>${item.isPack ? 'Упаковка' : 'Коробка'}</span>
                         </div>
                         <div class="cart-item-quantity">
                             <div class="quantity-controls">
@@ -4025,9 +4210,22 @@ function addToCartFromDetail() {
         function updateCartSummary() {
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const totalStems = cart.reduce((sum, item) => sum + (item.quantity * parseInt(item.box)), 0);
-            const totalBoxes = itemCount; // In this case, each package = 1 box
             
+            // Расчет коробок и упаковок
+            let totalPackages = 0;
+            let totalBoxes = 0;
+            let totalStems = 0;
+
+            cart.forEach(item => {
+                if (item.isPack) {
+                    totalPackages += item.quantity;
+                    totalStems += item.quantity * item.stemsPerBunch;
+                } else {
+                    totalBoxes += item.quantity;
+                    totalStems += item.quantity * item.box;
+                }
+            });
+
             document.getElementById('summaryItemCount').textContent = itemCount;
             document.getElementById('summarySubtotal').textContent = subtotal.toLocaleString('ru-RU') + ' ₸';
             document.getElementById('summaryDiscount').textContent = discount.toLocaleString('ru-RU') + ' ₸';
@@ -4035,7 +4233,7 @@ function addToCartFromDetail() {
             
             // Update calculator
             if (document.getElementById('totalPackages')) {
-                document.getElementById('totalPackages').textContent = itemCount;
+                document.getElementById('totalPackages').textContent = totalPackages;
                 document.getElementById('totalBoxes').textContent = totalBoxes;
                 document.getElementById('totalStems').textContent = totalStems;
             }
@@ -4067,7 +4265,7 @@ function addToCartFromDetail() {
                     </div>
                     <div class="order-item-info">
                         <h4>${item.name}</h4>
-                        <p>${item.quantity} × ${item.price.toLocaleString('ru-RU')} ₸</p>
+                        <p>${item.quantity} × ${item.price.toLocaleString('ru-RU')} ₸ • ${item.isPack ? 'Упаковка' : 'Коробка'}</p>
                     </div>
                     <div class="order-item-price">${(item.price * item.quantity).toLocaleString('ru-RU')} ₸</div>
                 </div>
@@ -4084,7 +4282,7 @@ function addToCartFromDetail() {
             document.querySelectorAll('.delivery-option').forEach(opt => opt.classList.remove('selected'));
             element.classList.add('selected');
             
-            const deliveryCost = element.querySelector('strong').textContent === 'Бесплатно' ? 0 : parseInt(element.querySelector('strong').textContent.replace(' ₸', ''));
+            const deliveryCost = element.querySelector('strong')?.textContent === 'Бесплатно' ? 0 : 0; // Default free
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             document.getElementById('checkoutDelivery').textContent = deliveryCost.toLocaleString('ru-RU') + ' ₸';
             document.getElementById('checkoutTotal').textContent = (subtotal + deliveryCost - discount).toLocaleString('ru-RU') + ' ₸'; // Apply discount
