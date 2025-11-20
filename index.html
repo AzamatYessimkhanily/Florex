@@ -2823,7 +2823,6 @@
     <div id="catalogScreen" class="screen">
         <div class="container">
             <div class="catalog-header">
-                <h1>Каталог</h1>
                 <div class="catalog-info">
                     <span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -3408,7 +3407,34 @@
                                             <p>Самовывоз • 18 ноября</p>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary" style="margin-top: 16px;">Оплатить заказ</button>
+                <div class="order-timeline">                           
+                    <div class="timeline-step active">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Ожидает оплаты</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Оплачен</div>
+                        <div class="timeline-date">Сейчас</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">В пути</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Готов к выдаче</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Выдан</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                </div>
+                                                    <button class="btn btn-primary" style="margin-top: 16px;">Оплатить заказ</button>
+
                                 </div>
                                 
                                 <div class="order-card">
@@ -3438,7 +3464,36 @@
                                             <p>Доставка • 17 ноября</p>
                                         </div>
                                     </div>
-                                    <button class="btn btn-outline" style="margin-top: 16px;">Посмотреть детали</button>
+
+
+                                                    <div class="order-timeline">                           
+                    <div class="timeline-step completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Ожидает оплаты</div>
+                    </div>
+                    <div class="timeline-step active">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Оплачен</div>
+                        <div class="timeline-date">Сейчас</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">В пути</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Готов к выдаче</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Выдан</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                </div>
+                                                    <button class="btn btn-outline" style="margin-top: 16px;">Посмотреть детали</button>
+
                                 </div>
                                 
                                 <div class="order-card">
@@ -3468,7 +3523,35 @@
                                             <p>Самовывоз • 12 ноября</p>
                                         </div>
                                     </div>
-                                    <button class="btn btn-outline" style="margin-top: 16px;">Повторить заказ</button>
+
+                                                                                        <div class="order-timeline">                           
+                    <div class="timeline-step completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Ожидает оплаты</div>
+                    </div>
+                    <div class="timeline-step completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Оплачен</div>
+                        <div class="timeline-date">Сейчас</div>
+                    </div>
+                    <div class="timeline-step completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">В пути</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                    <div class="timeline-step completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Готов к выдаче</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                    <div class="timeline-step active">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-label">Выдан</div>
+                        <div class="timeline-date"></div>
+                    </div>
+                </div>
+                                                    <button class="btn btn-outline" style="margin-top: 16px;">Повторить заказ</button>
+
                                 </div>
                             </div>
                         </div>
@@ -3753,7 +3836,7 @@ function updatePriceDisplay() {
         // Вычисляем цену упаковки: Цена коробки / кол-во пачек
         const packPrice = currentProduct.price / currentProduct.bunchesInBox;
         priceBox.textContent = `${packPrice.toLocaleString('ru-RU')} ₸`;
-        priceStem.textContent = `за 1 упаковку (${currentProduct.stemsPerBunch} шт)`;
+        priceStem.textContent = `за 1 упаковку (${currentProduct.stemsPerBunch} шт)`;      
         quantityBadge.textContent = `${currentProduct.stemsPerBunch} шт (Упаковка)`;
     }
 }
@@ -3902,7 +3985,6 @@ function getCountryFlag(countryName) {
                         <h3 class="product-name">${product.name}</h3>
                         
                         <!-- Терракотовая плашка с количеством -->
-                        <div class="product-quantity-badge">${product.box} шт</div>
                         
                         <div class="product-specs">
                             <div class="spec-item">
