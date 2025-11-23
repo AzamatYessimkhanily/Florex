@@ -395,7 +395,6 @@
             font-weight: 700;
             margin-bottom: 12px;
             font-size: 14px;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--dusty-olive);
         }
@@ -554,12 +553,86 @@
         }
 
         /* Каталог */
-        .catalog-header {
-            padding: 48px 0 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* Новый стиль шапки каталога */
+.catalog-header {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Отступ между поиском и городом */
+    margin-bottom: 20px; /* Отступ до фильтров */
+    padding: 0;
+}
+
+/* Стиль поисковика */
+.search-wrapper {
+    flex: 1; /* ВАЖНО: Растягивает поиск на всю доступную ширину */
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 16px 20px 16px 52px; /* Чуть больше паддинги для "дорогого" вида */
+    border: 1px solid transparent; /* Убираем рамку по умолчанию */
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--black);
+    background: var(--white);
+    /* Добавляем тень для объема */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.search-input:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
+}
+
+.search-input:focus {
+    outline: none;
+    background: var(--white);
+    border-color: var(--accent-orange);
+    box-shadow: 0 8px 30px rgba(211, 84, 44, 0.15); /* Оранжевое свечение */
+}
+
+.search-input::placeholder {
+    color: #999;
+    font-weight: 400;
+}
+
+.search-icon-inside {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    stroke: var(--dusty-olive);
+    opacity: 0.7;
+}
+
+/* Стиль города (без круга) */
+.location-selector {
+    background: var(--white);
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06); /* Тоже с тенью, в стиле поиска */
+    height: 52px; /* Высота как у инпута */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    transition: all 0.3s;
+}
+.location-selector:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.location-selector svg {
+    stroke: var(--accent-orange); /* Делаем иконку акцентной */
+    width: 20px;
+    height: 20px;
+}
 
         .catalog-header h1 {
             font-size: 48px;
@@ -582,6 +655,7 @@
             padding: 8px 16px;
             border-radius: 20px;
             border: 1px solid var(--light-sage);
+            
         }
 
         .catalog-controls {
@@ -627,6 +701,7 @@
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 40px;
             padding: 40px 0 100px;
+            padding-top: 10px; /* БЫЛО 40px -> СДЕЛАЛИ 10px. Убрали дыру сверху */
         }
 
         /* ОБНОВЛЕННЫЕ КАРТОЧКИ ТОВАРОВ - НОВЫЙ ДИЗАЙН */
@@ -681,7 +756,6 @@
             padding: 6px 12px;
             font-size: 10px;
             font-weight: 700;
-            text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             border-radius: 20px;
@@ -706,7 +780,7 @@
         }
 
         .product-name {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 600;
             margin-bottom: 12px;
             letter-spacing: 0.3px;
@@ -860,7 +934,7 @@
         }
 
         .product-detail-info h1 {
-            font-size: 48px;
+            font-size: 35px;
             margin-bottom: 16px;
             letter-spacing: -1px;
             color: var(--black);
@@ -870,7 +944,6 @@
             font-size: 14px;
             color: var(--dusty-olive);
             margin-bottom: 32px;
-            text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
         }
@@ -908,7 +981,6 @@
 
         .spec-label {
             font-size: 12px;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--dusty-olive);
             font-weight: 600;
@@ -951,7 +1023,6 @@
 
         .quantity-label {
             font-weight: 600;
-            text-transform: uppercase;
             font-size: 14px;
             letter-spacing: 0.5px;
             color: var(--dusty-olive);
@@ -1287,7 +1358,6 @@
             text-align: center;
             color: var(--dusty-olive);
             font-weight: 600;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
@@ -1505,7 +1575,6 @@
             font-size: 16px;
             transition: all 0.3s;
             letter-spacing: 0.5px;
-            text-transform: uppercase;
             box-shadow: 0 6px 20px rgba(211, 84, 44, 0.3);
             border-radius: 6px;
         }
@@ -1557,7 +1626,6 @@
         .payment-amount-label {
             font-size: 14px;
             color: var(--dusty-olive);
-            text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 12px;
             font-weight: 600;
@@ -1731,7 +1799,6 @@
 
         .info-card h3 {
             font-size: 13px;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--dusty-olive);
             margin-bottom: 10px;
@@ -1787,7 +1854,6 @@
             color: var(--white);
             font-size: 12px;
             font-weight: 700;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
             border-radius: 20px;
         }
@@ -1821,7 +1887,6 @@
 
         .order-detail-item h4 {
             font-size: 12px;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--dusty-olive);
             margin-bottom: 6px;
@@ -1918,17 +1983,17 @@
             background: var(--white);
             border-radius: 16px;
             padding: 0;
-            margin-bottom: 48px;
+            margin-bottom: 12px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             border: 1px solid var(--light-sage);
-        }
+}
 
         .filters-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 24px 32px;
+            padding: 16px 24px; /* Чуть компактнее внутри */
             background: var(--white);
             border-bottom: 2px solid var(--light-concrete);
         }
@@ -1960,7 +2025,6 @@
             font-size: 13px;
             cursor: pointer;
             transition: all 0.3s;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
             border-radius: 6px;
         }
@@ -2002,7 +2066,6 @@
         .filter-group label {
             font-size: 11px;
             font-weight: 700;
-            text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--dusty-sage);
             display: flex;
@@ -2106,7 +2169,6 @@
         .sort-section label {
             font-size: 11px;
             font-weight: 700;
-            text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--dusty-sage);
             display: block;
@@ -2134,7 +2196,19 @@
             gap: 8px;
             font-family: 'Montserrat', sans-serif;
         }
-
+.carousel-placeholder {
+    width: 100%;
+    height: 220px; /* Оптимальная высота, чтобы товары внизу были видны */
+    background: var(--light-concrete);
+    border-radius: 12px;
+    margin-bottom: 20px; /* Отступ до поиска */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dusty-olive);
+    font-weight: 600;
+    border: 1px dashed var(--light-sage);
+}
         .sort-btn svg {
             width: 16px;
             height: 16px;
@@ -2426,7 +2500,6 @@
             color: var(--white);
             font-size: 11px;
             font-weight: 700;
-            text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 0 4px 12px rgba(211, 84, 44, 0.3);
             border-radius: 20px;
@@ -2435,7 +2508,6 @@
         .section-title {
             font-size: 14px;
             font-weight: 700;
-            text-transform: uppercase;
             letter-spacing: 1.5px;
             color: var(--dusty-olive);
             margin-bottom: 20px;
@@ -2638,7 +2710,6 @@
     font-weight: 700;
     font-size: 14px;
     color: var(--dusty-olive);
-    text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
@@ -2706,10 +2777,245 @@
     border-color: var(--accent-orange) !important;
     font-weight: 600 !important;
 }
+nav a.active {
+    color: var(--accent-orange);
+}
 
+nav a.active::after {
+    width: 100%;
+}
+
+/* Всплывающее уведомление (Toast) */
+.notification-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    background-color: var(--black);
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 2000;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.notification-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* Иконка предупреждения внутри тоста */
+.toast-icon {
+    width: 20px;
+    height: 20px;
+    stroke: var(--accent-orange);
+}
+
+
+/* --- ИСПРАВЛЕНИЕ ОТСТУПА СВЕРХУ --- */
+#catalogScreen .container {
+    padding-top: 20px; /* Добавили воздух между хедером и каруселью */
+}
+
+/* --- НОВАЯ ПРЕМИУМ КАРУСЕЛЬ --- */
+.florex-carousel {
+    position: relative;
+    width: 100%;
+    height: 320px; /* Было 480px -> Стало 320px. Это освободит много места */
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-bottom: 24px; /* Было 40px -> Стало 24px */
+    background: var(--light-concrete);
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Затемнение поверх фото для читаемости текста */
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);
+    z-index: 2;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Временная заглушка, если нет фото */
+    background-color: var(--dusty-sage); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 20px;
+}
+
+.carousel-content {
+    position: absolute;
+    top: 50%;
+    left: 60px;
+    transform: translateY(-50%);
+    max-width: 500px;
+    z-index: 3;
+    color: var(--white);
+}
+
+.carousel-tag {
+    display: inline-block;
+    background: var(--accent-orange);
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(211, 84, 44, 0.3);
+    margin-bottom: 16px; /* Уменьшили отступ */
+    padding: 6px 12px;
+    font-size: 11px;
+}
+
+.carousel-title {
+    font-size: 36px; /* Было 48px -> Стало 36px */
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 12px; /* Чуть меньше отступ */
+    letter-spacing: -1px;
+}
+
+.carousel-text {
+    font-size: 15px; /* Было 18px -> Стало 15px */
+    margin-bottom: 24px;
+    opacity: 0.9;
+    line-height: 1.5;
+    max-width: 450px;
+}
+
+/* Элементы управления */
+.carousel-arrows {
+    position: absolute;
+    bottom: 30px; /* Сделали на одной высоте с точками */
+    right: 40px;
+    display: flex;
+    gap: 12px;
+    z-index: 3;
+}
+
+/* Точки навигации - теперь по центру */
+
+.carousel-arrow {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.3);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.carousel-arrow:hover {
+    background: var(--accent-orange);
+    border-color: var(--accent-orange);
+    transform: scale(1.1);
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 30px; /* Чуть приподняли от края */
+    left: 50%; /* Центрируем по горизонтали */
+    transform: translateX(-50%); /* Сдвигаем на половину своей ширины назад для точного центра */
+    display: flex;
+    gap: 12px;
+    z-index: 3;
+}
+
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.carousel-dot.active {
+    background: var(--accent-orange);
+    transform: scale(1.3);
+}
+
+/* Адаптив для карусели */
+@media (max-width: 768px) {
+    .florex-carousel {
+        height: 400px;
+        border-radius: 0; /* На мобилках на всю ширину */
+        margin: 0 -32px 32px -32px; /* Компенсируем паддинг контейнера */
+        width: calc(100% + 64px);
+    }
+    #catalogScreen .container {
+        padding-top: 20px;
+    }
+    .carousel-content {
+        left: 20px;
+        right: 20px;
+        text-align: center;
+        transform: translateY(-45%);
+    }
+    .carousel-title {
+        font-size: 32px;
+    }
+    .carousel-text {
+        font-size: 16px;
+    }
+    .carousel-arrows {
+        display: none; /* На мобилках убираем стрелки */
+    }
+    .carousel-dots {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 20px;
+    }
+}
     </style>
 </head>
 <body>
+
+    <div id="notificationToast" class="notification-toast">
+    <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+    </svg>
+    <span id="toastMessage">Текст уведомления</span>
+</div>
     <!-- Header -->
     <header>
         <div class="container">
@@ -2735,12 +3041,12 @@
                         <a href="#" class="lang-btn active">РУС</a>
                         <a href="#" class="lang-btn">КАЗ</a>
                     </div>
-                    <div class="cart-icon" onclick="showScreen('cart')">
+                    <div class="cart-icon" onclick="tryOpenCart()">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                            <line x1="3" y1="6" x2="21" y2="6"/>
-                            <path d="M16 10a4 4 0 0 1-8 0"/>
-                        </svg>
+                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                                <line x1="3" y1="6" x2="21" y2="6"/>
+                                <path d="M16 10a4 4 0 0 1-8 0"/>
+                            </svg>
                         <span class="cart-count" id="cartCount">0</span>
                     </div>
                     <div class="user-icon hidden-for-guest" onclick="showScreen('account')">ГА</div>
@@ -2821,21 +3127,75 @@
 
     <!-- Catalog Screen -->
     <div id="catalogScreen" class="screen">
-        <div class="container">
-            <div class="catalog-header">
-                <div class="catalog-info">
-                    <span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        <span id="selectedCity">Алматы</span>
-                    </span>
+<div class="container">
+    
+<div class="florex-carousel">
+    <div class="carousel-slide active">
+        <img src="1.png" alt="Свежие поставки" class="carousel-image" onerror="this.style.display='none'">
+        <div class="carousel-overlay"></div>
+        <div class="carousel-content">
+            <span class="carousel-tag">Новое поступление</span>
+            <h2 class="carousel-title">Свежие розы<br>из Эквадора</h2>
+            <p class="carousel-text">Премиальные сорта с крупным бутоном уже доступны к заказу. Успейте забронировать лучшие позиции.</p>
+            <button class="btn btn-primary" onclick="scrollToFilters()">Смотреть каталог</button>
+        </div>
+    </div>
+    
+    <div class="carousel-slide">
+        <img src="2.png" alt="Спецпредложение" class="carousel-image" onerror="this.style.display='none'">
+        <div class="carousel-overlay"></div>
+        <div class="carousel-content">
+            <span class="carousel-tag" style="background: var(--dusty-sage);">Акция недели</span>
+            <h2 class="carousel-title">Скидка 15%<br>на тюльпаны</h2>
+            <p class="carousel-text">Готовьтесь к сезону заранее. Специальные условия при заказе от 10 коробок.</p>
+            <button class="btn btn-primary" onclick="scrollToFilters()">Выбрать тюльпаны</button>
+        </div>
+    </div>
 
-                </div>
-            </div>
-            
-            <!-- Filters Container -->
+    <div class="carousel-slide">
+        <img src="3.png" alt="О компании" class="carousel-image" onerror="this.style.display='none'">
+        <div class="carousel-overlay"></div>
+        <div class="carousel-content">
+            <span class="carousel-tag">Florex Premium</span>
+            <h2 class="carousel-title">Ваш надежный<br>оптовый партнер</h2>
+            <p class="carousel-text">Прямые поставки с лучших плантаций мира. Гарантия свежести и качества.</p>
+            <button class="btn btn-primary" onclick="showScreen('about')">О компании</button>
+        </div>
+    </div>
+
+    <div class="carousel-arrows">
+        <button class="carousel-arrow" onclick="prevSlide()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="carousel-arrow" onclick="nextSlide()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+    </div>
+
+    <div class="carousel-dots">
+        <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+        <div class="carousel-dot" onclick="goToSlide(1)"></div>
+        <div class="carousel-dot" onclick="goToSlide(2)"></div>
+    </div>
+</div>
+<div class="catalog-header">
+    <div class="search-wrapper">
+        <svg class="search-icon-inside" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" placeholder="Поиск по названию, сорту или цвету..." oninput="console.log(this.value)">
+    </div>
+    
+    <div class="location-selector">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke: var(--accent-orange);">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <span id="selectedCity" style="font-weight: 600;">Алматы</span>
+    </div>
+</div>
+    
             <div class="filters-container">
 <div class="filters-header">
     <h2 class="filters-title">
@@ -2998,12 +3358,12 @@
                         </div>
                         
                         <!-- Логотип Florex -->
-                        <div class="unit-selector-container">
+<div class="unit-selector-container">
     <span class="spec-label" style="margin-bottom: 12px; display: block;">Единица измерения:</span>
     <div class="unit-switch">
         <button class="unit-btn active" id="btnUnitBox" onclick="setUnit('box')">
             <div class="unit-title">Коробка</div>
-            <div class="unit-subtitle" id="boxContentInfo">500 стеблей</div>
+            <div class="unit-subtitle" id="boxContentInfo">50 стеблей</div>
         </button>
         <button class="unit-btn" id="btnUnitPack" onclick="setUnit('pack')">
             <div class="unit-title">Упаковка</div>
@@ -3011,20 +3371,20 @@
         </button>
     </div>
 </div>
-                        <div class="quantity-selector">
-                            <span class="quantity-label" id="quantityLabel">Количество коробок:</span>
-                            <div class="quantity-controls">
-                                <button class="quantity-btn" onclick="changeQuantity(-1)">−</button>
-                                <input type="number" class="quantity-input" id="productQuantity" value="1" min="1">
-                                <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
-                            </div>
-                        </div>
+
+<div class="quantity-selector">
+    <span class="quantity-label" id="quantityLabel">Количество коробок:</span>
+    <div class="quantity-controls">
+        <button class="quantity-btn" onclick="changeQuantity(-1)">−</button>
+        <input type="number" class="quantity-input" id="productQuantity" value="0" min="0" readonly>
+        <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+    </div>
+</div>
+
 <div class="product-pricing" style="margin: 32px 0;">
-                            <div class="price-per-box" style="font-size: 40px;" id="productDetailPriceBox">
-                                </div>
-                            <div class="price-per-unit" style="font-size: 16px; margin-top: 8px;" id="productDetailPriceStem">
-                                </div>
-                        </div>
+    <div class="price-per-box" style="font-size: 40px;" id="productDetailPriceBox">0 ₸</div>
+    <div class="price-per-unit" style="font-size: 16px; margin-top: 8px;" id="productDetailPriceStem"></div>
+</div>
                         <div class="product-actions">
                             <button class="btn btn-primary" style="flex: 2;" onclick="addToCartFromDetail()">Добавить в корзину</button>
                             <button class="btn btn-outline" onclick="showScreen('catalog')">Продолжить покупки</button>
@@ -3055,21 +3415,30 @@
                         <h2>Итого</h2>
                         
                         <!-- Добавлен калькулятор коробок -->
-                        <div class="cart-calculator">
-                            <div class="section-title">Расчет</div>
-                            <div class="calc-row">
-                                <span>Всего упаковок:</span>
-                                <strong id="totalPackages">0</strong>
-                            </div>
-                            <div class="calc-row">
-                                <span>Всего коробок:</span>
-                                <strong id="totalBoxes">0</strong>
-                            </div>
-                            <div class="calc-row">
-                                <span>Всего стеблей:</span>
-                                <strong id="totalStems">0</strong>
-                            </div>
-                        </div>
+<div class="cart-calculator">
+    <div class="section-title">Расчет</div>
+    
+    <div class="calc-row" style="align-items: flex-start;">
+        <div style="display: flex; flex-direction: column;">
+            <span>Всего упаковок:</span>
+            <span id="totalPackagesPrice" style="font-size: 13px; color: var(--accent-orange); font-weight: 600; margin-top: 4px;">0 ₸</span>
+        </div>
+        <strong id="totalPackages" style="font-size: 20px;">0</strong>
+    </div>
+
+    <div class="calc-row" style="align-items: flex-start;">
+        <div style="display: flex; flex-direction: column;">
+            <span>Всего коробок:</span>
+            <span id="totalBoxesPrice" style="font-size: 13px; color: var(--accent-orange); font-weight: 600; margin-top: 4px;">0 ₸</span>
+        </div>
+        <strong id="totalBoxes" style="font-size: 20px;">0</strong>
+    </div>
+
+    <div class="calc-row" style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(0,0,0,0.1);">
+        <span style="color: var(--dusty-olive);">Всего стеблей:</span>
+        <strong id="totalStems">0</strong>
+    </div>
+</div>
 
                         <div class="summary-row">
                             <span>Товары (<span id="summaryItemCount">0</span>)</span>
@@ -3431,9 +3800,9 @@
                         <div class="timeline-dot"></div>
                         <div class="timeline-label">Выдан</div>
                         <div class="timeline-date"></div>
-                    </div>
-                </div>
-                                                    <button class="btn btn-primary" style="margin-top: 16px;">Оплатить заказ</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" style="margin-top: 16px;">Оплатить заказ</button>
 
                                 </div>
                                 
@@ -3490,9 +3859,9 @@
                         <div class="timeline-dot"></div>
                         <div class="timeline-label">Выдан</div>
                         <div class="timeline-date"></div>
-                    </div>
-                </div>
-                                                    <button class="btn btn-outline" style="margin-top: 16px;">Посмотреть детали</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline" style="margin-top: 16px;">Посмотреть детали</button>
 
                                 </div>
                                 
@@ -3548,9 +3917,9 @@
                         <div class="timeline-dot"></div>
                         <div class="timeline-label">Выдан</div>
                         <div class="timeline-date"></div>
-                    </div>
-                </div>
-                                                    <button class="btn btn-outline" style="margin-top: 16px;">Повторить заказ</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline" style="margin-top: 16px;">Повторить заказ</button>
 
                                 </div>
                             </div>
@@ -3560,7 +3929,7 @@
                         <div class="account-content-section" id="balanceSection">
                             <h2 style="font-size: 36px; margin-bottom: 40px;">Мой баланс</h2>
                             <div class="info-card" style="padding: 60px; text-align: center; background: linear-gradient(135deg, var(--light-concrete) 0%, var(--white) 100%);">
-                                <h3 style="font-size: 18px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">Текущий баланс</h3>
+                                <h3 style="font-size: 18px; margin-bottom: 20px; letter-spacing: 1px;">Текущий баланс</h3>
                                 <p style="font-size: 64px; font-weight: 700; color: var(--accent-orange); letter-spacing: -2px;">2 000 000 ₸</p>
                                 <p style="margin-top: 16px; color: var(--dusty-olive);">Средства доступны для оплаты заказов</p>
                             </div>
@@ -3690,6 +4059,34 @@
     </div>
 
     <script>
+        let isLoggedIn = false; // По умолчанию пользователь НЕ авторизован
+
+
+        function tryOpenCart() {
+    if (isLoggedIn) {
+        showScreen('cart');
+    } else {
+        showNotification('Пожалуйста, войдите в систему для доступа к корзине');
+        showScreen('home'); // Перекидываем на экран входа
+        // Плавный скролл к форме входа, если нужно
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+
+// 2. Красивое уведомление
+function showNotification(message) {
+    const toast = document.getElementById('notificationToast');
+    const msg = document.getElementById('toastMessage');
+    
+    msg.textContent = message;
+    toast.classList.add('show');
+    
+    // Скрываем через 3 секунды
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
         // Sample Products Data with more details
         const products = [
             { 
@@ -3797,64 +4194,80 @@
         ];
 
         let cart = [];
+
+        
         let currentProduct = null;
         let discount = 0; // Initialize discount to 0
+
+        let selectionState = {
+    box: 0,
+    pack: 0
+};
 let selectedUnit = 'box'; // 'box' или 'pack'
 
 // 1. Функция переключения
 function setUnit(unit) {
     selectedUnit = unit;
     
-    // Обновляем UI кнопок
+    // 1. Визуально переключаем кнопки
     document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
     if(unit === 'box') document.getElementById('btnUnitBox').classList.add('active');
     else document.getElementById('btnUnitPack').classList.add('active');
 
-    // Обновляем лейбл количества
+    // 2. Меняем заголовок "Количество ..."
     const label = document.getElementById('quantityLabel');
     label.textContent = unit === 'box' ? 'Количество коробок:' : 'Количество упаковок:';
 
-    // Пересчитываем цены
+    // 3. ВАЖНО: Подставляем в инпут то число, которое мы запомнили для этого типа
+    document.getElementById('productQuantity').value = selectionState[unit];
+
+    // 4. Обновляем цены
     updatePriceDisplay();
 }
-
+function toggleFilters() {
+    const filtersBlock = document.getElementById('filtersBlock');
+    filtersBlock.classList.toggle('open');
+}
 // 2. Функция обновления отображения цены
 function updatePriceDisplay() {
     if (!currentProduct) return;
-
     const priceBox = document.getElementById('productDetailPriceBox');
     const priceStem = document.getElementById('productDetailPriceStem');
     const quantityBadge = document.querySelector('.detail-quantity-badge');
 
     if (selectedUnit === 'box') {
-        // Режим КОРОБКА
         priceBox.textContent = `${currentProduct.price.toLocaleString('ru-RU')} ₸`;
         priceStem.textContent = `${currentProduct.pricePerStem.toLocaleString('ru-RU')} ₸ / Стебель`;
-        quantityBadge.textContent = `${currentProduct.box} шт (Коробка)`;
+        quantityBadge.textContent = `В наличии`; 
     } else {
-        // Режим УПАКОВКА
-        // Вычисляем цену упаковки: Цена коробки / кол-во пачек
         const packPrice = currentProduct.price / currentProduct.bunchesInBox;
         priceBox.textContent = `${packPrice.toLocaleString('ru-RU')} ₸`;
-        priceStem.textContent = `за 1 упаковку (${currentProduct.stemsPerBunch} шт)`;      
-        quantityBadge.textContent = `${currentProduct.stemsPerBunch} шт (Упаковка)`;
+        priceStem.textContent = `за 1 упаковку (${currentProduct.stemsPerBunch} шт)`;
+        quantityBadge.textContent = `В наличии`;
     }
 }
         // Screen Navigation
-        function showScreen(screenName) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(screenName + 'Screen').classList.add('active');
-            
-            if (screenName === 'catalog') {
-                renderProducts();
-            } else if (screenName === 'cart') {
-                renderCart();
-            } else if (screenName === 'checkout') {
-                renderCheckout();
-            }
-            
-            window.scrollTo(0, 0);
-        }
+function showScreen(screenName) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(screenName + 'Screen').classList.add('active');
+    
+    // Подсветка активного пункта навигации
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    if (screenName === 'catalog') {
+        const catalogLink = document.querySelector('nav a[onclick="showScreen(\'catalog\')"]');
+        if (catalogLink) catalogLink.classList.add('active');
+    }
+    
+    if (screenName === 'catalog') {
+        renderProducts();
+    } else if (screenName === 'cart') {
+        renderCart();
+    } else if (screenName === 'checkout') {
+        renderCheckout();
+    }
+    
+    window.scrollTo(0, 0);
+}
 
             function showUserIcon() {
                 const userIcon = document.querySelector('.user-icon');
@@ -3878,13 +4291,18 @@ function updatePriceDisplay() {
             }, 100);
         }
 
-        function verifySMS(e) {
-            e.preventDefault();
-            // Verify SMS code (in real app would check with server)
-            showScreen('catalog');
-            renderProducts();
-            showUserIcon();
-        }
+function verifySMS(e) {
+    e.preventDefault();
+    
+    // Логика проверки кода (тут у вас заглушка, оставляем как есть)
+    
+    // УСПЕШНЫЙ ВХОД
+    isLoggedIn = true; // <--- ВАЖНО: Ставим флаг, что вошли
+    
+    showScreen('catalog');
+    showUserIcon();
+    showNotification('Вы успешно вошли в систему!'); // Приветствие
+}
 
         function resendCode() {
             alert('Код отправлен повторно!');
@@ -4118,61 +4536,77 @@ function removeFilter(key) {
         }
 
         // Show Product Detail
-        function showProduct(id) {
-            currentProduct = products.find(p => p.id === id);
-            document.getElementById('productDetailPhoto').src = currentProduct.photo;
-            document.getElementById('productDetailPhoto').alt = currentProduct.name;
-            document.getElementById('productDetailName').textContent = currentProduct.name;
-            document.getElementById('productDetailArticle').textContent = `Артикул: ${currentProduct.id}${Math.random().toString(36).substring(2, 9).toUpperCase()}`;
-            document.getElementById('productDetailColor').innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                </svg>
-                ${currentProduct.color}
-            `;
-            document.getElementById('productDetailHeight').innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="12" y1="2" x2="12" y2="22"/>
-                    <polyline points="5 9 12 2 19 9"/>
-                </svg>
-                ${currentProduct.height} см
-            `;
-            document.getElementById('productDetailWeight').innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 6h18M3 6v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6M3 6l3-3m15 3l-3-3M12 10v4"/>
-                </svg>
-                ${currentProduct.weight} гр
-            `;
-document.getElementById('productDetailCountry').innerHTML = `
-    ${getCountryFlag(currentProduct.country)}
-    ${currentProduct.country}
-`;
-        document.getElementById('productDetailPriceBox').textContent = `${currentProduct.price.toLocaleString('ru-RU')} ₸`;
-            
-            // 2. Цена за ШТУКУ
-            document.getElementById('productDetailPriceStem').textContent = `${currentProduct.pricePerStem.toLocaleString('ru-RU')} ₸ / Коробка`;
-            /* ------------------- */
-            
-if (!currentProduct.bunchesInBox) currentProduct.bunchesInBox = 5; 
+// Обновленная функция открытия товара
+function showProduct(id) {
+    currentProduct = products.find(p => p.id === id);
+    
+    // Сбрасываем выбор в 0 при открытии нового товара
+    selectionState = { box: 0, pack: 0 };
+    selectedUnit = 'box';
+
+    // Заполнение картинок и текстов (стандартное)
+    document.getElementById('productDetailPhoto').src = currentProduct.photo;
+    document.getElementById('productDetailName').textContent = currentProduct.name;
+    document.getElementById('productDetailArticle').textContent = `Артикул: ${currentProduct.id}RN`;
+    
+    // Спецификации (Оставляем как было)
+    document.getElementById('productDetailColor').innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> ${currentProduct.color}`;
+    document.getElementById('productDetailHeight').innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><polyline points="5 9 12 2 19 9"/></svg> ${currentProduct.height} см`;
+    document.getElementById('productDetailWeight').innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 6v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6M3 6l3-3m15 3l-3-3M12 10v4"/></svg> ${currentProduct.weight} гр`;
+    document.getElementById('productDetailCountry').innerHTML = `${getCountryFlag(currentProduct.country)} ${currentProduct.country}`;
+
+    // Настройка вложений (если нет в базе)
+    if (!currentProduct.bunchesInBox) currentProduct.bunchesInBox = 5; 
     if (!currentProduct.stemsPerBunch) currentProduct.stemsPerBunch = 10;
 
+    // Тексты в табах
     document.getElementById('boxContentInfo').textContent = `${currentProduct.box} стеблей`;
     document.getElementById('packContentInfo').textContent = `${currentProduct.stemsPerBunch} стеблей`;
 
-    // Сброс на "Коробку" при открытии
-    document.getElementById('productQuantity').value = 1;
+    // Обновляем UI (активируем коробку)
     setUnit('box'); 
     
     showScreen('product');
 }
 
+// Функция изменения количества (+/-) для конкретного типа
+function changeDetailQuantity(type, delta) {
+    const inputId = type === 'box' ? 'qtyBox' : 'qtyPack';
+    const input = document.getElementById(inputId);
+    let newValue = parseInt(input.value) + delta;
+    
+    if (newValue < 0) newValue = 0; // Не даем уйти в минус
+    input.value = newValue;
+    
+    updateDetailTotal();
+}
+
+// Функция подсчета общей суммы в реальном времени
+function updateDetailTotal() {
+    if (!currentProduct) return;
+    
+    const qtyBox = parseInt(document.getElementById('qtyBox').value) || 0;
+    const qtyPack = parseInt(document.getElementById('qtyPack').value) || 0;
+    
+    const boxPrice = currentProduct.price;
+    const packPrice = currentProduct.price / currentProduct.bunchesInBox;
+    
+    const total = (qtyBox * boxPrice) + (qtyPack * packPrice);
+    
+    document.getElementById('detailTotalSum').textContent = `${total.toLocaleString('ru-RU')} ₸`;
+}
+
         // Quantity Controls
         function changeQuantity(delta) {
-            const input = document.getElementById('productQuantity');
-            const newValue = parseInt(input.value) + delta;
-            if (newValue >= 1) {
-                input.value = newValue;
-            }
+            // Меняем значение в памяти для ТЕКУЩЕЙ вкладки
+            let newValue = selectionState[selectedUnit] + delta;
+            
+            if (newValue < 0) newValue = 0; // Не даем уйти ниже 0
+            
+            selectionState[selectedUnit] = newValue; // Сохраняем
+            
+            // Обновляем инпут на экране
+            document.getElementById('productQuantity').value = newValue;
         }
 
         // Add to Cart
@@ -4181,24 +4615,41 @@ if (!currentProduct.bunchesInBox) currentProduct.bunchesInBox = 5;
             addToCart(product, 1, 'box'); // По умолчанию добавляем коробку
         }
 
+// Функция добавления в корзину (обрабатывает и коробки, и упаковки)
 function addToCartFromDetail() {
-    const quantity = parseInt(document.getElementById('productQuantity').value);
-    
-    // Создаем копию товара для корзины
-    let cartItem = { ...currentProduct };
-
-    if (selectedUnit === 'pack') {
-        // Если выбрана упаковка, меняем цену и название для корзины
-        cartItem.price = currentProduct.price / currentProduct.bunchesInBox;
-        cartItem.box = currentProduct.stemsPerBunch; // Теперь "в коробке" (в единице) столько стеблей
-        cartItem.name = `${cartItem.name} (Упаковка)`;
-        cartItem.isPack = true; // Метка, что это пачка
-    } else {
-        cartItem.name = `${cartItem.name} (Коробка)`;
-        cartItem.isPack = false;
+    if (!isLoggedIn) {
+        showNotification('Сначала авторизуйтесь для заказа');
+        showScreen('home');
+        return;
     }
 
-    addToCart(cartItem, quantity, selectedUnit); // Ваша существующая функция addToCart сработает нормально
+    const qtyBox = selectionState.box;
+    const qtyPack = selectionState.pack;
+
+    if (qtyBox === 0 && qtyPack === 0) {
+        showNotification('Выберите количество (Коробки или Упаковки)');
+        return;
+    }
+
+    // Добавляем коробки (если выбрали > 0)
+    if (qtyBox > 0) {
+        let boxItem = { ...currentProduct };
+        boxItem.name = `${boxItem.name} (Коробка)`;
+        boxItem.isPack = false;
+        addToCart(boxItem, qtyBox, 'box');
+    }
+
+    // Добавляем упаковки (если выбрали > 0)
+    if (qtyPack > 0) {
+        let packItem = { ...currentProduct };
+        packItem.name = `${packItem.name} (Упаковка)`;
+        packItem.price = currentProduct.price / currentProduct.bunchesInBox; // Цена упаковки
+        packItem.box = currentProduct.stemsPerBunch; // Меняем кол-во в "коробке" на кол-во в пачке для отображения
+        packItem.isPack = true;
+        addToCart(packItem, qtyPack, 'pack');
+    }
+
+    showNotification('Товары добавлены в корзину');
     showScreen('cart');
 }
 
@@ -4227,52 +4678,69 @@ function addToCartFromDetail() {
         }
 
         // Render Cart
-        function renderCart() {
-            const cartItems = document.getElementById('cartItems');
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<div style="text-align: center; padding: 80px 0; color: var(--dusty-olive)"><h2 style="font-size: 32px; margin-bottom: 16px;">Корзина пуста</h2><p style="margin: 20px 0; font-size: 16px;">Добавьте товары из каталога</p><button class="btn btn-primary" onclick="showScreen(\'catalog\')">Перейти в каталог</button></div>';
-                document.getElementById('summaryItemCount').textContent = '0';
-                document.getElementById('summarySubtotal').textContent = '0 ₸';
-                document.getElementById('summaryDiscount').textContent = '0 ₸';
-                document.getElementById('summaryTotal').textContent = '0 ₸';
-                // Reset calculator if cart is empty
-                if (document.getElementById('totalPackages')) {
-                    document.getElementById('totalPackages').textContent = '0';
-                    document.getElementById('totalBoxes').textContent = '0';
-                    document.getElementById('totalStems').textContent = '0';
-                }
-                return;
-            }
-            
-            cartItems.innerHTML = cart.map((item, index) => `
-                <div class="cart-item">
-                    <div class="cart-item-image">
-                        <img src="${item.photo}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='placeholder-image.jpg'">
-                    </div>
-                    <div class="cart-item-info">
-                        <h3>${item.name}</h3>
-                        <div class="cart-item-meta">
-                            <span>${item.color} • ${item.height} см • ${item.isPack ? item.stemsPerBunch + ' шт/уп' : item.box + ' шт/кор'}</span>
-                            <span>${item.isPack ? 'Упаковка' : 'Коробка'}</span>
-                        </div>
-                        <div class="cart-item-quantity">
-                            <div class="quantity-controls">
-                                <button class="quantity-btn" onclick="updateCartQuantity(${index}, -1)">−</button>
-                                <input type="number" class="quantity-input" value="${item.quantity}" readonly>
-                                <button class="quantity-btn" onclick="updateCartQuantity(${index}, 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cart-item-actions">
-                        <div class="cart-item-price">${(item.price * item.quantity).toLocaleString('ru-RU')} ₸</div>
-                        <button class="remove-btn" onclick="removeFromCart(${index})">Удалить</button>
+function renderCart() {
+    const cartItems = document.getElementById('cartItems');
+    
+    if (cart.length === 0) {
+        // Если корзина пуста
+        cartItems.innerHTML = '<div style="text-align: center; padding: 80px 0; color: var(--dusty-olive)"><h2 style="font-size: 32px; margin-bottom: 16px;">Корзина пуста</h2><p style="margin: 20px 0; font-size: 16px;">Добавьте товары из каталога</p><button class="btn btn-primary" onclick="showScreen(\'catalog\')">Перейти в каталог</button></div>';
+        
+        document.getElementById('summaryItemCount').textContent = '0';
+        document.getElementById('summarySubtotal').textContent = '0 ₸';
+        document.getElementById('summaryDiscount').textContent = '0 ₸';
+        document.getElementById('summaryTotal').textContent = '0 ₸';
+        
+        if (document.getElementById('totalPackages')) {
+            document.getElementById('totalPackages').textContent = '0';
+            document.getElementById('totalBoxes').textContent = '0';
+            document.getElementById('totalStems').textContent = '0';
+        }
+        return;
+    }
+    
+    // Генерируем список товаров
+    cartItems.innerHTML = cart.map((item, index) => `
+        <div class="cart-item">
+            <div class="cart-item-image">
+                <img src="${item.photo}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='placeholder-image.jpg'">
+            </div>
+            <div class="cart-item-info">
+                <h3>${item.name.replace(' (Коробка)', '').replace(' (Упаковка)', '')}</h3>
+                
+                <div class="cart-item-meta">
+                    <span>${item.color} • ${item.height} см • ${item.isPack ? item.stemsPerBunch + ' шт/уп' : item.box + ' шт/кор'}</span>
+                    
+                    <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--light-concrete);">
+                        <span style="font-weight: 700; color: var(--black); display: block; margin-bottom: 4px;">
+                            ${item.isPack ? 'Упаковка' : 'Коробка'}
+                        </span>
+                        <span style="font-size: 14px; color: var(--dusty-olive);">
+                            Цена за шт: <strong style="color: var(--accent-orange);">${item.price.toLocaleString('ru-RU')} ₸</strong>
+                        </span>
                     </div>
                 </div>
-            `).join('');
+
+                <div class="cart-item-quantity" style="margin-top: 12px;">
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="updateCartQuantity(${index}, -1)">−</button>
+                        <input type="number" class="quantity-input" value="${item.quantity}" readonly>
+                        <button class="quantity-btn" onclick="updateCartQuantity(${index}, 1)">+</button>
+                    </div>
+                </div>
+            </div>
             
-            updateCartSummary();
-        }
+            <div class="cart-item-actions">
+                <div style="text-align: right;">
+                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--dusty-olive); margin-bottom: 4px;">Общая сумма</div>
+                    <div class="cart-item-price">${(item.price * item.quantity).toLocaleString('ru-RU')} ₸</div>
+                </div>
+                <button class="remove-btn" onclick="removeFromCart(${index})">Удалить</button>
+            </div>
+        </div>
+    `).join('');
+    
+    updateCartSummary();
+}
 
         function updateCartQuantity(index, delta) {
             cart[index].quantity += delta;
@@ -4289,37 +4757,57 @@ function addToCartFromDetail() {
             renderCart();
         }
 
-        function updateCartSummary() {
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            
-            // Расчет коробок и упаковок
-            let totalPackages = 0;
-            let totalBoxes = 0;
-            let totalStems = 0;
+function updateCartSummary() {
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    // Переменные для детального расчета
+    let totalPackages = 0;
+    let totalPackagesCost = 0; // Сумма денег за упаковки
+    
+    let totalBoxes = 0;
+    let totalBoxesCost = 0;    // Сумма денег за коробки
+    
+    let totalStems = 0;
 
-            cart.forEach(item => {
-                if (item.isPack) {
-                    totalPackages += item.quantity;
-                    totalStems += item.quantity * item.stemsPerBunch;
-                } else {
-                    totalBoxes += item.quantity;
-                    totalStems += item.quantity * item.box;
-                }
-            });
-
-            document.getElementById('summaryItemCount').textContent = itemCount;
-            document.getElementById('summarySubtotal').textContent = subtotal.toLocaleString('ru-RU') + ' ₸';
-            document.getElementById('summaryDiscount').textContent = discount.toLocaleString('ru-RU') + ' ₸';
-            document.getElementById('summaryTotal').textContent = (subtotal - discount).toLocaleString('ru-RU') + ' ₸';
-            
-            // Update calculator
-            if (document.getElementById('totalPackages')) {
-                document.getElementById('totalPackages').textContent = totalPackages;
-                document.getElementById('totalBoxes').textContent = totalBoxes;
-                document.getElementById('totalStems').textContent = totalStems;
-            }
+    cart.forEach(item => {
+        const itemTotalCost = item.price * item.quantity;
+        
+        if (item.isPack) {
+            totalPackages += item.quantity;
+            totalPackagesCost += itemTotalCost;
+            totalStems += item.quantity * item.stemsPerBunch; // Берем кол-во стеблей из упаковки
+        } else {
+            totalBoxes += item.quantity;
+            totalBoxesCost += itemTotalCost;
+            totalStems += item.quantity * item.box; // Берем кол-во стеблей из коробки
         }
+    });
+
+    // Обновляем основные цифры корзины
+    document.getElementById('summaryItemCount').textContent = itemCount;
+    document.getElementById('summarySubtotal').textContent = subtotal.toLocaleString('ru-RU') + ' ₸';
+    document.getElementById('summaryDiscount').textContent = discount.toLocaleString('ru-RU') + ' ₸';
+    document.getElementById('summaryTotal').textContent = (subtotal - discount).toLocaleString('ru-RU') + ' ₸';
+    
+    // Обновляем блок "Расчет" (наш калькулятор)
+    if (document.getElementById('totalPackages')) {
+        // Упаковки
+        document.getElementById('totalPackages').textContent = totalPackages;
+        document.getElementById('totalPackagesPrice').textContent = totalPackages > 0 
+            ? `${totalPackagesCost.toLocaleString('ru-RU')} ₸` 
+            : '0 ₸';
+
+        // Коробки
+        document.getElementById('totalBoxes').textContent = totalBoxes;
+        document.getElementById('totalBoxesPrice').textContent = totalBoxes > 0 
+            ? `${totalBoxesCost.toLocaleString('ru-RU')} ₸` 
+            : '0 ₸';
+
+        // Стебли
+        document.getElementById('totalStems').textContent = totalStems;
+    }
+}
 
         function applyPromo() {
             const promoInput = document.getElementById('promoInput');
@@ -4492,6 +4980,59 @@ function addToCartFromDetail() {
                 }
             });
         });
+
+
+
+        // === ЛОГИКА КАРУСЕЛИ ===
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const dots = document.querySelectorAll('.carousel-dot');
+let slideInterval;
+
+// Функция переключения на конкретный слайд
+function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    
+    currentSlide = (n + slides.length) % slides.length; // Циклический переход
+    
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+}
+
+// Следующий слайд
+function nextSlide() {
+    goToSlide(currentSlide + 1);
+    resetTimer();
+}
+
+// Предыдущий слайд
+function prevSlide() {
+    goToSlide(currentSlide - 1);
+    resetTimer();
+}
+
+// Автоматическое переключение (таймер)
+function resetTimer() {
+    clearInterval(slideInterval);
+    // Меняем слайд каждые 5 секунд
+    slideInterval = setInterval(nextSlide, 5000);
+}
+
+// Функция прокрутки к фильтрам (для кнопки на баннере)
+function scrollToFilters() {
+    const filters = document.querySelector('.catalog-header');
+    if (filters) {
+        filters.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// Инициализация карусели при загрузке
+document.addEventListener('DOMContentLoaded', () => {
+    if (slides.length > 0) {
+        resetTimer(); // Запускаем таймер только если есть слайды
+    }
+});
     </script>
 </body>
 </html>
