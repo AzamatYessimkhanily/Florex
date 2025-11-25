@@ -635,7 +635,7 @@
 }
 
         .catalog-header h1 {
-            font-size: 48px;
+            font-size: 35px;
             letter-spacing: -1px;
             color: var(--black);
         }
@@ -1077,7 +1077,7 @@
         }
 
         .cart-screen h1 {
-            font-size: 48px;
+            font-size: 35px;
             margin-bottom: 48px;
             letter-spacing: -1px;
             color: var(--black);
@@ -1265,7 +1265,7 @@
         }
 
         .checkout-screen h1 {
-            font-size: 48px;
+            font-size: 35px;
             margin-bottom: 48px;
             letter-spacing: -1px;
             color: var(--black);
@@ -1596,7 +1596,7 @@
         }
 
         .payment-container h1 {
-            font-size: 48px;
+            font-size: 35px;
             margin-bottom: 16px;
             text-align: center;
             letter-spacing: -1px;
@@ -2575,7 +2575,7 @@
             }
 
             .hero h1 {
-                font-size: 48px;
+                font-size: 35px;
             }
 
             .hero p {
@@ -3474,7 +3474,7 @@ nav a.active::after {
                 Вернуться в корзину
             </a>
             <div class="checkout-screen">
-                <h1>Оформление заказа (Заказ № 123456789) </h1>
+                <h2>Оформление заказа (Заказ № 123456789) </h2>
                 
                 <!-- Таймлайн заказа -->
                 <div class="order-timeline">
@@ -4610,10 +4610,28 @@ function updateDetailTotal() {
         }
 
         // Add to Cart
-        function quickAddToCart(id) {
-            const product = products.find(p => p.id === id);
-            addToCart(product, 1, 'box'); // По умолчанию добавляем коробку
-        }
+function quickAddToCart(id) {
+    const product = products.find(p => p.id === id);
+    
+    // Ищем товар в корзине
+    const existingIndex = cart.findIndex(item => item.id === product.id);
+    
+    if (existingIndex !== -1) {
+        // Если товар уже есть, добавляем коробку
+        cart[existingIndex].boxQuantity += 1;
+    } else {
+        // Если нет, создаем новый элемент
+        cart.push({ 
+            ...product, 
+            boxQuantity: 1,
+            packQuantity: 0
+        });
+    }
+    
+    updateCartCount();
+    renderCart();
+    showNotification('Товар добавлен в корзину');
+}
 
 // Функция добавления в корзину (обрабатывает и коробки, и упаковки)
 function addToCartFromDetail() {
@@ -4631,24 +4649,27 @@ function addToCartFromDetail() {
         return;
     }
 
-    // Добавляем коробки (если выбрали > 0)
-    if (qtyBox > 0) {
-        let boxItem = { ...currentProduct };
-        boxItem.name = `${boxItem.name} (Коробка)`;
-        boxItem.isPack = false;
-        addToCart(boxItem, qtyBox, 'box');
+    // Ищем товар в корзине
+    const existingIndex = cart.findIndex(item => item.id === currentProduct.id);
+
+    if (existingIndex !== -1) {
+        // Если товар уже есть, обновляем количества
+        cart[existingIndex].boxQuantity += qtyBox;
+        cart[existingIndex].packQuantity += qtyPack;
+    } else {
+        // Если нет, добавляем новый элемент
+        cart.push({ 
+            ...currentProduct,
+            boxQuantity: qtyBox,
+            packQuantity: qtyPack
+        });
     }
 
-    // Добавляем упаковки (если выбрали > 0)
-    if (qtyPack > 0) {
-        let packItem = { ...currentProduct };
-        packItem.name = `${packItem.name} (Упаковка)`;
-        packItem.price = currentProduct.price / currentProduct.bunchesInBox; // Цена упаковки
-        packItem.box = currentProduct.stemsPerBunch; // Меняем кол-во в "коробке" на кол-во в пачке для отображения
-        packItem.isPack = true;
-        addToCart(packItem, qtyPack, 'pack');
-    }
+    // Сбрасываем выбор после добавления
+    selectionState = { box: 0, pack: 0 };
+    document.getElementById('productQuantity').value = 0;
 
+    updateCartCount();
     showNotification('Товары добавлены в корзину');
     showScreen('cart');
 }
@@ -4672,17 +4693,17 @@ function addToCartFromDetail() {
             renderCart(); // Re-render cart to reflect changes
         }
 
-        function updateCartCount() {
-            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cartCount').textContent = count;
-        }
+function updateCartCount() {
+    const count = cart.reduce((sum, item) => sum + item.boxQuantity + item.packQuantity, 0);
+    document.getElementById('cartCount').textContent = count;
+    console.log('Cart count updated:', count); // Для отладки
+}
 
         // Render Cart
 function renderCart() {
     const cartItems = document.getElementById('cartItems');
     
     if (cart.length === 0) {
-        // Если корзина пуста
         cartItems.innerHTML = '<div style="text-align: center; padding: 80px 0; color: var(--dusty-olive)"><h2 style="font-size: 32px; margin-bottom: 16px;">Корзина пуста</h2><p style="margin: 20px 0; font-size: 16px;">Добавьте товары из каталога</p><button class="btn btn-primary" onclick="showScreen(\'catalog\')">Перейти в каталог</button></div>';
         
         document.getElementById('summaryItemCount').textContent = '0';
@@ -4698,50 +4719,135 @@ function renderCart() {
         return;
     }
     
-    // Генерируем список товаров
-    cartItems.innerHTML = cart.map((item, index) => `
+    cartItems.innerHTML = cart.map((item, index) => {
+        const boxTotal = item.boxQuantity * item.price;
+        const packPrice = item.price / item.bunchesInBox;
+        const packTotal = item.packQuantity * packPrice;
+        const itemTotal = boxTotal + packTotal;
+
+        return `
         <div class="cart-item">
             <div class="cart-item-image">
                 <img src="${item.photo}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='placeholder-image.jpg'">
             </div>
             <div class="cart-item-info">
-                <h3>${item.name.replace(' (Коробка)', '').replace(' (Упаковка)', '')}</h3>
+                <h3>${item.name}</h3>
                 
                 <div class="cart-item-meta">
-                    <span>${item.color} • ${item.height} см • ${item.isPack ? item.stemsPerBunch + ' шт/уп' : item.box + ' шт/кор'}</span>
-                    
-                    <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--light-concrete);">
-                        <span style="font-weight: 700; color: var(--black); display: block; margin-bottom: 4px;">
-                            ${item.isPack ? 'Упаковка' : 'Коробка'}
-                        </span>
-                        <span style="font-size: 14px; color: var(--dusty-olive);">
-                            Цена за шт: <strong style="color: var(--accent-orange);">${item.price.toLocaleString('ru-RU')} ₸</strong>
-                        </span>
-                    </div>
+                    <span>${item.color} • ${item.height} см</span>
                 </div>
 
-                <div class="cart-item-quantity" style="margin-top: 12px;">
-                    <div class="quantity-controls">
-                        <button class="quantity-btn" onclick="updateCartQuantity(${index}, -1)">−</button>
-                        <input type="number" class="quantity-input" value="${item.quantity}" readonly>
-                        <button class="quantity-btn" onclick="updateCartQuantity(${index}, 1)">+</button>
+                <!-- Блок для коробок -->
+                ${item.boxQuantity > 0 ? `
+                <div style="margin-top: 8px; padding: 10px; border-radius: 8px; border: 2px solid #f0f0f0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+                        <!-- Левая часть: название + счётчик -->
+                        <div style="display: grid; grid-template-columns: auto max-content; align-items: center; column-gap: 16px; min-width: 260px;">
+                            <div>
+                                <strong>Коробка</strong>
+                                <div style="font-size: 14px; color: var(--dusty-olive); white-space: nowrap;">
+                                    ${item.box} стеблей
+                                </div>
+                            </div>
+                            <div class="cart-item-quantity">
+                                <div class="quantity-controls" style="transform: scale(0.85); transform-origin: left center;">
+                                    <button class="quantity-btn" onclick="updateCartBoxQuantity(${index}, -1)">−</button>
+                                    <input type="number" class="quantity-input" value="${item.boxQuantity}" readonly>
+                                    <button class="quantity-btn" onclick="updateCartBoxQuantity(${index}, 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Правая часть: цены -->
+                        <div style="text-align: right;">
+                            <div style="font-size: 14px; color: var(--dusty-olive);">Цена за коробку: ${item.price.toLocaleString('ru-RU')} ₸</div>
+                            <div style="font-size: 18px; font-weight: 700; color: var(--accent-orange);">${boxTotal.toLocaleString('ru-RU')} ₸</div>
+                        </div>
                     </div>
                 </div>
+                ` : ''}
+
+                <!-- Блок для упаковок -->
+                ${item.packQuantity > 0 ? `
+                <div style="margin-top: 8px; padding: 10px; border-radius: 8px; border: 1px solid #f0f0f0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+                        <!-- Левая часть: название + счётчик -->
+                        <div style="display: grid; grid-template-columns: auto max-content; align-items: center; column-gap: 16px; min-width: 260px;">
+                            <div>
+                                <strong>Упаковка</strong>
+                                <div style="font-size: 14px; color: var(--dusty-olive); white-space: nowrap;">
+                                    ${item.stemsPerBunch} стеблей
+                                </div>
+                            </div>
+                            <div class="cart-item-quantity">
+                                <div class="quantity-controls" style="transform: scale(0.85); transform-origin: left center;">
+                                    <button class="quantity-btn" onclick="updateCartPackQuantity(${index}, -1)">−</button>
+                                    <input type="number" class="quantity-input" value="${item.packQuantity}" readonly>
+                                    <button class="quantity-btn" onclick="updateCartPackQuantity(${index}, 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Правая часть: цены -->
+                        <div style="text-align: right;">
+                            <div style="font-size: 14px; color: var(--dusty-olive);">Цена за упаковку: ${packPrice.toLocaleString('ru-RU')} ₸</div>
+                            <div style="font-size: 18px; font-weight: 700; color: var(--accent-orange);">${packTotal.toLocaleString('ru-RU')} ₸</div>
+                        </div>
+                    </div>
+                </div>
+                ` : ''}
+
             </div>
             
             <div class="cart-item-actions">
                 <div style="text-align: right;">
                     <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--dusty-olive); margin-bottom: 4px;">Общая сумма</div>
-                    <div class="cart-item-price">${(item.price * item.quantity).toLocaleString('ru-RU')} ₸</div>
+                    <div class="cart-item-price">${itemTotal.toLocaleString('ru-RU')} ₸</div>
                 </div>
                 <button class="remove-btn" onclick="removeFromCart(${index})">Удалить</button>
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
     
     updateCartSummary();
 }
 
+
+function updateCartBoxQuantity(index, delta) {
+    cart[index].boxQuantity += delta;
+    if (cart[index].boxQuantity < 0) {
+        cart[index].boxQuantity = 0;
+    }
+    // Если оба количества стали 0, удаляем товар из корзины
+    if (cart[index].boxQuantity === 0 && cart[index].packQuantity === 0) {
+        cart.splice(index, 1);
+    }
+    updateCartCount();
+    renderCart();
+}
+
+function updateCartPackQuantity(index, delta) {
+    cart[index].packQuantity += delta;
+    if (cart[index].packQuantity < 0) {
+        cart[index].packQuantity = 0;
+    }
+    if (cart[index].boxQuantity === 0 && cart[index].packQuantity === 0) {
+        cart.splice(index, 1);
+    }
+    updateCartCount();
+    renderCart();
+}
+
+function updateCartPackQuantity(index, delta) {
+    cart[index].packQuantity += delta;
+    if (cart[index].packQuantity < 0) {
+        cart[index].packQuantity = 0;
+    }
+    if (cart[index].boxQuantity === 0 && cart[index].packQuantity === 0) {
+        cart.splice(index, 1);
+    }
+    updateCartCount();
+    renderCart();
+}
         function updateCartQuantity(index, delta) {
             cart[index].quantity += delta;
             if (cart[index].quantity < 1) {
@@ -4751,37 +4857,29 @@ function renderCart() {
             renderCart();
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartCount();
-            renderCart();
-        }
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartCount();
+    renderCart();
+}
 
 function updateCartSummary() {
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-    
-    // Переменные для детального расчета
     let totalPackages = 0;
-    let totalPackagesCost = 0; // Сумма денег за упаковки
-    
+    let totalPackagesCost = 0;
     let totalBoxes = 0;
-    let totalBoxesCost = 0;    // Сумма денег за коробки
-    
+    let totalBoxesCost = 0;
     let totalStems = 0;
+    let subtotal = 0;
+    let itemCount = 0;
 
     cart.forEach(item => {
-        const itemTotalCost = item.price * item.quantity;
-        
-        if (item.isPack) {
-            totalPackages += item.quantity;
-            totalPackagesCost += itemTotalCost;
-            totalStems += item.quantity * item.stemsPerBunch; // Берем кол-во стеблей из упаковки
-        } else {
-            totalBoxes += item.quantity;
-            totalBoxesCost += itemTotalCost;
-            totalStems += item.quantity * item.box; // Берем кол-во стеблей из коробки
-        }
+        totalBoxes += item.boxQuantity;
+        totalBoxesCost += item.boxQuantity * item.price;
+        totalPackages += item.packQuantity;
+        totalPackagesCost += item.packQuantity * (item.price / item.bunchesInBox);
+        totalStems += item.boxQuantity * item.box + item.packQuantity * item.stemsPerBunch;
+        subtotal += item.boxQuantity * item.price + item.packQuantity * (item.price / item.bunchesInBox);
+        itemCount += item.boxQuantity + item.packQuantity;
     });
 
     // Обновляем основные цифры корзины
@@ -4790,21 +4888,18 @@ function updateCartSummary() {
     document.getElementById('summaryDiscount').textContent = discount.toLocaleString('ru-RU') + ' ₸';
     document.getElementById('summaryTotal').textContent = (subtotal - discount).toLocaleString('ru-RU') + ' ₸';
     
-    // Обновляем блок "Расчет" (наш калькулятор)
+    // Обновляем блок "Расчет"
     if (document.getElementById('totalPackages')) {
-        // Упаковки
         document.getElementById('totalPackages').textContent = totalPackages;
         document.getElementById('totalPackagesPrice').textContent = totalPackages > 0 
             ? `${totalPackagesCost.toLocaleString('ru-RU')} ₸` 
             : '0 ₸';
 
-        // Коробки
         document.getElementById('totalBoxes').textContent = totalBoxes;
         document.getElementById('totalBoxesPrice').textContent = totalBoxes > 0 
             ? `${totalBoxesCost.toLocaleString('ru-RU')} ₸` 
             : '0 ₸';
 
-        // Стебли
         document.getElementById('totalStems').textContent = totalStems;
     }
 }
@@ -4826,20 +4921,27 @@ function updateCartSummary() {
         }
 
         // Render Checkout
-        function renderCheckout() {
-            const checkoutItems = document.getElementById('checkoutItems');
-            checkoutItems.innerHTML = cart.map(item => `
-                <div class="order-item">
-                    <div class="order-item-image">
-                        <img src="${item.photo}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='placeholder-image.jpg'">
-                    </div>
-                    <div class="order-item-info">
-                        <h4>${item.name}</h4>
-                        <p>${item.quantity} × ${item.price.toLocaleString('ru-RU')} ₸ • ${item.isPack ? 'Упаковка' : 'Коробка'}</p>
-                    </div>
-                    <div class="order-item-price">${(item.price * item.quantity).toLocaleString('ru-RU')} ₸</div>
+function renderCheckout() {
+    const checkoutItems = document.getElementById('checkoutItems');
+    checkoutItems.innerHTML = cart.map(item => {
+        const boxTotal = item.boxQuantity * item.price;
+        const packTotal = item.packQuantity * (item.price / item.bunchesInBox);
+        const itemTotal = boxTotal + packTotal;
+
+        return `
+            <div class="order-item">
+                <div class="order-item-image">
+                    <img src="${item.photo}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='placeholder-image.jpg'">
                 </div>
-            `).join('');
+                <div class="order-item-info">
+                    <h4>${item.name}</h4>
+                    ${item.boxQuantity > 0 ? `<p>Коробки: ${item.boxQuantity} × ${item.price.toLocaleString('ru-RU')} ₸</p>` : ''}
+                    ${item.packQuantity > 0 ? `<p>Упаковки: ${item.packQuantity} × ${(item.price / item.bunchesInBox).toLocaleString('ru-RU')} ₸</p>` : ''}
+                </div>
+                <div class="order-item-price">${itemTotal.toLocaleString('ru-RU')} ₸</div>
+            </div>
+        `;
+    }).join('');
             
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             document.getElementById('checkoutSubtotal').textContent = subtotal.toLocaleString('ru-RU') + ' ₸';
@@ -5032,6 +5134,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (slides.length > 0) {
         resetTimer(); // Запускаем таймер только если есть слайды
     }
+        updateCartCount();
+
 });
     </script>
 </body>
